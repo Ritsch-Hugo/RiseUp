@@ -1,0 +1,79 @@
+:root {
+  --bg: #05070d;
+  --card: #0c111d;
+  --card-2: #151d30;
+  --text: #eaf0ff;
+  --text-2: #9aa6c0;
+  --accent: #2f7bff;
+  --accent-solid: #2a6cf0;
+  --accent-text: #4d8dff;
+  --border-dashed: #6f7c99;
+  --glow-accent: 0 6px 24px rgb(47 123 255 / 0.45);
+  --accent-2: #38d0ff;
+  --positive: #3ddc97;
+  --danger: #ff5c6c;
+  --macro-protein: var(--accent-2);
+  --macro-carbs: #9d8cff;
+  --macro-fat: var(--positive);
+
+  --radius-card: 20px;
+  --radius-button: 16px;
+  --radius-input: 14px;
+  --radius-pill: 20px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --page-padding: 56px 20px 24px;
+
+  font-family: 'DM Sans Variable', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

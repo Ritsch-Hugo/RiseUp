@@ -6,3 +6,7 @@ dist
 *.local
 .supabase
 coverage
+.claude 
+CLAUDE.md 
+/docs
+supabase/.temp

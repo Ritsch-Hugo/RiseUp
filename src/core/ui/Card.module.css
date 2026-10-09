@@ -1,0 +1,13 @@
+.card {
+  background: var(--card);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+}
+
+.large {
+  padding: 20px;
+}
+
+.raised {
+  background: var(--card-2);
+}

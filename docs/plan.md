@@ -3,8 +3,8 @@
 Estimations en sessions d'environ 2 h avec Claude Code, indicatives. Hugo valide chaque étape.
 
 ## Phase 0 : socle (~4 sessions)
-- [ ] Repo Vite + React + TS strict, ESLint (isolation des modules), Prettier, Vitest
-- [ ] Projet Supabase + CLI, migration initiale (trigger `updated_at`, modèle RLS), inscriptions désactivées, compte de Hugo
+- [x] Repo Vite + React + TS strict, ESLint (isolation des modules), Prettier, Vitest
+- [x] Projet Supabase + CLI, migration initiale (trigger `updated_at`, modèle RLS), inscriptions désactivées, compte de Hugo
 - [ ] Login, routeur, layout à onglets, thème (charte + DM Sans), composants de base (carte, bouton, feuille)
 - [ ] PWA installable (manifest, icônes)
 - [ ] CI GitHub Actions, Cloudflare Pages, cron anti-pause
