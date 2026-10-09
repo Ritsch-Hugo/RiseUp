@@ -1,0 +1,45 @@
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-width);
+  display: flex;
+  padding: 12px 12px max(28px, env(safe-area-inset-bottom));
+  background: var(--card);
+  z-index: 50;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-2);
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.indicator {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background: transparent;
+}
+
+.active {
+  color: var(--accent-text);
+}
+
+.active .label {
+  font-weight: 700;
+}
+
+.active .indicator {
+  background: var(--accent);
+}

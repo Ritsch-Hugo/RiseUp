@@ -1,0 +1,52 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: var(--app-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: var(--page-padding);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.date {
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.module {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-button);
+  background: var(--card-2);
+  color: var(--text-2);
+}
+
+.name {
+  flex: 1;
+}
+
+.chevron {
+  color: var(--text-2);
+}
