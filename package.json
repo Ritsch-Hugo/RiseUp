@@ -37,6 +37,10 @@
     "supabase": "^2.119.0",
     "typescript": "^5.5.4",
     "vite": "^5.4.8",
+    "vite-plugin-pwa": "^2.0.0",
     "vitest": "^2.1.1"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
