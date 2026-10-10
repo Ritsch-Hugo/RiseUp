@@ -141,7 +141,7 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
       onSuccess: () => {
         clearDraft(workout.id)
         clearTimers(workout.id)
-        navigate('/muscu', { replace: true })
+        navigate(`/muscu/resume/${workout.id}`, { replace: true })
       },
     })
   const onAbandon = () =>

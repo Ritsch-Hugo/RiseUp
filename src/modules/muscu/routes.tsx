@@ -12,6 +12,7 @@ import { ProgrammesPage } from './programs/ProgrammesPage'
 import { SeancePage } from './programs/SeancePage'
 import { ActiveWorkoutPage } from './workout/ActiveWorkoutPage'
 import { MuscuHomePage } from './workout/MuscuHomePage'
+import { SummaryPage } from './workout/SummaryPage'
 
 export const muscuRoute: RouteObject = {
   path: 'muscu',
@@ -19,6 +20,7 @@ export const muscuRoute: RouteObject = {
   children: [
     { index: true, element: <MuscuHomePage /> },
     { path: 'seance', element: <ActiveWorkoutPage /> },
+    { path: 'resume/:id', element: <SummaryPage /> },
     { path: 'bibliotheque', element: <BibliothequePage /> },
     { path: 'bibliotheque/programmes', element: <ProgrammesPage /> },
     { path: 'bibliotheque/programmes/:id', element: <ProgrammePage /> },

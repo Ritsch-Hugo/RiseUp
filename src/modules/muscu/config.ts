@@ -54,3 +54,6 @@ export const DEFAULT_REST_SECONDS = 90
 
 /** Minuteur de repos : pas des boutons − / + (secondes). */
 export const REST_STEP_SECONDS = 15
+
+/** 1RM estimé (Epley) : valable de 1 à 12 reps. */
+export const ONE_RM_MAX_REPS = 12
