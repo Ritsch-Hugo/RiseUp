@@ -1,0 +1,155 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.field legend,
+.field label {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill,
+.pillOn {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--text-2);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pillOn {
+  background: var(--accent-solid);
+  color: #fff;
+  font-weight: 700;
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-button);
+  background: var(--card);
+}
+
+.seg,
+.segOn {
+  flex: 1;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-2);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.segOn {
+  background: var(--accent-solid);
+  color: #fff;
+  font-weight: 700;
+}
+
+.textarea {
+  width: 100%;
+  height: 96px;
+  padding: 14px var(--space-4);
+  border: 0;
+  border-radius: var(--radius-input);
+  background: var(--card);
+  color: var(--text);
+  font-size: 15px;
+  resize: none;
+}
+
+.addPhoto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 28px 0;
+  border: 1.5px dashed var(--border-dashed);
+  border-radius: var(--radius-card);
+  background: var(--card);
+  color: var(--text-2);
+}
+
+.addPhotoTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.photo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.photo img {
+  width: 100%;
+  max-height: 240px;
+  border-radius: var(--radius-card);
+  object-fit: cover;
+}
+
+.photoActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.photoActions > * {
+  flex: 1;
+}
+
+.error {
+  margin: 0;
+  font-size: 14px;
+  color: var(--danger);
+}
+
+.sheetActions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}

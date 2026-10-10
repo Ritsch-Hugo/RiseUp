@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Icon } from '../../../core/ui'
 import { MUSCLE_GROUPS } from '../config'
 import { useExercises } from '../queries'
 import { ExerciseCard } from './ExerciseCard'
@@ -37,7 +38,13 @@ export function BibliothequePage() {
           )
         ) : (
           <>
-            <h2>Groupes musculaires</h2>
+            <div className={styles.sectionHeader}>
+              <h2>Groupes musculaires</h2>
+              <Link to="/muscu/bibliotheque/nouveau" className={styles.createLink}>
+                <Icon name="plus" size={16} />
+                Créer un exercice
+              </Link>
+            </div>
             <div className={styles.grid}>
               {MUSCLE_GROUPS.map((g) => (
                 <Link key={g.key} to={`/muscu/bibliotheque/${g.key}`} className={styles.group}>

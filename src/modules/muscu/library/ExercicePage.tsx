@@ -1,20 +1,13 @@
 import { Navigate, useParams } from 'react-router-dom'
-import { Card, Icon, IconLink } from '../../../core/ui'
-import { EXERCISE_IMAGES_PATH, MUSCLE_GROUPS } from '../config'
-import { useExercises, type Exercise } from '../queries'
+import { Card, IconLink } from '../../../core/ui'
+import { EQUIPMENTS, MUSCLE_GROUPS } from '../config'
+import { useExercises } from '../queries'
+import { ExerciseImage } from './ExerciseImage'
+import { isUploadedImage } from './exerciseForm'
 import { LibraryState } from './LibraryState'
 import styles from './exercice.module.css'
 
 const labelOf = (key: string) => MUSCLE_GROUPS.find((g) => g.key === key)?.label ?? key
-
-/** Images de l'exercice : les exercices de base (free-exercise-db) en ont deux (départ / arrivée). */
-function imagesOf(exercise: Exercise): string[] {
-  if (!exercise.image_path) return []
-  const paths = exercise.is_custom
-    ? [exercise.image_path]
-    : [exercise.image_path, exercise.image_path.replace(/0\.jpg$/, '1.jpg')]
-  return paths.map((p) => EXERCISE_IMAGES_PATH + p)
-}
 
 export function ExercicePage() {
   const { id } = useParams()
@@ -22,8 +15,6 @@ export function ExercicePage() {
   const exercise = exercises?.find((e) => e.id === id)
 
   if (exercises && !exercise) return <Navigate to="/muscu/bibliotheque" replace />
-
-  const images = exercise ? imagesOf(exercise) : []
 
   return (
     <>
@@ -34,19 +25,27 @@ export function ExercicePage() {
           label="Retour"
         />
         <h2 className={styles.title}>{exercise?.name}</h2>
+        {exercise && (
+          <IconLink
+            to={`/muscu/bibliotheque/exercice/${exercise.id}/modifier`}
+            icon="edit"
+            label="Modifier l’exercice"
+          />
+        )}
       </div>
       <LibraryState isPending={isPending} isError={isError}>
         {exercise && (
           <>
-            {images.length > 0 ? (
+            {exercise.image_path ? (
               <div className={styles.images}>
-                {images.map((src) => (
-                  <img key={src} src={src} alt="" />
-                ))}
+                <ExerciseImage exercise={exercise} step={0} iconSize={64} />
+                {!isUploadedImage(exercise.image_path) && (
+                  <ExerciseImage exercise={exercise} step={1} iconSize={64} />
+                )}
               </div>
             ) : (
               <div className={styles.noImage}>
-                <Icon name="dumbbell" size={64} />
+                <ExerciseImage exercise={exercise} iconSize={64} />
               </div>
             )}
 
@@ -57,6 +56,11 @@ export function ExercicePage() {
                   {labelOf(g)}
                 </span>
               ))}
+              {exercise.equipment && (
+                <span className={styles.chip}>
+                  {EQUIPMENTS.find((q) => q.key === exercise.equipment)?.label}
+                </span>
+              )}
             </div>
 
             <Card>

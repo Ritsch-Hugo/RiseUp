@@ -25,6 +25,11 @@
   object-fit: cover;
 }
 
+.images img:only-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 10;
+}
+
 .noImage {
   display: flex;
   align-items: center;

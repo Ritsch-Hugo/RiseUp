@@ -12,6 +12,7 @@ export type Database = {
         Row: {
           archived_at: string | null
           created_at: string
+          equipment: Database['public']['Enums']['equipment_type'] | null
           id: string
           image_path: string | null
           instructions: string | null
@@ -19,12 +20,14 @@ export type Database = {
           name: string
           primary_group: Database['public']['Enums']['muscle_group']
           secondary_groups: Database['public']['Enums']['muscle_group'][]
+          tracking: Database['public']['Enums']['exercise_tracking']
           updated_at: string
           user_id: string
         }
         Insert: {
           archived_at?: string | null
           created_at?: string
+          equipment?: Database['public']['Enums']['equipment_type'] | null
           id: string
           image_path?: string | null
           instructions?: string | null
@@ -32,12 +35,14 @@ export type Database = {
           name: string
           primary_group: Database['public']['Enums']['muscle_group']
           secondary_groups?: Database['public']['Enums']['muscle_group'][]
+          tracking?: Database['public']['Enums']['exercise_tracking']
           updated_at?: string
           user_id?: string
         }
         Update: {
           archived_at?: string | null
           created_at?: string
+          equipment?: Database['public']['Enums']['equipment_type'] | null
           id?: string
           image_path?: string | null
           instructions?: string | null
@@ -45,6 +50,7 @@ export type Database = {
           name?: string
           primary_group?: Database['public']['Enums']['muscle_group']
           secondary_groups?: Database['public']['Enums']['muscle_group'][]
+          tracking?: Database['public']['Enums']['exercise_tracking']
           updated_at?: string
           user_id?: string
         }
@@ -185,6 +191,7 @@ export type Database = {
         Row: {
           created_at: string
           done_at: string
+          duration_seconds: number | null
           id: string
           is_warmup: boolean
           position: number
@@ -198,10 +205,11 @@ export type Database = {
         Insert: {
           created_at?: string
           done_at?: string
+          duration_seconds?: number | null
           id: string
           is_warmup?: boolean
           position?: number
-          reps: number
+          reps?: number
           rpe?: number | null
           updated_at?: string
           user_id?: string
@@ -211,6 +219,7 @@ export type Database = {
         Update: {
           created_at?: string
           done_at?: string
+          duration_seconds?: number | null
           id?: string
           is_warmup?: boolean
           position?: number
@@ -358,6 +367,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      equipment_type: 'barre' | 'halteres' | 'machine' | 'poulie' | 'poids_du_corps' | 'autre'
+      exercise_tracking: 'poids_reps' | 'reps' | 'duree'
       muscle_group:
         | 'pecs'
         | 'dos'
@@ -490,6 +501,8 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      equipment_type: ['barre', 'halteres', 'machine', 'poulie', 'poids_du_corps', 'autre'],
+      exercise_tracking: ['poids_reps', 'reps', 'duree'],
       muscle_group: [
         'pecs',
         'dos',

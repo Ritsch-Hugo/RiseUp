@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { IconLink } from '../../../core/ui'
+import { Icon, IconLink } from '../../../core/ui'
 import { MUSCLE_GROUPS } from '../config'
 import { useExercises } from '../queries'
 import { ExerciseCard } from './ExerciseCard'
@@ -45,9 +45,18 @@ export function GroupePage() {
       </nav>
       <SearchField value={query} onChange={setQuery} />
       <LibraryState isPending={isPending} isError={isError}>
-        <div className={styles.groupHeader}>
-          <h2>{current.label}</h2>
-          <span className={styles.groupCount}>{inGroup.length} exercices</span>
+        <div className={styles.sectionHeader}>
+          <div className={styles.groupHeader}>
+            <h2>{current.label}</h2>
+            <span className={styles.groupCount}>{inGroup.length} exercices</span>
+          </div>
+          <Link
+            to={`/muscu/bibliotheque/nouveau?groupe=${current.key}`}
+            className={styles.createLink}
+          >
+            <Icon name="plus" size={16} />
+            Créer
+          </Link>
         </div>
         {results.length > 0 ? (
           <div className={styles.grid}>

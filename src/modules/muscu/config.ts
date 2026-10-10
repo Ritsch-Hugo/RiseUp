@@ -18,3 +18,28 @@ export const MUSCLE_GROUPS: { key: MuscleGroup; label: string; abbr: string }[] 
 
 /** Dossier public des images de la bibliothèque de base (free-exercise-db). */
 export const EXERCISE_IMAGES_PATH = '/exercises/'
+
+export type Equipment = Enums<'equipment_type'>
+
+export const EQUIPMENTS: { key: Equipment; label: string }[] = [
+  { key: 'barre', label: 'Barre' },
+  { key: 'halteres', label: 'Haltères' },
+  { key: 'machine', label: 'Machine' },
+  { key: 'poulie', label: 'Poulie' },
+  { key: 'poids_du_corps', label: 'Poids du corps' },
+  { key: 'autre', label: 'Autre' },
+]
+
+export type Tracking = Enums<'exercise_tracking'>
+
+/** Ce qu'on note à chaque série d'un exercice. */
+export const TRACKINGS: { key: Tracking; label: string }[] = [
+  { key: 'poids_reps', label: 'Poids × reps' },
+  { key: 'reps', label: 'Reps' },
+  { key: 'duree', label: 'Durée' },
+]
+
+/** Photos perso (Supabase Storage, bucket privé) : taille max du grand côté, en pixels. */
+export const EXERCISE_PHOTO_MAX_SIDE = 1024
+export const EXERCISE_PHOTO_QUALITY = 0.8
+export const EXERCISE_IMAGES_BUCKET = 'exercise-images'
