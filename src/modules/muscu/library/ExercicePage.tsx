@@ -2,10 +2,24 @@ import { Navigate, useParams } from 'react-router-dom'
 import { Card, IconLink } from '../../../core/ui'
 import { EQUIPMENTS, MUSCLE_GROUPS } from '../config'
 import { useExercises } from '../queries'
+import { formatNumber } from '../workout/rows'
+import { formatLastTime } from '../workout/format'
+import { useExerciseHistory } from './historyQueries'
 import { ExerciseImage } from './ExerciseImage'
 import { isUploadedImage } from './exerciseForm'
 import { LibraryState } from './LibraryState'
 import styles from './exercice.module.css'
+
+const HISTORY_LIMIT = 10
+
+function Record({ label, value }: { label: string; value: string }) {
+  return (
+    <div className={styles.record}>
+      <span className={styles.recordValue}>{value}</span>
+      <span className={styles.recordLabel}>{label}</span>
+    </div>
+  )
+}
 
 const labelOf = (key: string) => MUSCLE_GROUPS.find((g) => g.key === key)?.label ?? key
 
@@ -13,6 +27,7 @@ export function ExercicePage() {
   const { id } = useParams()
   const { data: exercises, isPending, isError } = useExercises()
   const exercise = exercises?.find((e) => e.id === id)
+  const history = useExerciseHistory(id)
 
   if (exercises && !exercise) return <Navigate to="/muscu/bibliotheque" replace />
 
@@ -65,10 +80,56 @@ export function ExercicePage() {
 
             <Card>
               <h2>Records et historique</h2>
-              <p className={styles.hint}>
-                Ton record, ton 1RM estimé, ta progression et tes séances précédentes apparaîtront
-                ici après ta première série sur cet exercice.
-              </p>
+              {!history.data || history.data.sessions.length === 0 ? (
+                <p className={styles.hint}>
+                  Ton record, ton 1RM estimé et tes séances précédentes apparaîtront ici après ta
+                  première série sur cet exercice.
+                </p>
+              ) : (
+                <>
+                  <div className={styles.records}>
+                    {history.data.records.maxLoad > 0 && (
+                      <Record
+                        label="Charge max"
+                        value={`${formatNumber(history.data.records.maxLoad)} kg`}
+                      />
+                    )}
+                    {history.data.records.best1RM > 0 && (
+                      <Record
+                        label="1RM estimé"
+                        value={`${formatNumber(Math.round(history.data.records.best1RM))} kg`}
+                      />
+                    )}
+                    {history.data.records.bestSet && (
+                      <Record
+                        label="Meilleure série"
+                        value={`${formatNumber(history.data.records.bestSet.weight)} × ${history.data.records.bestSet.reps}`}
+                      />
+                    )}
+                    {history.data.records.maxReps > 0 && (
+                      <Record label="Reps max" value={String(history.data.records.maxReps)} />
+                    )}
+                  </div>
+                  <ul className={styles.sessions}>
+                    {history.data.sessions.slice(0, HISTORY_LIMIT).map((s) => (
+                      <li key={s.workoutId}>
+                        <span className={styles.sessionDate}>
+                          {new Date(s.startedAt).toLocaleDateString('fr-FR', {
+                            day: 'numeric',
+                            month: 'short',
+                          })}
+                        </span>
+                        <span className={styles.hint}>
+                          {formatLastTime(
+                            s.sets.filter((x) => !x.is_warmup),
+                            exercise.tracking
+                          )}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </Card>
 
             {exercise.instructions && (

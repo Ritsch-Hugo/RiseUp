@@ -22,6 +22,8 @@ import {
   useFinishWorkout,
   useOpenWorkout,
   usePreviousPerformance,
+  useRemoveWorkoutExercise,
+  useSaveWorkoutExerciseNote,
   type OpenWorkout,
   type WorkoutExercise,
 } from './workoutQueries'
@@ -69,6 +71,10 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
   const finish = useFinishWorkout()
   const abandon = useAbandonWorkout()
   const addExercise = useAddWorkoutExercise()
+  const removeExercise = useRemoveWorkoutExercise()
+  const saveNote = useSaveWorkoutExerciseNote()
+  const [menuId, setMenuId] = useState<string | null>(null)
+  const [noteDraft, setNoteDraft] = useState('')
   const [picking, setPicking] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [now, setNow] = useState(() => Date.now())
@@ -219,6 +225,10 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
             chronoSeconds={timers.chrono ? elapsedSeconds(timers.chrono.startedAt, now) : 0}
             onChronoToggle={(rowId) => onChronoToggle(we.id, rowId)}
             onAddRow={() => addRow(we.id)}
+            onMenu={() => {
+              setNoteDraft(we.notes ?? '')
+              setMenuId(we.id)
+            }}
           />
         ))}
         <button type="button" className={styles.dashed} onClick={() => setPicking(true)}>
@@ -237,6 +247,47 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
           )
         }
       />
+
+      <Sheet
+        open={menuId !== null}
+        onClose={() => setMenuId(null)}
+        title={
+          exerciseById.get(workout.exercises.find((x) => x.id === menuId)?.exercise_id ?? '')
+            ?.name ?? 'Exercice'
+        }
+      >
+        <textarea
+          className={styles.noteField}
+          aria-label="Note sur l’exercice"
+          placeholder="Note (réglage de la machine, sensation…)"
+          rows={3}
+          value={noteDraft}
+          onChange={(e) => setNoteDraft(e.target.value)}
+        />
+        <div className={styles.sheetActions}>
+          <Button
+            fullWidth
+            disabled={saveNote.isPending}
+            onClick={() => {
+              if (menuId) saveNote.mutate({ id: menuId, notes: noteDraft })
+              setMenuId(null)
+            }}
+          >
+            Enregistrer la note
+          </Button>
+          <Button
+            variant="danger"
+            fullWidth
+            disabled={removeExercise.isPending}
+            onClick={() => {
+              if (menuId) removeExercise.mutate(menuId)
+              setMenuId(null)
+            }}
+          >
+            Retirer de la séance
+          </Button>
+        </div>
+      </Sheet>
 
       <Sheet open={confirming} onClose={() => setConfirming(false)} title="Terminer la séance ?">
         <p className={styles.sub}>
@@ -271,6 +322,7 @@ type ExerciseBlockProps = {
   onCommit: (rowId: string, patch?: Partial<Row>) => void
   onToggleDone: (rowId: string) => void
   onAddRow: () => void
+  onMenu: () => void
   chronoRowId: string | null
   chronoSeconds: number
   onChronoToggle: (rowId: string) => void
@@ -287,6 +339,7 @@ function ExerciseBlock({
   onCommit,
   onToggleDone,
   onAddRow,
+  onMenu,
   chronoRowId,
   chronoSeconds,
   onChronoToggle,
@@ -320,15 +373,19 @@ function ExerciseBlock({
   const lastTime = formatLastTime(previous, tracking)
   return (
     <div className={styles.block}>
-      <button type="button" className={styles.blockHead} onClick={onToggleOpen} aria-expanded>
-        <span className={styles.thumbLarge}>
-          {exercise && <ExerciseImage exercise={exercise} iconSize={20} />}
-        </span>
-        <span className={styles.collapsedText}>
-          <span className={styles.blockName}>{name}</span>
-          {lastTime && <span className={styles.sub}>Dernière fois : {lastTime}</span>}
-        </span>
-      </button>
+      <div className={styles.blockTop}>
+        <button type="button" className={styles.blockHead} onClick={onToggleOpen} aria-expanded>
+          <span className={styles.thumbLarge}>
+            {exercise && <ExerciseImage exercise={exercise} iconSize={20} />}
+          </span>
+          <span className={styles.collapsedText}>
+            <span className={styles.blockName}>{name}</span>
+            {lastTime && <span className={styles.sub}>Dernière fois : {lastTime}</span>}
+          </span>
+        </button>
+        <IconButton icon="more" label="Options de l’exercice" onClick={onMenu} />
+      </div>
+      {we.notes && <p className={styles.note}>{we.notes}</p>}
 
       <div className={`${styles.gridRow} ${gridClass} ${styles.gridHeader}`}>
         <span>SÉR.</span>

@@ -41,6 +41,7 @@ const PATHS = {
   arrowDown: ['m6 9 6 6 6-6'],
   play: ['M6 3l14 9-14 9z'],
   stop: ['M6 6h12v12H6z'],
+  more: ['M12 5h.01', 'M12 12h.01', 'M12 19h.01'],
   logout: ['M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4', 'm16 17 5-5-5-5', 'M21 12H9'],
 } as const
 

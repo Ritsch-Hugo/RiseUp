@@ -76,3 +76,55 @@
   color: var(--text-2);
   white-space: pre-line;
 }
+
+.records {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.record {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+  border-radius: 14px;
+  background: var(--card-2);
+}
+
+.recordValue {
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.recordLabel {
+  font-size: 11px;
+  color: var(--text-2);
+}
+
+.sessions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sessions li {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.sessions .hint {
+  margin: 0;
+}
+
+.sessionDate {
+  flex: none;
+  width: 56px;
+  font-size: 14px;
+  font-weight: 600;
+}

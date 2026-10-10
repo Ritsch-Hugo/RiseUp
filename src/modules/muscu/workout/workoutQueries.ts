@@ -100,6 +100,32 @@ export function useAddWorkoutExercise() {
   })
 }
 
+/** Retire un exercice de la séance en cours (ses séries partent avec). */
+export function useRemoveWorkoutExercise() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from('muscu_workout_exercises').delete().eq('id', id)
+      if (error) throw error
+    },
+    onSettled: () => queryClient.invalidateQueries({ queryKey: OPEN_WORKOUT_KEY }),
+  })
+}
+
+export function useSaveWorkoutExerciseNote() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async ({ id, notes }: { id: string; notes: string }) => {
+      const { error } = await supabase
+        .from('muscu_workout_exercises')
+        .update({ notes: notes.trim() === '' ? null : notes.trim() })
+        .eq('id', id)
+      if (error) throw error
+    },
+    onSettled: () => queryClient.invalidateQueries({ queryKey: OPEN_WORKOUT_KEY }),
+  })
+}
+
 export function useFinishWorkout() {
   const queryClient = useQueryClient()
   return useMutation({
