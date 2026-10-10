@@ -564,3 +564,77 @@
   font: inherit;
   resize: vertical;
 }
+
+.homeTitle {
+  margin: var(--space-2) 0 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.weekHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.weekStats {
+  display: flex;
+}
+
+.weekStat {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weekValue {
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.pastCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: 20px;
+  background: var(--card);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.pastTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pastName {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.bubbles {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.bubble,
+.bubbleMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  background: var(--card-2);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.bubbleMore {
+  color: var(--text-2);
+}

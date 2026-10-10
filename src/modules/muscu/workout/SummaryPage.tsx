@@ -2,15 +2,10 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button, Card } from '../../../core/ui'
 import { LibraryState } from '../library/LibraryState'
 import type { BrokenRecord } from '../rules/records'
+import { formatDuration } from './format'
 import { formatNumber } from './rows'
 import { useWorkoutSummary, type ExerciseSummary } from './summaryQueries'
 import styles from './workout.module.css'
-
-function formatDuration(seconds: number): string {
-  const minutes = Math.max(1, Math.round(seconds / 60))
-  if (minutes < 60) return `${minutes} min`
-  return `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, '0')}`
-}
 
 const RECORD_LABELS: Record<BrokenRecord, string> = {
   maxLoad: 'Charge max',

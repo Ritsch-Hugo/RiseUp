@@ -29,3 +29,10 @@ export function formatLastTime(sets: PrevSet[], tracking: Tracking): string {
   }
   return sets.map((s) => `${formatNumber(s.weight_kg)} × ${s.reps}`).join(' · ')
 }
+
+/** Durée lisible : « 58 min », « 1 h 02 ». */
+export function formatDuration(seconds: number): string {
+  const minutes = Math.max(1, Math.round(seconds / 60))
+  if (minutes < 60) return `${minutes} min`
+  return `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, '0')}`
+}

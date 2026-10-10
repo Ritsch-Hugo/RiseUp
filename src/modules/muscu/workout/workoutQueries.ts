@@ -136,7 +136,7 @@ export function useFinishWorkout() {
         .eq('id', id)
       if (error) throw error
     },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: OPEN_WORKOUT_KEY }),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['muscu'] }),
   })
 }
 
