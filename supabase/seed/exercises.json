@@ -929,5 +929,1233 @@
    "epaules"
   ],
   "image": "Side_Bridge/0.jpg"
+ },
+ {
+  "src": "Wide-Grip_Barbell_Bench_Press",
+  "name": "Développé couché barre prise large",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Wide-Grip_Barbell_Bench_Press/0.jpg"
+ },
+ {
+  "src": "Decline_Dumbbell_Bench_Press",
+  "name": "Développé décliné haltères",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Decline_Dumbbell_Bench_Press/0.jpg"
+ },
+ {
+  "src": "Dumbbell_Bench_Press_with_Neutral_Grip",
+  "name": "Développé couché haltères prise neutre",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Dumbbell_Bench_Press_with_Neutral_Grip/0.jpg"
+ },
+ {
+  "src": "Hammer_Grip_Incline_DB_Bench_Press",
+  "name": "Développé incliné haltères prise neutre",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Hammer_Grip_Incline_DB_Bench_Press/0.jpg"
+ },
+ {
+  "src": "Smith_Machine_Incline_Bench_Press",
+  "name": "Développé incliné Smith",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Smith_Machine_Incline_Bench_Press/0.jpg"
+ },
+ {
+  "src": "Leverage_Chest_Press",
+  "name": "Développé couché machine convergente",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Leverage_Chest_Press/0.jpg"
+ },
+ {
+  "src": "Leverage_Incline_Chest_Press",
+  "name": "Développé incliné machine",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Leverage_Incline_Chest_Press/0.jpg"
+ },
+ {
+  "src": "Leverage_Decline_Chest_Press",
+  "name": "Développé décliné machine",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Leverage_Decline_Chest_Press/0.jpg"
+ },
+ {
+  "src": "Cable_Chest_Press",
+  "name": "Développé poulie",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Cable_Chest_Press/0.jpg"
+ },
+ {
+  "src": "Incline_Cable_Chest_Press",
+  "name": "Développé incliné poulie",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Incline_Cable_Chest_Press/0.jpg"
+ },
+ {
+  "src": "Flat_Bench_Cable_Flyes",
+  "name": "Écarté couché poulie",
+  "primary": "pecs",
+  "secondary": [],
+  "image": "Flat_Bench_Cable_Flyes/0.jpg"
+ },
+ {
+  "src": "Incline_Cable_Flye",
+  "name": "Écarté incliné poulie",
+  "primary": "pecs",
+  "secondary": [
+   "epaules"
+  ],
+  "image": "Incline_Cable_Flye/0.jpg"
+ },
+ {
+  "src": "Decline_Dumbbell_Flyes",
+  "name": "Écarté décliné haltères",
+  "primary": "pecs",
+  "secondary": [],
+  "image": "Decline_Dumbbell_Flyes/0.jpg"
+ },
+ {
+  "src": "Single-Arm_Cable_Crossover",
+  "name": "Écarté poulie un bras",
+  "primary": "pecs",
+  "secondary": [],
+  "image": "Single-Arm_Cable_Crossover/0.jpg"
+ },
+ {
+  "src": "One_Arm_Dumbbell_Bench_Press",
+  "name": "Développé couché haltère un bras",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "One_Arm_Dumbbell_Bench_Press/0.jpg"
+ },
+ {
+  "src": "Straight-Arm_Dumbbell_Pullover",
+  "name": "Pull-over haltère",
+  "primary": "pecs",
+  "secondary": [
+   "dos",
+   "epaules",
+   "triceps"
+  ],
+  "image": "Straight-Arm_Dumbbell_Pullover/0.jpg"
+ },
+ {
+  "src": "Incline_Push-Up",
+  "name": "Pompes inclinées",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Incline_Push-Up/0.jpg"
+ },
+ {
+  "src": "Decline_Push-Up",
+  "name": "Pompes déclinées",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Decline_Push-Up/0.jpg"
+ },
+ {
+  "src": "Push-Up_Wide",
+  "name": "Pompes prise large",
+  "primary": "pecs",
+  "secondary": [
+   "abdos",
+   "epaules",
+   "triceps"
+  ],
+  "image": "Push-Up_Wide/0.jpg"
+ },
+ {
+  "src": "Single-Arm_Push-Up",
+  "name": "Pompes un bras",
+  "primary": "pecs",
+  "secondary": [
+   "epaules",
+   "triceps"
+  ],
+  "image": "Single-Arm_Push-Up/0.jpg"
+ },
+ {
+  "src": "Bent_Over_Two-Arm_Long_Bar_Row",
+  "name": "Rowing barre longue deux bras",
+  "primary": "dos",
+  "secondary": [
+   "biceps"
+  ],
+  "image": "Bent_Over_Two-Arm_Long_Bar_Row/0.jpg"
+ },
+ {
+  "src": "Reverse_Grip_Bent-Over_Rows",
+  "name": "Rowing barre prise supination",
+  "primary": "dos",
+  "secondary": [
+   "biceps",
+   "epaules"
+  ],
+  "image": "Reverse_Grip_Bent-Over_Rows/0.jpg"
+ },
+ {
+  "src": "Dumbbell_Incline_Row",
+  "name": "Rowing haltères sur banc incliné",
+  "primary": "dos",
+  "secondary": [
+   "biceps",
+   "epaules"
+  ],
+  "image": "Dumbbell_Incline_Row/0.jpg"
+ },
+ {
+  "src": "Smith_Machine_Bent_Over_Row",
+  "name": "Rowing Smith",
+  "primary": "dos",
+  "secondary": [
+   "biceps",
+   "epaules"
+  ],
+  "image": "Smith_Machine_Bent_Over_Row/0.jpg"
+ },
+ {
+  "src": "Lying_T-Bar_Row",
+  "name": "Rowing T-bar appui poitrine",
+  "primary": "dos",
+  "secondary": [
+   "biceps"
+  ],
+  "image": "Lying_T-Bar_Row/0.jpg"
+ },
+ {
+  "src": "Leverage_High_Row",
+  "name": "Rowing haut machine",
+  "primary": "dos",
+  "secondary": [],
+  "image": "Leverage_High_Row/0.jpg"
+ },
+ {
+  "src": "Seated_One-arm_Cable_Pulley_Rows",
+  "name": "Tirage horizontal poulie un bras",
+  "primary": "dos",
+  "secondary": [
+   "biceps"
+  ],
+  "image": "Seated_One-arm_Cable_Pulley_Rows/0.jpg"
+ },
+ {
+  "src": "Elevated_Cable_Rows",
+  "name": "Tirage poulie haute",
+  "primary": "dos",
+  "secondary": [],
+  "image": "Elevated_Cable_Rows/0.jpg"
+ },
+ {
+  "src": "Underhand_Cable_Pulldowns",
+  "name": "Tirage vertical supination",
+  "primary": "dos",
+  "secondary": [
+   "biceps",
+   "epaules"
+  ],
+  "image": "Underhand_Cable_Pulldowns/0.jpg"
+ },
+ {
+  "src": "Rope_Straight-Arm_Pulldown",
+  "name": "Pull-over poulie corde",
+  "primary": "dos",
+  "secondary": [],
+  "image": "Rope_Straight-Arm_Pulldown/0.jpg"
+ },
+ {
+  "src": "V-Bar_Pullup",
+  "name": "Tractions prise neutre",
+  "primary": "dos",
+  "secondary": [
+   "biceps",
+   "epaules"
+  ],
+  "image": "V-Bar_Pullup/0.jpg"
+ },
+ {
+  "src": "Wide-Grip_Rear_Pull-Up",
+  "name": "Tractions prise large",
+  "primary": "dos",
+  "secondary": [
+   "biceps",
+   "epaules"
+  ],
+  "image": "Wide-Grip_Rear_Pull-Up/0.jpg"
+ },
+ {
+  "src": "Leverage_Shrug",
+  "name": "Shrugs machine",
+  "primary": "dos",
+  "secondary": [
+   "biceps"
+  ],
+  "image": "Leverage_Shrug/0.jpg"
+ },
+ {
+  "src": "Cable_Shrugs",
+  "name": "Shrugs poulie",
+  "primary": "dos",
+  "secondary": [],
+  "image": "Cable_Shrugs/0.jpg"
+ },
+ {
+  "src": "Reverse_Hyperextension",
+  "name": "Extensions lombaires inversées",
+  "primary": "ischios",
+  "secondary": [
+   "mollets",
+   "fessiers"
+  ],
+  "image": "Reverse_Hyperextension/0.jpg"
+ },
+ {
+  "src": "Standing_Dumbbell_Upright_Row",
+  "name": "Tirage menton haltères",
+  "primary": "dos",
+  "secondary": [
+   "biceps",
+   "epaules"
+  ],
+  "image": "Standing_Dumbbell_Upright_Row/0.jpg"
+ },
+ {
+  "src": "Upright_Cable_Row",
+  "name": "Tirage menton poulie",
+  "primary": "dos",
+  "secondary": [
+   "epaules"
+  ],
+  "image": "Upright_Cable_Row/0.jpg"
+ },
+ {
+  "src": "Barbell_Shoulder_Press",
+  "name": "Développé épaules barre",
+  "primary": "epaules",
+  "secondary": [
+   "pecs",
+   "triceps"
+  ],
+  "image": "Barbell_Shoulder_Press/0.jpg"
+ },
+ {
+  "src": "Seated_Barbell_Military_Press",
+  "name": "Développé militaire assis",
+  "primary": "epaules",
+  "secondary": [
+   "triceps"
+  ],
+  "image": "Seated_Barbell_Military_Press/0.jpg"
+ },
+ {
+  "src": "Standing_Barbell_Press_Behind_Neck",
+  "name": "Développé nuque barre",
+  "primary": "epaules",
+  "secondary": [
+   "triceps"
+  ],
+  "image": "Standing_Barbell_Press_Behind_Neck/0.jpg"
+ },
+ {
+  "src": "Seated_Dumbbell_Press",
+  "name": "Développé épaules haltères assis",
+  "primary": "epaules",
+  "secondary": [
+   "triceps"
+  ],
+  "image": "Seated_Dumbbell_Press/0.jpg"
+ },
+ {
+  "src": "Standing_Dumbbell_Press",
+  "name": "Développé épaules haltères debout",
+  "primary": "epaules",
+  "secondary": [
+   "triceps"
+  ],
+  "image": "Standing_Dumbbell_Press/0.jpg"
+ },
+ {
+  "src": "Dumbbell_One-Arm_Shoulder_Press",
+  "name": "Développé épaules haltère un bras",
+  "primary": "epaules",
+  "secondary": [
+   "triceps"
+  ],
+  "image": "Dumbbell_One-Arm_Shoulder_Press/0.jpg"
+ },
+ {
+  "src": "Leverage_Shoulder_Press",
+  "name": "Développé épaules machine convergente",
+  "primary": "epaules",
+  "secondary": [
+   "triceps"
+  ],
+  "image": "Leverage_Shoulder_Press/0.jpg"
+ },
+ {
+  "src": "Smith_Machine_Overhead_Shoulder_Press",
+  "name": "Développé épaules Smith",
+  "primary": "epaules",
+  "secondary": [
+   "triceps"
+  ],
+  "image": "Smith_Machine_Overhead_Shoulder_Press/0.jpg"
+ },
+ {
+  "src": "Cable_Shoulder_Press",
+  "name": "Développé épaules poulie",
+  "primary": "epaules",
+  "secondary": [
+   "triceps"
+  ],
+  "image": "Cable_Shoulder_Press/0.jpg"
+ },
+ {
+  "src": "Seated_Side_Lateral_Raise",
+  "name": "Élévations latérales assis",
+  "primary": "epaules",
+  "secondary": [],
+  "image": "Seated_Side_Lateral_Raise/0.jpg"
+ },
+ {
+  "src": "One-Arm_Side_Laterals",
+  "name": "Élévation latérale un bras",
+  "primary": "epaules",
+  "secondary": [],
+  "image": "One-Arm_Side_Laterals/0.jpg"
+ },
+ {
+  "src": "Standing_Low-Pulley_Deltoid_Raise",
+  "name": "Élévation latérale poulie basse",
+  "primary": "epaules",
+  "secondary": [
+   "biceps"
+  ],
+  "image": "Standing_Low-Pulley_Deltoid_Raise/0.jpg"
+ },
+ {
+  "src": "Front_Cable_Raise",
+  "name": "Élévations frontales poulie",
+  "primary": "epaules",
+  "secondary": [],
+  "image": "Front_Cable_Raise/0.jpg"
+ },
+ {
+  "src": "Front_Two-Dumbbell_Raise",
+  "name": "Élévations frontales deux haltères",
+  "primary": "epaules",
+  "secondary": [],
+  "image": "Front_Two-Dumbbell_Raise/0.jpg"
+ },
+ {
+  "src": "Reverse_Flyes",
+  "name": "Oiseau haltères buste penché",
+  "primary": "epaules",
+  "secondary": [],
+  "image": "Reverse_Flyes/0.jpg"
+ },
+ {
+  "src": "Seated_Bent-Over_Rear_Delt_Raise",
+  "name": "Oiseau haltères assis",
+  "primary": "epaules",
+  "secondary": [],
+  "image": "Seated_Bent-Over_Rear_Delt_Raise/0.jpg"
+ },
+ {
+  "src": "Cable_Rope_Rear-Delt_Rows",
+  "name": "Oiseau poulie corde",
+  "primary": "epaules",
+  "secondary": [
+   "biceps",
+   "dos"
+  ],
+  "image": "Cable_Rope_Rear-Delt_Rows/0.jpg"
+ },
+ {
+  "src": "Barbell_Rear_Delt_Row",
+  "name": "Rowing deltoïdes postérieurs barre",
+  "primary": "epaules",
+  "secondary": [
+   "biceps",
+   "dos"
+  ],
+  "image": "Barbell_Rear_Delt_Row/0.jpg"
+ },
+ {
+  "src": "Clean_and_Press",
+  "name": "Épaulé-développé",
+  "primary": "epaules",
+  "secondary": [
+   "abdos",
+   "mollets",
+   "fessiers",
+   "ischios",
+   "dos",
+   "quadriceps",
+   "triceps"
+  ],
+  "image": "Clean_and_Press/0.jpg"
+ },
+ {
+  "src": "Alternate_Hammer_Curl",
+  "name": "Curl marteau alterné",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Alternate_Hammer_Curl/0.jpg"
+ },
+ {
+  "src": "Dumbbell_Alternate_Bicep_Curl",
+  "name": "Curl haltères alterné",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Dumbbell_Alternate_Bicep_Curl/0.jpg"
+ },
+ {
+  "src": "Seated_Dumbbell_Curl",
+  "name": "Curl haltères assis",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Seated_Dumbbell_Curl/0.jpg"
+ },
+ {
+  "src": "Zottman_Curl",
+  "name": "Curl Zottman",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Zottman_Curl/0.jpg"
+ },
+ {
+  "src": "Close-Grip_EZ_Bar_Curl",
+  "name": "Curl barre EZ prise serrée",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Close-Grip_EZ_Bar_Curl/0.jpg"
+ },
+ {
+  "src": "Wide-Grip_Standing_Barbell_Curl",
+  "name": "Curl barre prise large",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Wide-Grip_Standing_Barbell_Curl/0.jpg"
+ },
+ {
+  "src": "Close-Grip_Standing_Barbell_Curl",
+  "name": "Curl barre prise serrée",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Close-Grip_Standing_Barbell_Curl/0.jpg"
+ },
+ {
+  "src": "Cross_Body_Hammer_Curl",
+  "name": "Curl marteau croisé",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Cross_Body_Hammer_Curl/0.jpg"
+ },
+ {
+  "src": "Spider_Curl",
+  "name": "Curl araignée",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Spider_Curl/0.jpg"
+ },
+ {
+  "src": "Cable_Preacher_Curl",
+  "name": "Curl pupitre poulie",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Cable_Preacher_Curl/0.jpg"
+ },
+ {
+  "src": "Overhead_Cable_Curl",
+  "name": "Curl poulie haute",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Overhead_Cable_Curl/0.jpg"
+ },
+ {
+  "src": "High_Cable_Curls",
+  "name": "Curl poulie haute double",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "High_Cable_Curls/0.jpg"
+ },
+ {
+  "src": "Standing_One-Arm_Cable_Curl",
+  "name": "Curl poulie un bras",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Standing_One-Arm_Cable_Curl/0.jpg"
+ },
+ {
+  "src": "Reverse_Cable_Curl",
+  "name": "Curl inversé poulie",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Reverse_Cable_Curl/0.jpg"
+ },
+ {
+  "src": "Machine_Bicep_Curl",
+  "name": "Curl biceps machine",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Machine_Bicep_Curl/0.jpg"
+ },
+ {
+  "src": "Standing_Dumbbell_Reverse_Curl",
+  "name": "Curl inversé haltères",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Standing_Dumbbell_Reverse_Curl/0.jpg"
+ },
+ {
+  "src": "Drag_Curl",
+  "name": "Drag curl",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Drag_Curl/0.jpg"
+ },
+ {
+  "src": "Palms-Up_Barbell_Wrist_Curl_Over_A_Bench",
+  "name": "Curl poignets barre",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Palms-Up_Barbell_Wrist_Curl_Over_A_Bench/0.jpg"
+ },
+ {
+  "src": "Palms-Down_Wrist_Curl_Over_A_Bench",
+  "name": "Curl poignets inversé barre",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Palms-Down_Wrist_Curl_Over_A_Bench/0.jpg"
+ },
+ {
+  "src": "Seated_Dumbbell_Palms-Up_Wrist_Curl",
+  "name": "Curl poignets haltère",
+  "primary": "biceps",
+  "secondary": [],
+  "image": "Seated_Dumbbell_Palms-Up_Wrist_Curl/0.jpg"
+ },
+ {
+  "src": "Cable_Incline_Triceps_Extension",
+  "name": "Extension triceps poulie inclinée",
+  "primary": "triceps",
+  "secondary": [],
+  "image": "Cable_Incline_Triceps_Extension/0.jpg"
+ },
+ {
+  "src": "Cable_Lying_Triceps_Extension",
+  "name": "Extension triceps poulie allongé",
+  "primary": "triceps",
+  "secondary": [],
+  "image": "Cable_Lying_Triceps_Extension/0.jpg"
+ },
+ {
+  "src": "Cable_One_Arm_Tricep_Extension",
+  "name": "Extension triceps poulie un bras",
+  "primary": "triceps",
+  "secondary": [],
+  "image": "Cable_One_Arm_Tricep_Extension/0.jpg"
+ },
+ {
+  "src": "Close-Grip_Dumbbell_Press",
+  "name": "Développé haltères prise serrée",
+  "primary": "triceps",
+  "secondary": [
+   "pecs",
+   "epaules"
+  ],
+  "image": "Close-Grip_Dumbbell_Press/0.jpg"
+ },
+ {
+  "src": "Smith_Machine_Close-Grip_Bench_Press",
+  "name": "Développé couché prise serrée Smith",
+  "primary": "triceps",
+  "secondary": [
+   "pecs",
+   "epaules"
+  ],
+  "image": "Smith_Machine_Close-Grip_Bench_Press/0.jpg"
+ },
+ {
+  "src": "Dip_Machine",
+  "name": "Dips machine",
+  "primary": "triceps",
+  "secondary": [
+   "pecs",
+   "epaules"
+  ],
+  "image": "Dip_Machine/0.jpg"
+ },
+ {
+  "src": "JM_Press",
+  "name": "JM press",
+  "primary": "triceps",
+  "secondary": [
+   "pecs",
+   "epaules"
+  ],
+  "image": "JM_Press/0.jpg"
+ },
+ {
+  "src": "Lying_Triceps_Press",
+  "name": "Barre au front",
+  "primary": "triceps",
+  "secondary": [],
+  "image": "Lying_Triceps_Press/0.jpg"
+ },
+ {
+  "src": "Decline_EZ_Bar_Triceps_Extension",
+  "name": "Barre au front déclinée",
+  "primary": "triceps",
+  "secondary": [],
+  "image": "Decline_EZ_Bar_Triceps_Extension/0.jpg"
+ },
+ {
+  "src": "Lying_Dumbbell_Tricep_Extension",
+  "name": "Extension triceps haltères allongé",
+  "primary": "triceps",
+  "secondary": [
+   "pecs",
+   "epaules"
+  ],
+  "image": "Lying_Dumbbell_Tricep_Extension/0.jpg"
+ },
+ {
+  "src": "Standing_Dumbbell_Triceps_Extension",
+  "name": "Extension triceps haltère debout",
+  "primary": "triceps",
+  "secondary": [],
+  "image": "Standing_Dumbbell_Triceps_Extension/0.jpg"
+ },
+ {
+  "src": "Seated_Triceps_Press",
+  "name": "Extension triceps haltère assis",
+  "primary": "triceps",
+  "secondary": [],
+  "image": "Seated_Triceps_Press/0.jpg"
+ },
+ {
+  "src": "Standing_Overhead_Barbell_Triceps_Extension",
+  "name": "Extension triceps barre debout",
+  "primary": "triceps",
+  "secondary": [
+   "epaules"
+  ],
+  "image": "Standing_Overhead_Barbell_Triceps_Extension/0.jpg"
+ },
+ {
+  "src": "Triceps_Pushdown_-_V-Bar_Attachment",
+  "name": "Extension triceps poulie (barre en V)",
+  "primary": "triceps",
+  "secondary": [],
+  "image": "Triceps_Pushdown_-_V-Bar_Attachment/0.jpg"
+ },
+ {
+  "src": "Push-Ups_-_Close_Triceps_Position",
+  "name": "Pompes prise serrée",
+  "primary": "triceps",
+  "secondary": [
+   "pecs",
+   "epaules"
+  ],
+  "image": "Push-Ups_-_Close_Triceps_Position/0.jpg"
+ },
+ {
+  "src": "Standing_Bent-Over_Two-Arm_Dumbbell_Triceps_Extension",
+  "name": "Extension triceps haltères buste penché",
+  "primary": "triceps",
+  "secondary": [],
+  "image": "Standing_Bent-Over_Two-Arm_Dumbbell_Triceps_Extension/0.jpg"
+ },
+ {
+  "src": "Bodyweight_Squat",
+  "name": "Squat au poids du corps",
+  "primary": "quadriceps",
+  "secondary": [
+   "fessiers",
+   "ischios"
+  ],
+  "image": "Bodyweight_Squat/0.jpg"
+ },
+ {
+  "src": "Dumbbell_Squat",
+  "name": "Squat haltères",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "ischios",
+   "dos"
+  ],
+  "image": "Dumbbell_Squat/0.jpg"
+ },
+ {
+  "src": "Front_Squat_Clean_Grip",
+  "name": "Front squat",
+  "primary": "quadriceps",
+  "secondary": [
+   "abdos",
+   "fessiers",
+   "ischios"
+  ],
+  "image": "Front_Squat_Clean_Grip/0.jpg"
+ },
+ {
+  "src": "Wide_Stance_Barbell_Squat",
+  "name": "Squat barre écart large",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "ischios",
+   "dos"
+  ],
+  "image": "Wide_Stance_Barbell_Squat/0.jpg"
+ },
+ {
+  "src": "Narrow_Stance_Squats",
+  "name": "Squat barre écart serré",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "ischios",
+   "dos"
+  ],
+  "image": "Narrow_Stance_Squats/0.jpg"
+ },
+ {
+  "src": "Plie_Dumbbell_Squat",
+  "name": "Squat sumo haltère",
+  "primary": "quadriceps",
+  "secondary": [
+   "abdos",
+   "mollets",
+   "fessiers",
+   "ischios"
+  ],
+  "image": "Plie_Dumbbell_Squat/0.jpg"
+ },
+ {
+  "src": "Dumbbell_Rear_Lunge",
+  "name": "Fentes arrière haltères",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "ischios"
+  ],
+  "image": "Dumbbell_Rear_Lunge/0.jpg"
+ },
+ {
+  "src": "Bodyweight_Walking_Lunge",
+  "name": "Fentes marchées poids du corps",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "ischios"
+  ],
+  "image": "Bodyweight_Walking_Lunge/0.jpg"
+ },
+ {
+  "src": "Barbell_Step_Ups",
+  "name": "Montées sur banc barre",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "ischios"
+  ],
+  "image": "Barbell_Step_Ups/0.jpg"
+ },
+ {
+  "src": "Barbell_Hack_Squat",
+  "name": "Hack squat barre",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "biceps",
+   "ischios"
+  ],
+  "image": "Barbell_Hack_Squat/0.jpg"
+ },
+ {
+  "src": "Narrow_Stance_Leg_Press",
+  "name": "Presse à cuisses écart serré",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "ischios"
+  ],
+  "image": "Narrow_Stance_Leg_Press/0.jpg"
+ },
+ {
+  "src": "Smith_Machine_Leg_Press",
+  "name": "Presse à cuisses Smith",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "ischios"
+  ],
+  "image": "Smith_Machine_Leg_Press/0.jpg"
+ },
+ {
+  "src": "Smith_Single-Leg_Split_Squat",
+  "name": "Split squat Smith",
+  "primary": "quadriceps",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "ischios"
+  ],
+  "image": "Smith_Single-Leg_Split_Squat/0.jpg"
+ },
+ {
+  "src": "Single-Leg_Leg_Extension",
+  "name": "Leg extension unilatéral",
+  "primary": "quadriceps",
+  "secondary": [],
+  "image": "Single-Leg_Leg_Extension/0.jpg"
+ },
+ {
+  "src": "Cable_Hip_Adduction",
+  "name": "Adduction hanche poulie",
+  "primary": "quadriceps",
+  "secondary": [],
+  "image": "Cable_Hip_Adduction/0.jpg"
+ },
+ {
+  "src": "Standing_Leg_Curl",
+  "name": "Leg curl debout",
+  "primary": "ischios",
+  "secondary": [],
+  "image": "Standing_Leg_Curl/0.jpg"
+ },
+ {
+  "src": "Natural_Glute_Ham_Raise",
+  "name": "Glute-ham raise",
+  "primary": "ischios",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "dos"
+  ],
+  "image": "Natural_Glute_Ham_Raise/0.jpg"
+ },
+ {
+  "src": "Smith_Machine_Stiff-Legged_Deadlift",
+  "name": "Soulevé de terre jambes tendues Smith",
+  "primary": "ischios",
+  "secondary": [
+   "fessiers",
+   "dos"
+  ],
+  "image": "Smith_Machine_Stiff-Legged_Deadlift/0.jpg"
+ },
+ {
+  "src": "Kettlebell_One-Legged_Deadlift",
+  "name": "Soulevé de terre unilatéral kettlebell",
+  "primary": "ischios",
+  "secondary": [
+   "fessiers",
+   "dos"
+  ],
+  "image": "Kettlebell_One-Legged_Deadlift/0.jpg"
+ },
+ {
+  "src": "One-Arm_Kettlebell_Swings",
+  "name": "Swing kettlebell",
+  "primary": "ischios",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "dos",
+   "epaules"
+  ],
+  "image": "One-Arm_Kettlebell_Swings/0.jpg"
+ },
+ {
+  "src": "Power_Clean",
+  "name": "Épaulé (power clean)",
+  "primary": "ischios",
+  "secondary": [
+   "mollets",
+   "biceps",
+   "fessiers",
+   "dos",
+   "quadriceps",
+   "epaules",
+   "triceps"
+  ],
+  "image": "Power_Clean/0.jpg"
+ },
+ {
+  "src": "Snatch_Pull",
+  "name": "Tirage arraché",
+  "primary": "ischios",
+  "secondary": [
+   "mollets",
+   "fessiers",
+   "dos",
+   "quadriceps"
+  ],
+  "image": "Snatch_Pull/0.jpg"
+ },
+ {
+  "src": "Pull_Through",
+  "name": "Pull-through poulie",
+  "primary": "fessiers",
+  "secondary": [
+   "ischios",
+   "dos"
+  ],
+  "image": "Pull_Through/0.jpg"
+ },
+ {
+  "src": "Step-up_with_Knee_Raise",
+  "name": "Montée sur banc genou levé",
+  "primary": "fessiers",
+  "secondary": [
+   "ischios",
+   "quadriceps"
+  ],
+  "image": "Step-up_with_Knee_Raise/0.jpg"
+ },
+ {
+  "src": "Leg_Lift",
+  "name": "Relevé de jambe fessiers au sol",
+  "primary": "fessiers",
+  "secondary": [
+   "ischios"
+  ],
+  "image": "Leg_Lift/0.jpg"
+ },
+ {
+  "src": "Standing_Barbell_Calf_Raise",
+  "name": "Mollets debout barre",
+  "primary": "mollets",
+  "secondary": [],
+  "image": "Standing_Barbell_Calf_Raise/0.jpg"
+ },
+ {
+  "src": "Standing_Dumbbell_Calf_Raise",
+  "name": "Mollets debout haltères",
+  "primary": "mollets",
+  "secondary": [],
+  "image": "Standing_Dumbbell_Calf_Raise/0.jpg"
+ },
+ {
+  "src": "Dumbbell_Seated_One-Leg_Calf_Raise",
+  "name": "Mollets assis haltère une jambe",
+  "primary": "mollets",
+  "secondary": [],
+  "image": "Dumbbell_Seated_One-Leg_Calf_Raise/0.jpg"
+ },
+ {
+  "src": "Barbell_Seated_Calf_Raise",
+  "name": "Mollets assis barre",
+  "primary": "mollets",
+  "secondary": [],
+  "image": "Barbell_Seated_Calf_Raise/0.jpg"
+ },
+ {
+  "src": "Calf_Raise_On_A_Dumbbell",
+  "name": "Mollets sur haltère",
+  "primary": "mollets",
+  "secondary": [],
+  "image": "Calf_Raise_On_A_Dumbbell/0.jpg"
+ },
+ {
+  "src": "Cable_Seated_Crunch",
+  "name": "Crunch assis poulie",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Cable_Seated_Crunch/0.jpg"
+ },
+ {
+  "src": "Rope_Crunch",
+  "name": "Crunch corde",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Rope_Crunch/0.jpg"
+ },
+ {
+  "src": "Cable_Reverse_Crunch",
+  "name": "Crunch inversé poulie",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Cable_Reverse_Crunch/0.jpg"
+ },
+ {
+  "src": "Cable_Russian_Twists",
+  "name": "Russian twist poulie",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Cable_Russian_Twists/0.jpg"
+ },
+ {
+  "src": "Pallof_Press",
+  "name": "Pallof press",
+  "primary": "abdos",
+  "secondary": [
+   "pecs",
+   "epaules",
+   "triceps"
+  ],
+  "image": "Pallof_Press/0.jpg"
+ },
+ {
+  "src": "Standing_Cable_Wood_Chop",
+  "name": "Bûcheron poulie",
+  "primary": "abdos",
+  "secondary": [
+   "epaules"
+  ],
+  "image": "Standing_Cable_Wood_Chop/0.jpg"
+ },
+ {
+  "src": "Barbell_Ab_Rollout",
+  "name": "Roue abdominale barre",
+  "primary": "abdos",
+  "secondary": [
+   "dos",
+   "epaules"
+  ],
+  "image": "Barbell_Ab_Rollout/0.jpg"
+ },
+ {
+  "src": "Dead_Bug",
+  "name": "Dead bug",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Dead_Bug/0.jpg"
+ },
+ {
+  "src": "Dumbbell_Side_Bend",
+  "name": "Flexions latérales haltère",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Dumbbell_Side_Bend/0.jpg"
+ },
+ {
+  "src": "One-Arm_High-Pulley_Cable_Side_Bends",
+  "name": "Flexions latérales poulie",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "One-Arm_High-Pulley_Cable_Side_Bends/0.jpg"
+ },
+ {
+  "src": "Seated_Barbell_Twist",
+  "name": "Rotations assis barre",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Seated_Barbell_Twist/0.jpg"
+ },
+ {
+  "src": "Bent-Knee_Hip_Raise",
+  "name": "Relevé de bassin genoux fléchis",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Bent-Knee_Hip_Raise/0.jpg"
+ },
+ {
+  "src": "Cross-Body_Crunch",
+  "name": "Crunch croisé",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Cross-Body_Crunch/0.jpg"
+ },
+ {
+  "src": "Decline_Reverse_Crunch",
+  "name": "Crunch inversé décliné",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Decline_Reverse_Crunch/0.jpg"
+ },
+ {
+  "src": "Jackknife_Sit-Up",
+  "name": "Jackknife sit-up",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Jackknife_Sit-Up/0.jpg"
+ },
+ {
+  "src": "Air_Bike",
+  "name": "Vélo abdominal",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Air_Bike/0.jpg"
+ },
+ {
+  "src": "Leg_Pull-In",
+  "name": "Rentrées de jambes",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Leg_Pull-In/0.jpg"
+ },
+ {
+  "src": "Smith_Machine_Hip_Raise",
+  "name": "Relevé de jambes Smith",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Smith_Machine_Hip_Raise/0.jpg"
+ },
+ {
+  "src": "Elbow_to_Knee",
+  "name": "Coude-genou",
+  "primary": "abdos",
+  "secondary": [],
+  "image": "Elbow_to_Knee/0.jpg"
  }
 ]
