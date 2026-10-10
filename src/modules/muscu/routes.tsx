@@ -1,5 +1,6 @@
 import type { RouteObject } from 'react-router-dom'
 import { ComingSoon, ModuleLayout, type Tab } from '../../core/ui'
+import { ExercicePage } from './library/ExercicePage'
 import { BibliothequePage } from './library/BibliothequePage'
 import { GroupePage } from './library/GroupePage'
 
@@ -16,7 +17,7 @@ export const muscuRoute: RouteObject = {
     { index: true, element: <ComingSoon name="Accueil Muscu" /> },
     { path: 'bibliotheque', element: <BibliothequePage /> },
     { path: 'bibliotheque/:group', element: <GroupePage /> },
-    { path: 'bibliotheque/exercice/:id', element: <ComingSoon name="Fiche exercice" /> },
+    { path: 'bibliotheque/exercice/:id', element: <ExercicePage /> },
     { path: 'profil', element: <ComingSoon name="Profil" /> },
   ],
 }
