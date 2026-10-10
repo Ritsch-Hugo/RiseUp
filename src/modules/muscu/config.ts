@@ -51,3 +51,6 @@ export const DEFAULT_TARGET_SETS = 3
 export const DEFAULT_TARGET_REPS_MIN = 8
 export const DEFAULT_TARGET_REPS_MAX = 12
 export const DEFAULT_REST_SECONDS = 90
+
+/** Minuteur de repos : pas des boutons − / + (secondes). */
+export const REST_STEP_SECONDS = 15

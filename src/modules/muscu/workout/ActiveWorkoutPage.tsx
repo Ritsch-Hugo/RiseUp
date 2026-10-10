@@ -7,9 +7,13 @@ import { ExerciseImage } from '../library/ExerciseImage'
 import { LibraryState } from '../library/LibraryState'
 import { ExercisePicker } from '../programs/ExercisePicker'
 import { useExercises, type Exercise } from '../queries'
+import { elapsedSeconds } from '../rules/restTimer'
 import { workoutVolume } from '../rules/volume'
 import { formatClock, formatLastTime, formatPrevious } from './format'
-import { parseDecimal, type PrevSet, type Row } from './rows'
+import { RestCard } from './RestCard'
+import { canValidate, parseDecimal, type PrevSet, type Row } from './rows'
+import { clearTimers, useTimers } from './useTimers'
+import { useWakeLock } from './useWakeLock'
 import { clearDraft, useWorkoutRows } from './useWorkoutRows'
 import {
   OPEN_WORKOUT_KEY,
@@ -68,6 +72,8 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
   const [picking, setPicking] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [now, setNow] = useState(() => Date.now())
+  useWakeLock()
+  const timers = useTimers(workout.id, now)
 
   const exerciseById = useMemo(() => new Map(exercises.map((e) => [e.id, e])), [exercises])
   const trackingOf = useMemo(
@@ -108,10 +114,33 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
   const firstOpen = workout.exercises.find((we) => (rows[we.id] ?? []).some((r) => !r.done))
   const [openId, setOpenId] = useState<string | null>(firstOpen?.id ?? null)
 
+  const onToggleDone = (weId: string, rowId: string) => {
+    const we = workout.exercises.find((x) => x.id === weId)
+    const row = rows[weId]?.find((r) => r.id === rowId)
+    if (!we || !row) return
+    const startsRest = !row.done && !row.warmup && canValidate(row, trackingOf(we.exercise_id))
+    toggleDone(weId, rowId)
+    if (startsRest) timers.startRest(we.rest_seconds)
+  }
+
+  /** Lance le chrono de cette ligne, ou l'arrête et range la durée mesurée dans la ligne. */
+  const onChronoToggle = (weId: string, rowId: string) => {
+    if (timers.chrono?.rowId === rowId) {
+      const seconds = timers.stopChrono()
+      if (seconds !== null) {
+        patchRow(weId, rowId, { duration: String(seconds) })
+        commit(weId, rowId, { duration: String(seconds) })
+      }
+      return
+    }
+    timers.startChrono(rowId)
+  }
+
   const onFinish = () =>
     finish.mutate(workout.id, {
       onSuccess: () => {
         clearDraft(workout.id)
+        clearTimers(workout.id)
         navigate('/muscu', { replace: true })
       },
     })
@@ -119,6 +148,7 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
     abandon.mutate(workout.id, {
       onSuccess: () => {
         clearDraft(workout.id)
+        clearTimers(workout.id)
         navigate('/muscu', { replace: true })
       },
     })
@@ -155,6 +185,16 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
         </div>
       </div>
 
+      {timers.rest && (
+        <RestCard
+          endsAt={timers.rest.endsAt}
+          total={timers.rest.total}
+          now={now}
+          onAdjust={timers.adjust}
+          onStop={timers.stopRest}
+        />
+      )}
+
       {syncError && (
         <button type="button" className={styles.syncError} onClick={dismissSyncError}>
           Une série n’a pas pu être enregistrée (connexion ?). Elle reste dans ton brouillon.
@@ -174,7 +214,10 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
             onToggleOpen={() => setOpenId(openId === we.id ? null : we.id)}
             onPatch={(rowId, patch) => patchRow(we.id, rowId, patch)}
             onCommit={(rowId, patch) => commit(we.id, rowId, patch)}
-            onToggleDone={(rowId) => toggleDone(we.id, rowId)}
+            onToggleDone={(rowId) => onToggleDone(we.id, rowId)}
+            chronoRowId={timers.chrono?.rowId ?? null}
+            chronoSeconds={timers.chrono ? elapsedSeconds(timers.chrono.startedAt, now) : 0}
+            onChronoToggle={(rowId) => onChronoToggle(we.id, rowId)}
             onAddRow={() => addRow(we.id)}
           />
         ))}
@@ -228,6 +271,9 @@ type ExerciseBlockProps = {
   onCommit: (rowId: string, patch?: Partial<Row>) => void
   onToggleDone: (rowId: string) => void
   onAddRow: () => void
+  chronoRowId: string | null
+  chronoSeconds: number
+  onChronoToggle: (rowId: string) => void
 }
 
 function ExerciseBlock({
@@ -241,6 +287,9 @@ function ExerciseBlock({
   onCommit,
   onToggleDone,
   onAddRow,
+  chronoRowId,
+  chronoSeconds,
+  onChronoToggle,
 }: ExerciseBlockProps) {
   const tracking: Tracking = exercise?.tracking ?? 'poids_reps'
   const name = exercise?.name ?? 'Exercice archivé'
@@ -248,7 +297,7 @@ function ExerciseBlock({
   const gridClass = {
     poids_reps: styles.gridWeight,
     reps: styles.gridReps,
-    duree: styles.gridTime,
+    duree: styles.gridTimeChrono,
   }[tracking]
 
   if (!open) {
@@ -287,6 +336,7 @@ function ExerciseBlock({
         {tracking === 'poids_reps' && <span>KG</span>}
         {tracking !== 'duree' && <span>REPS</span>}
         {tracking === 'duree' && <span>SEC.</span>}
+        {tracking === 'duree' && <span />}
         <span>RPE</span>
         <span />
       </div>
@@ -331,13 +381,29 @@ function ExerciseBlock({
             />
           )}
           {tracking === 'duree' && (
-            <NumberInput
-              label={`Secondes série ${i + 1}`}
-              value={row.duration}
-              done={row.done}
-              onChange={(v) => onPatch(row.id, { duration: v })}
-              onBlur={() => onCommit(row.id)}
-            />
+            <>
+              <NumberInput
+                label={`Secondes série ${i + 1}`}
+                value={chronoRowId === row.id ? String(chronoSeconds) : row.duration}
+                done={row.done}
+                readOnly={chronoRowId === row.id}
+                onChange={(v) => onPatch(row.id, { duration: v })}
+                onBlur={() => onCommit(row.id)}
+              />
+              <button
+                type="button"
+                className={chronoRowId === row.id ? styles.chronoOn : styles.chronoOff}
+                aria-label={
+                  chronoRowId === row.id
+                    ? `Arrêter le chrono de la série ${i + 1}`
+                    : `Lancer le chrono de la série ${i + 1}`
+                }
+                aria-pressed={chronoRowId === row.id}
+                onClick={() => onChronoToggle(row.id)}
+              >
+                <Icon name={chronoRowId === row.id ? 'stop' : 'play'} size={18} />
+              </button>
+            </>
           )}
           <NumberInput
             label={`RPE série ${i + 1}`}
@@ -381,6 +447,7 @@ type NumberInputProps = {
   done: boolean
   decimal?: boolean
   placeholder?: string
+  readOnly?: boolean
   onChange: (value: string) => void
   onBlur: () => void
 }
@@ -391,6 +458,7 @@ function NumberInput({
   done,
   decimal,
   placeholder,
+  readOnly,
   onChange,
   onBlur,
 }: NumberInputProps) {
@@ -400,6 +468,7 @@ function NumberInput({
       aria-label={label}
       inputMode={decimal ? 'decimal' : 'numeric'}
       placeholder={placeholder}
+      readOnly={readOnly}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       onBlur={onBlur}

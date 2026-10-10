@@ -385,3 +385,92 @@
   font-size: 14px;
   color: var(--danger);
 }
+
+.rest {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--card-2);
+}
+
+.restHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.restLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.restClock,
+.restClockDone {
+  font-size: 26px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.restClockDone {
+  color: var(--positive);
+}
+
+.restTrack {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--card);
+}
+
+.restFill {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--accent);
+  transition: width 0.3s linear;
+}
+
+.restButtons {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.restButtons button {
+  flex: 1;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.restButtons .restSkip {
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.gridTimeChrono {
+  grid-template-columns: 26px 70px minmax(0, 1fr) 40px 48px 40px;
+}
+
+.chronoOff,
+.chronoOn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--card-2);
+  color: var(--accent-text);
+}
+
+.chronoOn {
+  background: var(--accent-solid);
+  color: #fff;
+}
