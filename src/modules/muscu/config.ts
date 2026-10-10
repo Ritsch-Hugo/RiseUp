@@ -61,3 +61,7 @@ export const ONE_RM_MAX_REPS = 12
 /** Accueil Muscu : nombre de dernières séances affichées et de pastilles muscles par séance. */
 export const HOME_RECENT_WORKOUTS = 5
 export const HOME_MUSCLE_BUBBLES = 4
+
+/** Profil : nombre de semaines des graphes (≈ 3 mois) et objectif hebdomadaire du streak. */
+export const PROFILE_WEEKS = 13
+export const WEEKLY_GOAL = 3

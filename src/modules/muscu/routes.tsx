@@ -4,6 +4,8 @@ import { BibliothequePage } from './library/BibliothequePage'
 import { ExerciceFormPage } from './library/ExerciceFormPage'
 import { ExercicePage } from './library/ExercicePage'
 import { GroupePage } from './library/GroupePage'
+import { OverviewPage } from './profile/OverviewPage'
+import { ProfilePage } from './profile/ProfilePage'
 import { MuscuLayout } from './MuscuLayout'
 import { LancerSeancePage } from './programs/LancerSeancePage'
 import { ProgrammeFormPage } from './programs/ProgrammeFormPage'
@@ -31,6 +33,14 @@ export const muscuRoute: RouteObject = {
     { path: 'bibliotheque/:group', element: <GroupePage /> },
     { path: 'bibliotheque/exercice/:id', element: <ExercicePage /> },
     { path: 'bibliotheque/exercice/:id/modifier', element: <ExerciceFormPage /> },
-    { path: 'profil', element: <ComingSoon name="Profil" /> },
+    {
+      path: 'profil',
+      element: <ProfilePage />,
+      children: [
+        { index: true, element: <OverviewPage /> },
+        { path: 'exercices', element: <ComingSoon name="Exercices" /> },
+        { path: 'stats', element: <ComingSoon name="Stats avancées" /> },
+      ],
+    },
   ],
 }
