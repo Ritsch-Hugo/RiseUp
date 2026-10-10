@@ -24,6 +24,7 @@ const PATHS = {
   ],
   chevronRight: ['m9 18 6-6-6-6'],
   chevronLeft: ['m15 18-6-6 6-6'],
+  search: ['M11 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16z', 'm21 21-4.3-4.3'],
   logout: ['M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4', 'm16 17 5-5-5-5', 'M21 12H9'],
 } as const
 
