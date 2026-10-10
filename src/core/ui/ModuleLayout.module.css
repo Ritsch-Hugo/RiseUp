@@ -24,3 +24,18 @@
   gap: var(--space-4);
   padding: var(--space-4) 20px 120px;
 }
+
+.withBanner {
+  padding-bottom: 190px;
+}
+
+.banner {
+  position: fixed;
+  bottom: var(--tabbar-height);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-width);
+  padding: 0 12px 8px;
+  z-index: 40;
+}

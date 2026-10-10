@@ -340,3 +340,63 @@
   height: 100%;
   object-fit: cover;
 }
+
+.chips {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chip,
+.chipOn {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 22px;
+  background: var(--card);
+  color: var(--text-2);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.chipOn {
+  background: var(--accent-solid);
+  color: #fff;
+  font-weight: 700;
+}
+
+.bigTitle {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.launchRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px;
+  border-radius: 18px;
+  background: var(--card);
+}
+
+.launchThumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--card-2);
+  color: var(--text-2);
+}
+
+.launchThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

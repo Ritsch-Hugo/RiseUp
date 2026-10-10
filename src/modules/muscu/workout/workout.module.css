@@ -1,0 +1,387 @@
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: var(--app-width);
+  margin: 0 auto;
+  padding: 10px var(--space-4) 40px;
+  overflow-y: auto;
+  background: var(--card);
+}
+
+.handle {
+  flex: none;
+  width: 40px;
+  height: 5px;
+  margin: 0 auto 2px;
+  border-radius: 3px;
+  background: #3a4560;
+}
+
+.center {
+  text-align: center;
+  color: var(--text-2);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.headTitle {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.finish {
+  height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--accent-solid);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.stats {
+  display: flex;
+  padding: var(--space-3);
+  border-radius: 14px;
+  background: var(--card-2);
+}
+
+.stats > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statValue,
+.statAccent {
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.statAccent {
+  color: var(--accent-text);
+}
+
+.statLabel {
+  font-size: 11px;
+  color: var(--text-2);
+}
+
+.syncError {
+  padding: var(--space-3);
+  border: 0;
+  border-radius: 12px;
+  background: var(--card-2);
+  color: var(--danger);
+  font-size: 13px;
+  text-align: left;
+}
+
+.exercises {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.blockHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.blockName {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.thumb,
+.thumbLarge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--text-2);
+}
+
+.thumbLarge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--card-2);
+}
+
+.thumb img,
+.thumbLarge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collapsed {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 8px var(--space-3);
+  border: 0;
+  border-radius: 14px;
+  background: var(--card-2);
+  color: var(--text-2);
+  text-align: left;
+}
+
+.collapsedText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.collapsedName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.gridRow {
+  display: grid;
+  gap: 6px;
+  align-items: center;
+  text-align: center;
+}
+
+.gridWeight {
+  grid-template-columns: 26px 70px minmax(0, 1fr) minmax(0, 1fr) 48px 40px;
+}
+
+.gridReps {
+  grid-template-columns: 26px 70px minmax(0, 1fr) 48px 40px;
+}
+
+.gridTime {
+  grid-template-columns: 26px 70px minmax(0, 1fr) 48px 40px;
+}
+
+.gridHeader {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-2);
+}
+
+.index,
+.indexWarmup {
+  width: 26px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-2);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.indexWarmup {
+  color: var(--accent-2);
+}
+
+.prev {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.input,
+.inputDone {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  padding: 0;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  background: var(--card-2);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.inputDone {
+  color: var(--text);
+}
+
+.checkOff,
+.checkOn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.checkOff {
+  border: 2px solid #6f7c99;
+  background: transparent;
+}
+
+.checkOn {
+  border: 0;
+  background: var(--accent-solid);
+}
+
+.addSet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--accent-text);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.target {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.dashed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 52px;
+  border: 1.5px dashed var(--border-dashed);
+  border-radius: var(--radius-button);
+  background: transparent;
+  color: var(--accent-text);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sheetActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 60px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-button);
+  background: var(--card-2);
+  box-shadow: 0 4px 20px rgb(47 123 255 / 0.25);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--positive);
+}
+
+.barText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.barName {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.barClock {
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-text);
+}
+
+.homeText {
+  margin: var(--space-2) 0 var(--space-4);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.homeActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.homeLink {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  border-radius: var(--radius-button);
+  background: var(--accent-solid);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.errorText {
+  margin: var(--space-3) 0 0;
+  font-size: 14px;
+  color: var(--danger);
+}

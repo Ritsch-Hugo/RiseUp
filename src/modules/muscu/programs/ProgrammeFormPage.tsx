@@ -111,7 +111,7 @@ function Form({ program }: { program: Program }) {
             ))
           )}
           <Link
-            to={`/muscu/bibliotheque/programmes/${program.id}/seance/${s.id}`}
+            to={`/muscu/bibliotheque/programmes/${program.id}/seance/${s.id}/modifier`}
             className={styles.link}
           >
             <Icon name="edit" size={16} />
