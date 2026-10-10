@@ -43,3 +43,11 @@ export const TRACKINGS: { key: Tracking; label: string }[] = [
 export const EXERCISE_PHOTO_MAX_SIDE = 1024
 export const EXERCISE_PHOTO_QUALITY = 0.8
 export const EXERCISE_IMAGES_BUCKET = 'exercise-images'
+
+/** Programmes : choix « jours par semaine » et valeurs par défaut d'un exercice ajouté à une séance type. */
+export const PROGRAM_DAYS_OPTIONS = [2, 3, 4, 5, 6]
+export const DEFAULT_PROGRAM_DAYS = 3
+export const DEFAULT_TARGET_SETS = 3
+export const DEFAULT_TARGET_REPS_MIN = 8
+export const DEFAULT_TARGET_REPS_MAX = 12
+export const DEFAULT_REST_SECONDS = 90

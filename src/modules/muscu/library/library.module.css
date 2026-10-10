@@ -193,3 +193,30 @@
   font-weight: 700;
   color: var(--accent-text);
 }
+
+.switch {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-button);
+  background: var(--card);
+}
+
+.switchOn,
+.switchOff {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border-radius: 12px;
+  font-size: 15px;
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.switchOn {
+  background: var(--accent-solid);
+  color: #fff;
+  font-weight: 700;
+}

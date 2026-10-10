@@ -5,13 +5,13 @@ Estimations en sessions d'environ 2 h avec Claude Code, indicatives. Hugo valide
 ## Phase 0 : socle (~4 sessions)
 - [x] Repo Vite + React + TS strict, ESLint (isolation des modules), Prettier, Vitest
 - [x] Projet Supabase + CLI, migration initiale (trigger `updated_at`, modèle RLS), inscriptions désactivées, compte de Hugo
-- [ ] Login, routeur, layout à onglets, thème (charte + DM Sans), composants de base (carte, bouton, feuille)
-- [ ] PWA installable (manifest, icônes)
-- [ ] CI GitHub Actions, Cloudflare Pages, cron anti-pause
+- [x] Login, routeur, layout à onglets, thème (charte + DM Sans), composants de base (carte, bouton, feuille)
+- [x] PWA installable (manifest, icônes)
+- [x] CI GitHub Actions, Cloudflare Pages, cron anti-pause
 
 ## Phase 1 : Muscu (~12 sessions)
-- [ ] Schéma + seed ~100 exercices traduits + images
-- [ ] Bibliothèque (10 groupes), fiche exercice, création d'exercice + upload photo
+- [x] Schéma + seed ~100 exercices traduits + images
+- [x] Bibliothèque (10 groupes), fiche exercice, création d'exercice + upload photo
 - [ ] Programmes et séances types
 - [ ] Séance en cours : feuille, saisie, minuteur, chrono, brouillon local, fin de séance
 - [ ] Règles métier + tests (1RM, records, volume, récup, muscles, streak)

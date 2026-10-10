@@ -4,6 +4,7 @@ import { Icon } from '../../../core/ui'
 import { MUSCLE_GROUPS } from '../config'
 import { useExercises } from '../queries'
 import { ExerciseCard } from './ExerciseCard'
+import { LibrarySwitch } from './LibrarySwitch'
 import { LibraryState } from './LibraryState'
 import { SearchField } from './SearchField'
 import { searchExercises } from './searchExercises'
@@ -24,6 +25,7 @@ export function BibliothequePage() {
 
   return (
     <>
+      <LibrarySwitch />
       <SearchField value={query} onChange={setQuery} />
       <LibraryState isPending={isPending} isError={isError}>
         {searching ? (
