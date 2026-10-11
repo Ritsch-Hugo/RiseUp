@@ -19,16 +19,27 @@ const toValues = (g: Tables<'nutri_goals'> | null): GoalValues =>
       }
     : DEFAULT_GOALS
 
+/** Objectif en vigueur un jour donné d'après l'historique des objectifs ; défauts si rien d'enregistré. */
+export const goalsOnDay = (rows: Tables<'nutri_goals'>[], day: string): GoalValues =>
+  toValues(goalForDay(rows, day))
+
+const fetchGoalRows = async () => {
+  const { data, error } = await supabase.from('nutri_goals').select('*')
+  if (error) throw error
+  return data
+}
+
+/** Toutes les lignes d'objectifs (historique daté). */
+export function useGoalRows() {
+  return useQuery({ queryKey: KEY, queryFn: fetchGoalRows })
+}
+
 /** Objectif en vigueur un jour donné ; les valeurs par défaut tant que rien n'est enregistré. */
 export function useGoalsForDay(day: string) {
   return useQuery({
     queryKey: KEY,
-    queryFn: async () => {
-      const { data, error } = await supabase.from('nutri_goals').select('*')
-      if (error) throw error
-      return data
-    },
-    select: (rows) => toValues(goalForDay(rows, day)),
+    queryFn: fetchGoalRows,
+    select: (rows) => goalsOnDay(rows, day),
   })
 }
 

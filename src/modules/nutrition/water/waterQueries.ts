@@ -58,7 +58,10 @@ export function useAddWater() {
       return { previous, day }
     },
     onError: (_e, _v, context) => queryClient.setQueryData(dayKey(context!.day), context?.previous),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['nutri', 'water'] }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['nutri', 'water'] })
+      queryClient.invalidateQueries({ queryKey: ['nutri', 'water-days'] })
+    },
   })
 }
 
@@ -79,6 +82,9 @@ export function useRemoveWater() {
       return { previous, day: row.day }
     },
     onError: (_e, _v, context) => queryClient.setQueryData(dayKey(context!.day), context?.previous),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['nutri', 'water'] }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['nutri', 'water'] })
+      queryClient.invalidateQueries({ queryKey: ['nutri', 'water-days'] })
+    },
   })
 }

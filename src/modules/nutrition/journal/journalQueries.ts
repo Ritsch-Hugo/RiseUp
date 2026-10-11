@@ -57,7 +57,10 @@ function useEntryMutation<TInput>(
     onError: (_e, _i, context?: Context) => {
       if (context) queryClient.setQueryData(context.key, context.previous)
     },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['nutri', 'entries'] }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['nutri', 'entries'] })
+      queryClient.invalidateQueries({ queryKey: ['nutri', 'day-totals'] })
+    },
   })
 }
 

@@ -47,3 +47,12 @@ export const WATER_CHART_DAYS = 7
 /** Onglet « Récents » : nombre d'entrées du journal relues et d'aliments affichés. */
 export const RECENT_ENTRIES_FETCHED = 200
 export const RECENT_FOODS_SHOWN = 20
+
+/** Stats : périodes proposées (jours) ; « dans l'objectif » = calories entre ±10 % de l'objectif du jour. */
+export const STATS_PERIODS = [
+  { key: '7', label: '7 jours', days: 7 },
+  { key: '30', label: '30 jours', days: 30 },
+  { key: '90', label: '3 mois', days: 90 },
+] as const
+export type StatsPeriod = (typeof STATS_PERIODS)[number]['key']
+export const KCAL_TARGET_TOLERANCE = 0.1

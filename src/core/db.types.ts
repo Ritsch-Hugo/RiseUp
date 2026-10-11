@@ -709,6 +709,31 @@ export type Database = {
           },
         ]
       }
+      nutri_day_totals: {
+        Row: {
+          carbs: number | null
+          day: string | null
+          entries: number | null
+          fat: number | null
+          fiber: number | null
+          kcal: number | null
+          protein: number | null
+          salt: number | null
+          saturated_fat: number | null
+          slots_tracked: number | null
+          sugars: number | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
+      nutri_water_day: {
+        Row: {
+          amount_ml: number | null
+          day: string | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
