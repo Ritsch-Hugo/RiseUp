@@ -322,6 +322,13 @@ export type Database = {
             foreignKeyName: 'muscu_workout_exercises_workout_id_fkey'
             columns: ['workout_id']
             isOneToOne: false
+            referencedRelation: 'muscu_workout_stats'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'muscu_workout_exercises_workout_id_fkey'
+            columns: ['workout_id']
+            isOneToOne: false
             referencedRelation: 'muscu_workouts'
             referencedColumns: ['id']
           },
@@ -373,7 +380,29 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      muscu_workout_stats: {
+        Row: {
+          duration_seconds: number | null
+          ended_at: string | null
+          groups: Database['public']['Enums']['muscle_group'][] | null
+          id: string | null
+          name: string | null
+          session_id: string | null
+          started_at: string | null
+          user_id: string | null
+          volume: number | null
+          working_sets: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'muscu_workouts_session_id_fkey'
+            columns: ['session_id']
+            isOneToOne: false
+            referencedRelation: 'muscu_program_sessions'
+            referencedColumns: ['id']
+          },
+        ]
+      }
     }
     Functions: {
       [_ in never]: never

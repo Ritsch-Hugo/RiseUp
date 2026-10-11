@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import { supabase } from '../../../core'
 import type { MuscleGroup } from '../config'
 import { brokenCountByWorkout } from '../rules/history'
-import { workoutVolume } from '../rules/volume'
 
 export type PastWorkout = {
   id: string
@@ -19,49 +18,46 @@ export type PastWorkout = {
 
 /**
  * Séances terminées et comptées (≥ 1 série hors échauffement), plus récente d'abord.
- * Calculé côté client pour l'instant : à remplacer par des vues SQL.
+ * Durée, volume et groupes viennent de la vue SQL `muscu_workout_stats` ; les records sont encore
+ * calculés côté client (à remplacer par une fonction SQL).
  */
 export function usePastWorkouts() {
   return useQuery({
     queryKey: ['muscu', 'past-workouts'],
     staleTime: 60_000,
     queryFn: async (): Promise<PastWorkout[]> => {
-      const { data, error } = await supabase
-        .from('muscu_workouts')
-        .select(
-          'id, name, session_id, started_at, ended_at, muscu_workout_exercises(exercise_id, position, exercise:muscu_exercises(primary_group), sets:muscu_sets(weight_kg, reps, is_warmup))'
-        )
-        .not('ended_at', 'is', null)
-        .order('started_at', { ascending: true })
-      if (error) throw error
+      const [stats, content] = await Promise.all([
+        supabase.from('muscu_workout_stats').select('*').order('started_at', { ascending: true }),
+        supabase
+          .from('muscu_workout_exercises')
+          .select('workout_id, exercise_id, position, sets:muscu_sets(weight_kg, reps, is_warmup)'),
+      ])
+      if (stats.error) throw stats.error
+      if (content.error) throw content.error
 
-      const workouts = data
-        .map((w) => ({
-          ...w,
-          exercises: [...w.muscu_workout_exercises].sort((a, b) => a.position - b.position),
-        }))
-        .filter((w) => w.exercises.some((e) => e.sets.some((s) => !s.is_warmup)))
-
+      const byWorkout = new Map<string, typeof content.data>()
+      for (const e of content.data) {
+        byWorkout.set(e.workout_id, [...(byWorkout.get(e.workout_id) ?? []), e])
+      }
       const broken = brokenCountByWorkout(
-        workouts.map((w) => ({
-          id: w.id,
-          exercises: w.exercises.map((e) => ({ exerciseId: e.exercise_id, sets: e.sets })),
+        stats.data.map((w) => ({
+          id: w.id!,
+          exercises: [...(byWorkout.get(w.id!) ?? [])]
+            .sort((a, b) => a.position - b.position)
+            .map((e) => ({ exerciseId: e.exercise_id, sets: e.sets })),
         }))
       )
 
-      return workouts
+      return stats.data
         .map((w) => ({
-          id: w.id,
-          name: w.name,
+          id: w.id!,
+          name: w.name!,
           sessionId: w.session_id,
-          startedAt: w.started_at,
-          durationSeconds:
-            (new Date(w.ended_at!).getTime() - new Date(w.started_at).getTime()) / 1000,
-          volume: workoutVolume(w.exercises.flatMap((e) => e.sets)),
-          records: broken.get(w.id) ?? 0,
-          groups: [
-            ...new Set(w.exercises.flatMap((e) => (e.exercise ? [e.exercise.primary_group] : []))),
-          ],
+          startedAt: w.started_at!,
+          durationSeconds: Number(w.duration_seconds),
+          volume: Number(w.volume),
+          records: broken.get(w.id!) ?? 0,
+          groups: w.groups ?? [],
         }))
         .reverse()
     },
