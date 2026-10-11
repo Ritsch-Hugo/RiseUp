@@ -172,3 +172,7 @@ export const BADGES: {
   { key: 'niveau_10', label: 'Niveau 10', icon: 'trophy', metric: 'level', threshold: 10 },
   { key: 'niveau_20', label: 'Niveau 20', icon: 'trophy', metric: 'level', threshold: 20 },
 ]
+
+/** Récompenses perso : une par niveau, de ce niveau minimum à ce niveau maximum. */
+export const REWARD_MIN_LEVEL = 2
+export const REWARD_MAX_LEVEL = 99

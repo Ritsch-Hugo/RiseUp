@@ -460,3 +460,98 @@
 .badgeLocked .badgeLabel {
   color: var(--text-2);
 }
+
+.addLink {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-text);
+  cursor: pointer;
+}
+
+.rewardCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 20px;
+  background: var(--card);
+}
+
+.rewardMain {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.rewardIcon {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: var(--card-2);
+  color: var(--accent-2);
+}
+
+.rewardText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rewardLevel {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.rewardClaimed {
+  font-size: 12px;
+  color: var(--text-2);
+  text-decoration: line-through;
+}
+
+.rewardXp {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.rewardTrack {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--card-2);
+}
+
+.rewardTrack div {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--accent-2);
+}
+
+.rewardForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.rewardError {
+  margin: 0;
+  font-size: 13px;
+  color: var(--danger);
+}

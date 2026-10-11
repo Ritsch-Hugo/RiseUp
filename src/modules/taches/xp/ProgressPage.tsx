@@ -1,5 +1,6 @@
 import { levelFromXp, rankFor } from '../rules/xp'
 import { Icon } from '../../../core/ui'
+import { RewardsSection } from '../rewards/RewardsSection'
 import { BADGES, PROGRESS_CHART_DAYS } from '../config'
 import { useActiveStreak, useBadges, useProgressStats, useXpTotal } from './xpQueries'
 import styles from './xp.module.css'
@@ -7,7 +8,7 @@ import styles from './xp.module.css'
 const W = 318
 const H = 90
 
-/** Écran Progrès : niveau, chiffres clés, tâches terminées par jour, badges. (Récompenses : plus tard.) */
+/** Écran Progrès : niveau, chiffres clés, tâches terminées par jour, badges. */
 export function ProgressPage() {
   const { data: total } = useXpTotal()
   const { data: stats } = useProgressStats()
@@ -117,6 +118,8 @@ export function ProgressPage() {
           )
         })}
       </div>
+
+      <RewardsSection totalXp={total} />
     </div>
   )
 }
