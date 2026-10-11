@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { parisDay } from '../../../core'
+import { PushSettings } from '../../../core/push/PushSettings'
 import { Button, IconLink, Sheet } from '../../../core/ui'
 import {
   DEFAULT_HABIT_MOMENT,
@@ -245,6 +246,7 @@ function HabitEditor({ existing }: { existing: Habit | undefined }) {
             />
           </label>
         )}
+        {form.reminderOn && <PushSettings />}
       </div>
 
       <div className={styles.xpCard}>

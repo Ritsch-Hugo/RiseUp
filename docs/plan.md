@@ -31,7 +31,7 @@ Estimations en sessions d'environ 2 h avec Claude Code, indicatives. Hugo valide
 - [x] Journal d'XP, niveaux, rangs, anti-triche, écran de récompense + tests
 - [x] Quêtes perso (types, reconduction)
 - [x] Boss, badges, récompenses perso
-- [ ] Notifications push (pg_cron + Edge Function + Web Push)
+- [x] Notifications push (pg_cron + Edge Function + Web Push)
 
 ## Phase 4 : finitions (~3 sessions)
 - [ ] Accueil global (résumés des 3 modules)

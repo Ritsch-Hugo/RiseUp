@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: { importScripts: ['push-sw.js'] },
       includeAssets: ['apple-touch-icon.png', 'icon.svg'],
       manifest: {
         name: 'RiseUp',

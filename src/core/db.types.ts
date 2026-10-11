@@ -676,6 +676,39 @@ export type Database = {
         }
         Relationships: []
       }
+      push_subscriptions: {
+        Row: {
+          auth: string
+          created_at: string
+          device_label: string | null
+          endpoint: string
+          id: string
+          p256dh: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          auth: string
+          created_at?: string
+          device_label?: string | null
+          endpoint: string
+          id: string
+          p256dh: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          auth?: string
+          created_at?: string
+          device_label?: string | null
+          endpoint?: string
+          id?: string
+          p256dh?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       taches_badges: {
         Row: {
           badge_key: string
@@ -1186,7 +1219,14 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      taches_due_reminders: {
+        Args: { p_at?: string }
+        Returns: {
+          habit_id: string
+          name: string
+          user_id: string
+        }[]
+      }
     }
     Enums: {
       equipment_type: 'barre' | 'halteres' | 'machine' | 'poulie' | 'poids_du_corps' | 'autre'
