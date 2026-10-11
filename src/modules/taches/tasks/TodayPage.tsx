@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { parisDay } from '../../../core'
 import { Icon } from '../../../core/ui'
+import { RoutineCard } from '../habits/RoutineCard'
 import { splitToday, taskXp } from '../rules/tasks'
 import { TaskRow } from './TaskRow'
 import { useCategories, useTasks } from './taskQueries'
@@ -21,6 +22,8 @@ export function TodayPage() {
 
   return (
     <div className={styles.page}>
+      <RoutineCard today={today} />
+
       <div className={styles.sectionHead}>
         <h2 className={styles.section}>À faire</h2>
         <span className={styles.sub}>
