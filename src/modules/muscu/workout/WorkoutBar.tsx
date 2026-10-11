@@ -18,7 +18,7 @@ export function WorkoutBar({ workout }: { workout: OpenWorkout }) {
 
   return (
     <Link to="/muscu/seance" className={styles.bar} aria-label="Ouvrir la séance en cours">
-      <span className={styles.dot} />
+      <span className={styles.liveDot} />
       <span className={styles.barText}>
         <span className={styles.barName}>{workout.name}</span>
         <span className={styles.sub}>

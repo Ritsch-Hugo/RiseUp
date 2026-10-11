@@ -167,7 +167,10 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
         <IconButton icon="arrowDown" label="Réduire la séance" onClick={() => navigate('/muscu')} />
         <div className={styles.headTitle}>
           <span className={styles.name}>{workout.name}</span>
-          <span className={styles.sub}>Séance en cours</span>
+          <span className={styles.live}>
+            <span className={styles.liveDot} />
+            Séance en cours
+          </span>
         </div>
         <button type="button" className={styles.finish} onClick={() => setConfirming(true)}>
           Terminer
@@ -191,6 +194,11 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
           </span>
           <span className={styles.statLabel}>Séries</span>
         </div>
+      </div>
+      <div className={styles.setsTrack} aria-hidden>
+        <div
+          style={{ width: `${allRows.length ? (doneRows.length / allRows.length) * 100 : 0}%` }}
+        />
       </div>
 
       {timers.rest && (
@@ -367,7 +375,13 @@ function ExerciseBlock({
             {done} / {rows.length} séries
           </span>
         </span>
-        <Icon name="chevronRight" size={18} />
+        {rows.length > 0 && done === rows.length ? (
+          <span className={styles.allDone}>
+            <Icon name="check" size={14} strokeWidth={3.5} />
+          </span>
+        ) : (
+          <Icon name="chevronRight" size={18} />
+        )}
       </button>
     )
   }
@@ -401,7 +415,10 @@ function ExerciseBlock({
       </div>
 
       {rows.map((row, i) => (
-        <div key={row.id} className={`${styles.gridRow} ${gridClass}`}>
+        <div
+          key={row.id}
+          className={`${styles.gridRow} ${gridClass} ${row.done ? styles.gridRowDone : ''}`}
+        >
           <button
             type="button"
             className={row.warmup ? styles.indexWarmup : styles.index}
