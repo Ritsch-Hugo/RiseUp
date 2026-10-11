@@ -1,4 +1,4 @@
-import { addDays } from '../../../core'
+import { addDays } from '../../../core/dates'
 
 /** Volume en litres lisible : 1500 → « 1,5 L », 1000 → « 1 L », 750 → « 750 mL ». */
 export function formatWater(ml: number): string {
