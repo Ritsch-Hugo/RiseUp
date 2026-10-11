@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { parisDay } from '../dates'
 import { Button, Card } from '../ui'
-import { buildExport, downloadJson, exportFileName } from './exportData'
+import { exportAll } from './exportData'
+import { downloadJson, exportFileName } from './exportFile'
 import styles from './ExportCard.module.css'
 
 /** Sauvegarde : télécharge toutes les données (Muscu, Nutrition, Tâches) dans un fichier JSON. */
@@ -11,7 +12,7 @@ export function ExportCard() {
   const run = async () => {
     setState('busy')
     try {
-      downloadJson(await buildExport(), exportFileName(parisDay()))
+      downloadJson(await exportAll(), exportFileName(parisDay()))
       setState('done')
     } catch {
       setState('error')

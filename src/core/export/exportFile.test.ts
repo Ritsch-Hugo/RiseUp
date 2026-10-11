@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { EXPORT_TABLES, buildExport, exportFileName } from './exportData'
+import { EXPORT_TABLES, buildExport, exportFileName } from './exportFile'
 
 describe('export des données', () => {
   it('toutes les tables sont lues, une seule fois, sans doublon dans la liste', async () => {
