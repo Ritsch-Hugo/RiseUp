@@ -38,7 +38,7 @@ Estimations en sessions d'environ 2 h avec Claude Code, indicatives. Hugo valide
 - [x] Export / import JSON
 - [x] États vides, écrans de détail restants
 
-**Total : ~40 sessions.**
+**Total : ~40 sessions** (plus le polish).
 
 ## Écrans à concevoir pendant le dev
 Fin de séance, choix d'exercices, historique + détail de séance, calendrier, passage de niveau, stats nutrition 30 j / 3 mois, suppression de tâche, création de récompense, états vides, ajout des groupes Fessiers et Mollets. → Proposés dans la charte, validés sur capture.
@@ -48,7 +48,24 @@ Fin de séance, choix d'exercices, historique + détail de séance, calendrier, 
 - **Tests** : composants, E2E Playwright.
 - **Récupération** : affiner avec le RPE.
 
-## État au 11 octobre 2026
-- Phases 1, 2 et 3 (étapes 1 à 5) codées, poussées, CI verte. **Rien n'est encore validé sur téléphone par Hugo.**
-- À faire ensuite : validation sur tel des 3 modules, jalon d'usage réel en salle (phase 1), puis phase 3 étape 6 (boss, badges, récompenses perso) et étape 7 (notifications push), puis phase 4.
-- Écrans proposés par Claude (absents des maquettes, à valider sur capture) : historique Muscu, création de quête, fin de séance/récompense déjà validée côté Muscu.
+## Polish visuel (hors plan initial, demandé par Hugo le 11 oct.)
+Retour de Hugo après test sur tel : « tout est à peu près ok mais ça fait encore projet perso ».
+- [x] Base commune : animations (changement d'écran, feuilles, barres, cases), retour tactile, squelettes de chargement, vibrations
+- [x] Accueil (salutation, halo, cartes en dégradé, anneaux de progression, données dans une feuille)
+- [x] Tâches : écran Aujourd'hui (carte de niveau héros, bande de priorité, surfaces)
+- [x] Muscu : séance en cours (en-tête live, stats, minuteur de repos héros, exercices en cartes)
+- [ ] Nutrition : journal (anneaux, créneaux, eau)
+- [ ] Harmoniser les autres écrans avec `--surface` / `--shadow-card` : Tâches (À venir, Quêtes, Progrès, détail, formulaires), Muscu (accueil, bibliothèque, programmes, profil, historique, résumé de séance), Nutrition (aliments, repas, stats, objectifs), connexion
+- [ ] Éventuel : écran de démarrage (splash), glisser pour supprimer, pull-to-refresh
+
+## État au 11 octobre 2026 (fin de session)
+- **Les 4 phases du plan sont codées, poussées, CI verte.**
+- Hugo a testé sur téléphone (PWA installée) : fonctionnel dans l'ensemble, d'où le polish ci-dessus. Les retours détaillés (bugs précis) restent à collecter au fil de l'usage.
+- **À faire ensuite, dans l'ordre :**
+  1. Poursuivre le polish (journal Nutrition, puis harmonisation des écrans restants).
+  2. Valider sur tel les ajouts récents : boss, badges, récompenses, notifications push (essai + vrai rappel), export puis réimport du même fichier (l'aperçu doit afficher « 0 ligne à ajouter »).
+  3. Jalon d'usage réel en salle (phase 1).
+  4. Trancher deux définitions : « taux de réussite » (Progrès) et exclusion des tâches récurrentes de l'anti-triche.
+  5. Confirmer les cases validées en vert (ou revenir au bleu de la maquette).
+- Écrans proposés par Claude (absents des maquettes, à valider sur capture) : historique Muscu, création de quête, formulaire boss, création de récompense, états vides ajoutés (historique, aperçu du profil, programme sans séance).
+- Backlog technique : réordonner par glisser-déposer, calculs restants à passer en SQL, tests de composants et E2E.

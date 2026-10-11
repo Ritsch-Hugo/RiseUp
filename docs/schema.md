@@ -48,7 +48,7 @@ Enums : `task_priority` (basse, normale, haute, critique), `difficulty` (facile,
 | `taches_quests` | title, period, period_start date, kind (type de critère), params jsonb (difficulty, category_id, moment), target int, bonus_xp, recurring bool, manual_progress (quêtes manuelles), completed_at |
 | `taches_badges` | badge_key, unlocked_at |
 | `taches_rewards` | level int, title, claimed_at |
-| `push_subscriptions` | endpoint, p256dh, auth, device_label |
+| `push_subscriptions` | endpoint, p256dh, auth, device_label — unique (user_id, endpoint) |
 
 Types de quête (`kind`) : `n_taches`, `n_taches_categorie`, `habitudes_moment`, `habitudes_jour`, `manuelle`.
 
@@ -56,5 +56,6 @@ Types de quête (`kind`) : `n_taches`, `n_taches_categorie`, `habitudes_moment`,
 - Muscu : `muscu_workout_stats` (durée, volume, séries, groupes par séance comptée), `muscu_workout_records` (records battus par séance).
 - Nutrition : `nutri_day_totals` (totaux et créneaux suivis par jour), `nutri_water_day`.
 - Tâches : `taches_xp_total`, `taches_active_days` (série du badge), `taches_completed_by_day`.
-- Edge Function : `off-search` (proxy de recherche Open Food Facts, ADR-016).
+- Fonction SQL : `taches_due_reminders(p_at)` (habitudes à rappeler à la minute donnée, réservée à `service_role`). Job `pg_cron` : `taches-reminders` (chaque minute).
+- Edge Functions : `send-reminders` (rappels et notification d'essai, ADR-014 / 018) ; `off-search` (proxy de recherche Open Food Facts, ADR-016).
 

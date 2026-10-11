@@ -1,5 +1,5 @@
 # ADR-014 : notifications
-**Statut** : accepté — arrive avec le module Tâches
+**Statut** : accepté et implémenté (phase 3). Précisions et écarts : voir ADR-018.
 
 - Pas de notification programmée côté navigateur (API abandonnée) → push serveur.
 - pg_cron (toutes les minutes) → pg_net → Edge Function → Web Push (VAPID). ~43 000 invocations/mois (quota gratuit : 500 000).

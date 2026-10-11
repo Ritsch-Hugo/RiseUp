@@ -43,4 +43,8 @@ Toutes les valeurs sont des constantes dans `src/modules/<module>/config.ts`. Ch
 - **Taux de réussite (écran Progrès)** : tâches arrivées à échéance sur les 30 derniers jours qui ont été terminées (définition de Claude, à valider).
 - **Anti-triche** : les règles « créée et terminée en moins de 5 min » et « même titre » ne s'appliquent pas aux tâches récurrentes.
 - **XP des habitudes** : une seule fois par habitude et par jour, à la validation ; décocher (ou repasser sous l'objectif d'un compteur) annule l'XP du jour.
-
+- **Boss (Hugo, 11 oct.)** : créé par un interrupteur dans le formulaire de tâche ; étapes avec PV saisis ; barre de vie = PV restants / PV totaux ; un seul par semaine ; victoire automatique à la dernière étape (+150 XP, +10 XP par étape) ; annulation de l'XP si une étape est décochée.
+- **Badges (12)** : Première tâche (1 tâche), Première habitude (1 habitude validée), Série de 5 / 10 / 30 jours (meilleure série de jours actifs), 10 quêtes validées, 50 / 100 tâches, Boss vaincu (1), Niveau 5 / 10 / 20. Un badge débloqué reste acquis.
+- **Récompenses perso** : une par niveau entre 2 et 99 ; « réclamable » dès que le total d'XP atteint le niveau.
+- **Rappels d'habitude** : envoyés à l'heure du rappel si l'habitude est active, prévue ce jour-là, pas en pause et pas faite (case cochée, ou compteur à l'objectif).
+- **Accueil** : Muscu = séance en cours, sinon prochaine séance (ou séance faite aujourd'hui) ; anneau = séances de la semaine / 3. Nutrition = calories restantes et eau ; anneau = calories / objectif. Tâches = niveau, tâches à faire, série ; anneau = avancement du niveau.

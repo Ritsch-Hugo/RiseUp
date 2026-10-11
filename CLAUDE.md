@@ -44,13 +44,18 @@ Toutes dans `docs/regles-metier.md`. Les chiffres sont des **constantes** dans `
 - Les chiffres des maquettes sont des exemples.
 - Écrans manquants (fin de séance, choix d'exercices, historique, calendrier, etc.) : les proposer dans la charte, Hugo valide sur capture.
 
+## Pièges connus
+- Vitest en CI sans `.env.local` : un test ne doit pas importer le client Supabase (`core/supabase.ts` lève une erreur). Séparer la logique pure (testée) de l'accès base. Vérifier en déplaçant `.env.local` avant de pousser.
+- `docs/` est dans `.gitignore` : les nouveaux fichiers se commitent avec `git add -f`.
+- Les secrets (VAPID, cron) ne vont jamais dans le dépôt ; voir ADR-018. Les migrations sont appliquées par la CI au push sur `main`, puis `supabase gen types`.
+
 ## Commandes (à compléter au setup)
 - `npm run dev` / `npm run build` / `npm run lint` / `npm run typecheck` / `npm test`
 - `supabase db push` (migrations), `supabase gen types typescript --linked > src/core/db.types.ts`
 
 ## Docs
 - `docs/produit.md` : périmètre fonctionnel
-- `docs/adr/` : décisions (001 → 015)
+- `docs/adr/` : décisions (001 → 018)
 - `docs/schema.md` : tables
 - `docs/regles-metier.md` : calculs chiffrés
 - `docs/plan.md` : phases, backlog

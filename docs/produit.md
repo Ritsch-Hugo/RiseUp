@@ -36,9 +36,10 @@ Chaque module garde ses stats et streaks, rien n'est mélangé.
 - Tâches (titre, catégorie, priorité, difficulté, échéance, récurrence, sous-tâches, notes), vue Aujourd'hui, À venir.
 - Habitudes (jours, moment, fait/compteur, rappel, difficulté, pause, archivage), routine du jour par moment.
 - XP, niveaux, écran de récompense, quêtes du jour/semaine **créées par Hugo**, boss de la semaine, badges, récompense perso par niveau, anti-triche.
+- Rappels d'habitude par notification push (PWA installée, Chrome Android).
 
 ## Transverse
-Accueil global, bouton maison dans chaque module, onglets par module, export/import JSON, compte, synchro.
+Accueil global avec le résumé du jour de chaque module, bouton maison dans chaque module, onglets par module, export / import JSON (fusion), compte, synchro, animations, squelettes de chargement et vibrations.
 
 ## Design
 Canvas : https://claude.ai/artifact/C2MFJZBdG9PmQ7o4Qibh2j — charte dans `CLAUDE.md`.
