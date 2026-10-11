@@ -18,7 +18,9 @@ export function RewardPage() {
       ? 'Tâche terminée'
       : award.kind === 'habit'
         ? 'Habitude validée'
-        : 'Quête validée'
+        : award.kind === 'boss'
+          ? 'Boss vaincu !'
+          : 'Quête validée'
   const gained = award.after - award.before
 
   return (

@@ -11,7 +11,7 @@ export type Subtask = Tables<'taches_subtasks'>
 export type Task = Tables<'taches_tasks'> & { subtasks: Subtask[] }
 export type Category = Tables<'taches_categories'>
 
-const TASKS_KEY = ['taches', 'tasks']
+export const TASKS_KEY = ['taches', 'tasks']
 const CATEGORIES_KEY = ['taches', 'categories']
 
 /** Tâches non terminées + celles terminées récemment (pour la liste « Terminées » du jour). */
@@ -24,7 +24,7 @@ export function useTasks() {
         .from('taches_tasks')
         .select('*, subtasks:taches_subtasks(*)')
         .is('archived_at', null)
-        .or(`completed_at.is.null,completed_at.gte.${since}`)
+        .or(`completed_at.is.null,completed_at.gte.${since},is_boss.eq.true`)
       if (error) throw error
       return data.map((t) => ({
         ...t,
@@ -74,7 +74,15 @@ export function useCreateCategory() {
 
 type TaskValues = Pick<
   Task,
-  'title' | 'category_id' | 'priority' | 'difficulty' | 'due_date' | 'due_time' | 'notes'
+  | 'title'
+  | 'category_id'
+  | 'priority'
+  | 'difficulty'
+  | 'due_date'
+  | 'due_time'
+  | 'notes'
+  | 'is_boss'
+  | 'boss_week'
 > & { recurrence: { type: 'daily' | 'weekly' } | null }
 
 /** Crée la tâche (sans `existingId`) ou la modifie, puis aligne ses sous-tâches sur la liste donnée. */
@@ -88,7 +96,7 @@ export function useSaveTask() {
     }: {
       existingId?: string
       values: TaskValues
-      subtasks: { id: string; title: string }[]
+      subtasks: { id: string; title: string; hp?: number }[]
     }) => {
       const id = existingId ?? crypto.randomUUID()
       if (existingId) {
@@ -114,7 +122,13 @@ export function useSaveTask() {
       }
       if (subtasks.length > 0) {
         const { error } = await supabase.from('taches_subtasks').upsert(
-          subtasks.map((s, position) => ({ id: s.id, task_id: id, title: s.title, position })),
+          subtasks.map((s, position) => ({
+            id: s.id,
+            task_id: id,
+            title: s.title,
+            position,
+            hp: values.is_boss ? (s.hp ?? null) : null,
+          })),
           { onConflict: 'id' }
         )
         if (error) throw error

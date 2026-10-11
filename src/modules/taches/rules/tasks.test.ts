@@ -118,6 +118,7 @@ describe('validateTaskForm', () => {
     time: '18:00',
     repeat: 'none',
     notes: '  ',
+    boss: false,
     subtasks: [],
   }
   it('valeurs nettoyées', () => {
@@ -130,6 +131,26 @@ describe('validateTaskForm', () => {
       due_time: '18:00',
       recurrence: null,
       notes: null,
+      is_boss: false,
+      boss_week: null,
+    })
+  })
+  it('boss : échéance au dimanche, semaine du lundi, étapes avec PV obligatoires', () => {
+    const boss = { ...form, boss: true, repeat: 'daily' as const, time: '18:00' }
+    expect(validateTaskForm(boss, '2026-10-07')).toBeNull()
+    expect(
+      validateTaskForm({ ...boss, subtasks: [{ id: 'a', title: 'Plan', hp: 0 }] }, '2026-10-07')
+    ).toBeNull()
+    const v = validateTaskForm(
+      { ...boss, subtasks: [{ id: 'a', title: 'Plan', hp: 20 }] },
+      '2026-10-07'
+    )!
+    expect(v).toMatchObject({
+      is_boss: true,
+      due_date: '2026-10-11',
+      boss_week: '2026-10-05',
+      due_time: null,
+      recurrence: null,
     })
   })
   it('récurrence et notes', () => {

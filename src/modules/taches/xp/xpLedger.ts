@@ -1,7 +1,7 @@
 import { supabase } from '../../../core'
 import { currentStreak } from '../../../core/streak'
 
-export type XpSource = 'tache' | 'habitude' | 'quete'
+export type XpSource = 'tache' | 'habitude' | 'quete' | 'boss_etape' | 'boss'
 
 /** XP total actuel (somme du journal d'XP). */
 export async function fetchTotalXp(): Promise<number> {

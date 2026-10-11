@@ -20,7 +20,10 @@ export function TodayPage() {
   if (isPending) return <p className={styles.state}>Chargement…</p>
   if (isError) return <p className={styles.state}>Impossible de charger les tâches.</p>
 
-  const { todo, done } = splitToday(tasks, today)
+  const { todo, done } = splitToday(
+    tasks.filter((t) => !t.is_boss),
+    today
+  )
   const categoryName = (id: string | null) => categories?.find((c) => c.id === id)?.name ?? null
   const earned = (id: string) =>
     (xpToday ?? [])

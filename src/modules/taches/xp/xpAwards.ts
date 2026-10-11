@@ -15,6 +15,7 @@ async function recentCompleted(exceptId: string): Promise<RecentTask[]> {
     .from('taches_tasks')
     .select('id, title, difficulty, completed_at, recurrence, recurred_from')
     .gte('completed_at', since)
+    .eq('is_boss', false)
     .neq('id', exceptId)
   if (error) throw error
   return data.flatMap((t) =>

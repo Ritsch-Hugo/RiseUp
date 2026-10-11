@@ -18,6 +18,7 @@ export async function fetchQuestContext(sinceDay: string): Promise<QuestContext>
       .from('taches_tasks')
       .select('category_id, difficulty, completed_at')
       .not('completed_at', 'is', null)
+      .eq('is_boss', false)
       .gte('completed_at', `${addDays(sinceDay, -1)}T00:00:00Z`),
     supabase.from('taches_habits').select('id, moment, type, target, weekdays, archived_at'),
     supabase.from('taches_habit_logs').select('habit_id, day, value').gte('day', sinceDay),

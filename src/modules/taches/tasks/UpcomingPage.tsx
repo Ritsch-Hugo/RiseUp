@@ -18,7 +18,8 @@ export function UpcomingPage() {
   if (isPending) return <p className={styles.state}>Chargement…</p>
   if (isError) return <p className={styles.state}>Impossible de charger les tâches.</p>
 
-  const filtered = categoryId ? tasks.filter((t) => t.category_id === categoryId) : tasks
+  const regular = tasks.filter((t) => !t.is_boss)
+  const filtered = categoryId ? regular.filter((t) => t.category_id === categoryId) : regular
   const sections = groupUpcoming(filtered, today)
   const strip = weekStrip(filtered, today)
   const monthLabel = new Date(`${today}T12:00:00Z`).toLocaleDateString('fr-FR', {

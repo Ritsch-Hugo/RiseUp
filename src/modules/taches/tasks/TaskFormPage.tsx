@@ -1,8 +1,17 @@
 import { useState, type FormEvent } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { parisDay } from '../../../core'
 import { Button, Card, IconLink, Sheet } from '../../../core/ui'
-import { DEFAULT_DIFFICULTY, DEFAULT_PRIORITY, PRIORITIES, TASK_DIFFICULTIES } from '../config'
+import {
+  BOSS_DEFAULT_STEP_HP,
+  BOSS_STEP_XP,
+  BOSS_VICTORY_XP,
+  DEFAULT_DIFFICULTY,
+  DEFAULT_PRIORITY,
+  PRIORITIES,
+  TASK_DIFFICULTIES,
+} from '../config'
+import { useBoss } from '../boss/bossQueries'
 import {
   choiceForDue,
   parseRecurrence,
@@ -47,7 +56,7 @@ export function TaskFormPage() {
   return <TaskEditor existing={existing} />
 }
 
-function initialForm(existing: Task | undefined, today: string): TaskForm {
+function initialForm(existing: Task | undefined, today: string, boss: boolean): TaskForm {
   if (!existing) {
     return {
       title: '',
@@ -59,6 +68,7 @@ function initialForm(existing: Task | undefined, today: string): TaskForm {
       time: '',
       repeat: 'none',
       notes: '',
+      boss,
       subtasks: [],
     }
   }
@@ -73,7 +83,8 @@ function initialForm(existing: Task | undefined, today: string): TaskForm {
     time: existing.due_time?.slice(0, 5) ?? '',
     repeat: repeatChoiceFor(parseRecurrence(existing.recurrence)),
     notes: existing.notes ?? '',
-    subtasks: existing.subtasks.map((s) => ({ id: s.id, title: s.title })),
+    boss: existing.is_boss,
+    subtasks: existing.subtasks.map((s) => ({ id: s.id, title: s.title, hp: s.hp ?? undefined })),
   }
 }
 
@@ -84,12 +95,17 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
   const createCategory = useCreateCategory()
   const save = useSaveTask()
   const remove = useDeleteTask()
-  const [form, setForm] = useState<TaskForm>(initialForm(existing, today))
+  const { boss: currentBoss } = useBoss()
+  const [params] = useSearchParams()
+  const [form, setForm] = useState<TaskForm>(
+    initialForm(existing, today, !existing && params.get('boss') === '1' && !currentBoss)
+  )
   const [newCategory, setNewCategory] = useState<string | null>(null)
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [newSubtask, setNewSubtask] = useState('')
   const patch = (p: Partial<TaskForm>) => setForm((f) => ({ ...f, ...p }))
-  const values = validateTaskForm(form, today)
+  const values = validateTaskForm(form, today, existing?.due_date ?? today)
+  const bossTaken = !existing && currentBoss !== null
 
   const addCategory = () => {
     const name = (newCategory ?? '').trim()
@@ -103,7 +119,12 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
   const addSubtask = () => {
     const title = newSubtask.trim()
     if (title === '') return
-    patch({ subtasks: [...form.subtasks, { id: crypto.randomUUID(), title }] })
+    patch({
+      subtasks: [
+        ...form.subtasks,
+        { id: crypto.randomUUID(), title, ...(form.boss ? { hp: BOSS_DEFAULT_STEP_HP } : {}) },
+      ],
+    })
     setNewSubtask('')
   }
 
@@ -133,6 +154,29 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
           onChange={(e) => patch({ title: e.target.value })}
         />
       </div>
+
+      {!existing && (
+        <div className={styles.field}>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={form.boss}
+            disabled={bossTaken}
+            className={form.boss ? styles.pillOn : styles.pill}
+            onClick={() =>
+              patch({
+                boss: !form.boss,
+                subtasks: form.subtasks.map(({ id, title }) =>
+                  form.boss ? { id, title } : { id, title, hp: BOSS_DEFAULT_STEP_HP }
+                ),
+              })
+            }
+          >
+            Boss de la semaine
+          </button>
+          {bossTaken && <span className={styles.sub}>Tu as déjà un boss cette semaine.</span>}
+        </div>
+      )}
 
       <div className={styles.field}>
         <span className={styles.label}>Catégorie</span>
@@ -207,92 +251,115 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
         </div>
       </div>
 
-      <div className={styles.field}>
-        <span className={styles.label}>Difficulté · détermine l’XP</span>
-        <div className={styles.difficulties} role="group" aria-label="Difficulté">
-          {TASK_DIFFICULTIES.map((d) => (
-            <button
-              key={d.key}
-              type="button"
-              className={d.key === form.difficulty ? styles.diffOn : styles.diff}
-              aria-pressed={d.key === form.difficulty}
-              onClick={() => patch({ difficulty: d.key })}
-            >
-              <span className={styles.diffName}>{d.label}</span>
-              <span className={styles.diffXp}>+{d.xp} XP</span>
-            </button>
-          ))}
+      {!form.boss && (
+        <div className={styles.field}>
+          <span className={styles.label}>Difficulté · détermine l’XP</span>
+          <div className={styles.difficulties} role="group" aria-label="Difficulté">
+            {TASK_DIFFICULTIES.map((d) => (
+              <button
+                key={d.key}
+                type="button"
+                className={d.key === form.difficulty ? styles.diffOn : styles.diff}
+                aria-pressed={d.key === form.difficulty}
+                onClick={() => patch({ difficulty: d.key })}
+              >
+                <span className={styles.diffName}>{d.label}</span>
+                <span className={styles.diffXp}>+{d.xp} XP</span>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className={styles.field}>
-        <span className={styles.label}>Échéance</span>
-        <div className={styles.pills} role="group" aria-label="Échéance">
-          {DUE_CHOICES.map((c) => (
-            <button
-              key={c.key}
-              type="button"
-              className={c.key === form.due ? styles.pillOn : styles.pill}
-              aria-pressed={c.key === form.due}
-              onClick={() =>
-                patch({ due: c.key, ...(c.key === 'none' ? { repeat: 'none' as const } : {}) })
-              }
-            >
-              {c.label}
-            </button>
-          ))}
-        </div>
-        {form.due === 'custom' && (
-          <input
-            type="date"
-            className={styles.input}
-            aria-label="Date d’échéance"
-            value={form.customDate}
-            onChange={(e) => patch({ customDate: e.target.value })}
-          />
-        )}
-        {form.due !== 'none' && (
-          <label className={styles.timeRow}>
-            <span>Heure limite</span>
+      {!form.boss && (
+        <div className={styles.field}>
+          <span className={styles.label}>Échéance</span>
+          <div className={styles.pills} role="group" aria-label="Échéance">
+            {DUE_CHOICES.map((c) => (
+              <button
+                key={c.key}
+                type="button"
+                className={c.key === form.due ? styles.pillOn : styles.pill}
+                aria-pressed={c.key === form.due}
+                onClick={() =>
+                  patch({ due: c.key, ...(c.key === 'none' ? { repeat: 'none' as const } : {}) })
+                }
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+          {form.due === 'custom' && (
             <input
-              type="time"
-              className={styles.timeInput}
-              value={form.time}
-              onChange={(e) => patch({ time: e.target.value })}
+              type="date"
+              className={styles.input}
+              aria-label="Date d’échéance"
+              value={form.customDate}
+              onChange={(e) => patch({ customDate: e.target.value })}
             />
-          </label>
-        )}
-      </div>
-
-      <div className={styles.field}>
-        <span className={styles.label}>Répéter</span>
-        <div className={styles.segmented} role="group" aria-label="Répéter">
-          {REPEAT_CHOICES.map((r) => (
-            <button
-              key={r.key}
-              type="button"
-              className={r.key === form.repeat ? styles.segOn : styles.seg}
-              aria-pressed={r.key === form.repeat}
-              onClick={() =>
-                patch({
-                  repeat: r.key,
-                  // Une tâche qui se répète a besoin d'une échéance.
-                  ...(r.key !== 'none' && form.due === 'none' ? { due: 'today' as const } : {}),
-                })
-              }
-            >
-              {r.label}
-            </button>
-          ))}
+          )}
+          {form.due !== 'none' && (
+            <label className={styles.timeRow}>
+              <span>Heure limite</span>
+              <input
+                type="time"
+                className={styles.timeInput}
+                value={form.time}
+                onChange={(e) => patch({ time: e.target.value })}
+              />
+            </label>
+          )}
         </div>
-      </div>
+      )}
+
+      {!form.boss && (
+        <div className={styles.field}>
+          <span className={styles.label}>Répéter</span>
+          <div className={styles.segmented} role="group" aria-label="Répéter">
+            {REPEAT_CHOICES.map((r) => (
+              <button
+                key={r.key}
+                type="button"
+                className={r.key === form.repeat ? styles.segOn : styles.seg}
+                aria-pressed={r.key === form.repeat}
+                onClick={() =>
+                  patch({
+                    repeat: r.key,
+                    // Une tâche qui se répète a besoin d'une échéance.
+                    ...(r.key !== 'none' && form.due === 'none' ? { due: 'today' as const } : {}),
+                  })
+                }
+              >
+                {r.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <Card>
-        <h3 className={styles.cardTitle}>Sous-tâches</h3>
+        <h3 className={styles.cardTitle}>{form.boss ? 'Étapes du boss' : 'Sous-tâches'}</h3>
         {form.subtasks.map((s) => (
           <div key={s.id} className={styles.subRow}>
             <span className={styles.subBullet} />
             <span className={styles.subTitle}>{s.title}</span>
+            {form.boss && (
+              <input
+                type="number"
+                inputMode="numeric"
+                min={1}
+                className={styles.hpInput}
+                aria-label={`PV de ${s.title}`}
+                value={s.hp ?? ''}
+                onChange={(e) =>
+                  patch({
+                    subtasks: form.subtasks.map((x) =>
+                      x.id === s.id ? { ...x, hp: Number(e.target.value) || undefined } : x
+                    ),
+                  })
+                }
+              />
+            )}
             <button
               type="button"
               className={styles.removeButton}
@@ -306,7 +373,7 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
         <div className={styles.subAdd}>
           <input
             className={styles.input}
-            placeholder="Ajouter une sous-tâche"
+            placeholder={form.boss ? 'Ajouter une étape' : 'Ajouter une sous-tâche'}
             aria-label="Nouvelle sous-tâche"
             value={newSubtask}
             onChange={(e) => setNewSubtask(e.target.value)}
@@ -333,19 +400,34 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
         />
       </div>
 
-      <Card className={styles.xpCard}>
-        <div className={styles.xpLine}>
-          <span className={styles.xpBig}>+{taskXp(form.difficulty)} XP</span>
-          <span className={styles.sub}>à la fin de cette tâche</span>
-        </div>
-        <span className={styles.sub}>
-          Les tâches trop faciles ou répétées plusieurs fois par jour rapportent moins d’XP.
-        </span>
-      </Card>
+      {!form.boss && (
+        <Card className={styles.xpCard}>
+          <div className={styles.xpLine}>
+            <span className={styles.xpBig}>+{taskXp(form.difficulty)} XP</span>
+            <span className={styles.sub}>à la fin de cette tâche</span>
+          </div>
+          <span className={styles.sub}>
+            Les tâches trop faciles ou répétées plusieurs fois par jour rapportent moins d’XP.
+          </span>
+        </Card>
+      )}
+
+      {form.boss && (
+        <Card className={styles.xpCard}>
+          <div className={styles.xpLine}>
+            <span className={styles.xpBig}>+{BOSS_VICTORY_XP} XP</span>
+            <span className={styles.sub}>à la victoire, +{BOSS_STEP_XP} XP par étape</span>
+          </div>
+          <span className={styles.sub}>
+            Échéance le dimanche de la semaine. Un boss non battu s’échappe, sans pénalité. Les PV
+            décident du poids de chaque étape dans la barre de vie.
+          </span>
+        </Card>
+      )}
 
       {save.isError && <p className={styles.error}>Impossible d’enregistrer la tâche.</p>}
       <Button type="submit" fullWidth disabled={!values || save.isPending}>
-        {existing ? 'Enregistrer' : 'Créer la tâche'}
+        {existing ? 'Enregistrer' : form.boss ? 'Invoquer le boss' : 'Créer la tâche'}
       </Button>
       {existing && (
         <Button variant="secondary" fullWidth onClick={() => setConfirmDelete(true)}>

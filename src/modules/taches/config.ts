@@ -126,3 +126,9 @@ export const QUEST_KINDS: { key: QuestKind; label: string; hint: string }[] = [
 
 /** Objectif proposé par défaut à la création d'une quête. */
 export const DEFAULT_QUEST_TARGET = 3
+
+/** Boss de la semaine (docs/regles-metier.md) : XP par étape battue et à la victoire. */
+export const BOSS_STEP_XP = 10
+export const BOSS_VICTORY_XP = 150
+/** PV proposés par défaut à une nouvelle étape de boss. */
+export const BOSS_DEFAULT_STEP_HP = 20

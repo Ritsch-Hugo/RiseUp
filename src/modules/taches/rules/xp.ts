@@ -136,7 +136,7 @@ export const applyFactor = (base: number, factor: number): number => Math.round(
 export type Bonus = { title: string; xp: number }
 
 export type Award = {
-  kind: 'task' | 'habit' | 'quest'
+  kind: 'task' | 'habit' | 'quest' | 'boss'
   title: string
   /** Ligne de détail de l'écran de récompense : « Tâche difficile », « Habitude facile »… */
   label: string

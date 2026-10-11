@@ -122,13 +122,36 @@ export type TaskForm = {
   time: string
   repeat: RepeatChoice
   notes: string
-  subtasks: { id: string; title: string }[]
+  /** Boss de la semaine : échéance = dimanche, pas de répétition, étapes avec PV. */
+  boss: boolean
+  /** `hp` : points de vie d'une étape de boss (ignoré hors boss). */
+  subtasks: { id: string; title: string; hp?: number }[]
 }
 
-/** Valeurs prêtes à écrire, ou null si le formulaire est incomplet (titre vide, date « choisir » vide). */
-export function validateTaskForm(f: TaskForm, today: string) {
+/**
+ * Valeurs prêtes à écrire, ou null si le formulaire est incomplet (titre vide, date « choisir » vide,
+ * boss sans étape). `bossDay` = jour qui fixe la semaine du boss (aujourd'hui, ou l'échéance d'un boss modifié).
+ */
+export function validateTaskForm(f: TaskForm, today: string, bossDay: string = today) {
   const title = f.title.trim()
   if (title === '') return null
+  if (f.boss) {
+    if (f.subtasks.length === 0 || f.subtasks.some((s) => !Number.isInteger(s.hp) || s.hp! <= 0))
+      return null
+    const due_date = endOfWeek(bossDay)
+    return {
+      title,
+      category_id: f.categoryId,
+      priority: f.priority,
+      difficulty: f.difficulty,
+      due_date,
+      due_time: null,
+      recurrence: null as Recurrence | null,
+      notes: f.notes.trim() || null,
+      is_boss: true,
+      boss_week: addDays(due_date, -6) as string | null,
+    }
+  }
   if (f.due === 'custom' && dueDateFor('custom', today, f.customDate) === null) return null
   const due_date = dueDateFor(f.due, today, f.customDate)
   // Une tâche qui se répète a besoin d'une échéance : c'est elle qui donne la date suivante.
@@ -142,6 +165,8 @@ export function validateTaskForm(f: TaskForm, today: string) {
     due_time: due_date && /^\d{2}:\d{2}$/.test(f.time) ? f.time : null,
     recurrence: (f.repeat === 'none' ? null : { type: f.repeat }) as Recurrence | null,
     notes: f.notes.trim() || null,
+    is_boss: false,
+    boss_week: null as string | null,
   }
 }
 

@@ -22,6 +22,7 @@ export function TaskDetailPage() {
   if (isPending) return <p className={styles.state}>Chargement…</p>
   const task = tasks?.find((t) => t.id === id)
   if (!task) return <Navigate to="/taches" replace />
+  if (task.is_boss) return <Navigate to="/taches/quetes" replace />
   return <Detail task={task} />
 }
 

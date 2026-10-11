@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { parisDay, parisMinutes } from '../../../core'
 import { Button, Icon, Sheet } from '../../../core/ui'
+import { BossCard } from '../boss/BossCard'
 import { QUEST_BONUS_XP } from '../config'
 import { logMapFor, useHabitLogs, useHabits } from '../habits/habitQueries'
 import { addDays } from '../../../core'
@@ -128,6 +129,8 @@ export function QuestsPage() {
         Une quête validée rapporte {QUEST_BONUS_XP.jour} XP (du jour) ou {QUEST_BONUS_XP.semaine} XP
         (de la semaine).
       </p>
+
+      <BossCard />
 
       <div className={styles.sectionHead}>
         <h3 className={styles.section}>Habitudes</h3>
