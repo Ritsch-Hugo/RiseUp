@@ -65,3 +65,17 @@ export const HOME_MUSCLE_BUBBLES = 4
 /** Profil : nombre de semaines des graphes (≈ 3 mois) et objectif hebdomadaire du streak. */
 export const PROFILE_WEEKS = 13
 export const WEEKLY_GOAL = 3
+
+/** Muscles sollicités : séries effectives par semaine pour atteindre 100 %, poids des groupes secondaires. */
+export const MUSCLE_WEEKLY_TARGET_SETS = 15
+export const SECONDARY_GROUP_WEIGHT = 0.5
+
+/** Récupération : 12 h + 4 h × séries effectives de la dernière séance, plafonné à 48 h (indicatif). */
+export const RECOVERY_BASE_HOURS = 12
+export const RECOVERY_HOURS_PER_SET = 4
+export const RECOVERY_MAX_HOURS = 48
+/** « Presque prêt » sous ce nombre d'heures restantes ; en dessous de ce taux d'avancement, la barre est en rouge. */
+export const RECOVERY_ALMOST_READY_HOURS = 6
+export const RECOVERY_DANGER_PROGRESS = 0.5
+/** Fenêtre de séances chargée pour la récupération et les muscles sollicités (jours). */
+export const MUSCLE_HISTORY_DAYS = 9

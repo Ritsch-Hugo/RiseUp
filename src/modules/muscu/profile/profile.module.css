@@ -182,3 +182,85 @@
 .dayToday {
   border: 2px solid var(--accent-text);
 }
+
+.cardTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.cardSub {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.recoveryList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: var(--space-3);
+}
+
+.recoveryRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.recoveryName {
+  width: 84px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.recoveryTrack {
+  flex: none;
+  width: 118px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--card-2);
+}
+
+.recoveryFill {
+  display: block;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.recoveryStatus {
+  flex: 1;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.bodies {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: var(--space-3);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.scale {
+  height: 8px;
+  margin-top: var(--space-3);
+  border-radius: 4px;
+  background: linear-gradient(to right, #2e3846, #3b82c4 40%, #e5484d);
+}
+
+.scaleLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-2);
+}

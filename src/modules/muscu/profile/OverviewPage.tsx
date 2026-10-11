@@ -2,12 +2,16 @@ import { useRef, useState } from 'react'
 import { Card } from '../../../core/ui'
 import { PROFILE_WEEKS, WEEKLY_GOAL } from '../config'
 import { LibraryState } from '../library/LibraryState'
+import { recovery, weeklyLoad } from '../rules/muscles'
 import { monthGrid, trendPercent, weeklySeries, weeklyStreak } from '../rules/profile'
 import { parisDay } from '../rules/week'
 import { formatDuration } from '../workout/format'
 import { usePastWorkouts } from '../workout/historyQueries'
 import { BarChart } from './BarChart'
+import { BodyCard } from './BodyCard'
 import { Calendar } from './Calendar'
+import { useMuscleWorkouts } from './muscleQueries'
+import { RecoveryCard } from './RecoveryCard'
 import styles from './profile.module.css'
 
 const monthLabel = (day: string) =>
@@ -33,6 +37,7 @@ type OverviewProps = {
 }
 
 function Overview({ past, page, setPage, scroller }: OverviewProps) {
+  const muscles = useMuscleWorkouts()
   const today = parisDay(new Date())
   const series = weeklySeries(past, today, PROFILE_WEEKS * 2)
   const recent = series.slice(PROFILE_WEEKS)
@@ -130,6 +135,13 @@ function Overview({ past, page, setPage, scroller }: OverviewProps) {
             : `Fais ${WEEKLY_GOAL} séances dans la semaine pour lancer ta série`}
         </p>
       </Card>
+
+      {muscles.data && (
+        <>
+          <RecoveryCard recovery={recovery(muscles.data, new Date())} />
+          <BodyCard load={weeklyLoad(muscles.data, today)} />
+        </>
+      )}
 
       <Calendar today={today} cells={monthGrid(today, trained)} count={monthCount} />
     </>
