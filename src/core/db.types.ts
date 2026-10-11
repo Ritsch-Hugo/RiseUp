@@ -385,6 +385,294 @@ export type Database = {
           },
         ]
       }
+      nutri_entries: {
+        Row: {
+          carbs: number
+          created_at: string
+          day: string
+          fat: number
+          fiber: number
+          food_id: string
+          from_meal_id: string | null
+          id: string
+          kcal: number
+          protein: number
+          quantity_g: number
+          salt: number
+          saturated_fat: number
+          slot: Database['public']['Enums']['meal_slot']
+          sugars: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          carbs?: number
+          created_at?: string
+          day: string
+          fat?: number
+          fiber?: number
+          food_id: string
+          from_meal_id?: string | null
+          id: string
+          kcal: number
+          protein?: number
+          quantity_g: number
+          salt?: number
+          saturated_fat?: number
+          slot: Database['public']['Enums']['meal_slot']
+          sugars?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          carbs?: number
+          created_at?: string
+          day?: string
+          fat?: number
+          fiber?: number
+          food_id?: string
+          from_meal_id?: string | null
+          id?: string
+          kcal?: number
+          protein?: number
+          quantity_g?: number
+          salt?: number
+          saturated_fat?: number
+          slot?: Database['public']['Enums']['meal_slot']
+          sugars?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'nutri_entries_food_id_fkey'
+            columns: ['food_id']
+            isOneToOne: false
+            referencedRelation: 'nutri_foods'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'nutri_entries_from_meal_id_fkey'
+            columns: ['from_meal_id']
+            isOneToOne: false
+            referencedRelation: 'nutri_meals'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      nutri_foods: {
+        Row: {
+          archived_at: string | null
+          barcode: string | null
+          brand: string | null
+          carbs: number
+          created_at: string
+          fat: number
+          fiber: number
+          id: string
+          is_favorite: boolean
+          kcal: number | null
+          name: string
+          protein: number
+          salt: number
+          saturated_fat: number
+          serving_g: number | null
+          serving_label: string | null
+          source: Database['public']['Enums']['food_source']
+          sugars: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          archived_at?: string | null
+          barcode?: string | null
+          brand?: string | null
+          carbs?: number
+          created_at?: string
+          fat?: number
+          fiber?: number
+          id: string
+          is_favorite?: boolean
+          kcal?: number | null
+          name: string
+          protein?: number
+          salt?: number
+          saturated_fat?: number
+          serving_g?: number | null
+          serving_label?: string | null
+          source?: Database['public']['Enums']['food_source']
+          sugars?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          archived_at?: string | null
+          barcode?: string | null
+          brand?: string | null
+          carbs?: number
+          created_at?: string
+          fat?: number
+          fiber?: number
+          id?: string
+          is_favorite?: boolean
+          kcal?: number | null
+          name?: string
+          protein?: number
+          salt?: number
+          saturated_fat?: number
+          serving_g?: number | null
+          serving_label?: string | null
+          source?: Database['public']['Enums']['food_source']
+          sugars?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      nutri_goals: {
+        Row: {
+          carbs_g: number
+          created_at: string
+          effective_from: string
+          fat_g: number
+          fiber_g: number
+          id: string
+          kcal: number
+          min_slots_tracked: number
+          protein_g: number
+          salt_g: number
+          updated_at: string
+          user_id: string
+          water_ml: number
+        }
+        Insert: {
+          carbs_g?: number
+          created_at?: string
+          effective_from: string
+          fat_g?: number
+          fiber_g?: number
+          id: string
+          kcal?: number
+          min_slots_tracked?: number
+          protein_g?: number
+          salt_g?: number
+          updated_at?: string
+          user_id?: string
+          water_ml?: number
+        }
+        Update: {
+          carbs_g?: number
+          created_at?: string
+          effective_from?: string
+          fat_g?: number
+          fiber_g?: number
+          id?: string
+          kcal?: number
+          min_slots_tracked?: number
+          protein_g?: number
+          salt_g?: number
+          updated_at?: string
+          user_id?: string
+          water_ml?: number
+        }
+        Relationships: []
+      }
+      nutri_meal_items: {
+        Row: {
+          created_at: string
+          food_id: string
+          id: string
+          meal_id: string
+          quantity_g: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          food_id: string
+          id: string
+          meal_id: string
+          quantity_g: number
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          food_id?: string
+          id?: string
+          meal_id?: string
+          quantity_g?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'nutri_meal_items_food_id_fkey'
+            columns: ['food_id']
+            isOneToOne: false
+            referencedRelation: 'nutri_foods'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'nutri_meal_items_meal_id_fkey'
+            columns: ['meal_id']
+            isOneToOne: false
+            referencedRelation: 'nutri_meals'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      nutri_meals: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          name: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      nutri_water: {
+        Row: {
+          amount_ml: number
+          created_at: string
+          day: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_ml: number
+          created_at?: string
+          day: string
+          id: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          amount_ml?: number
+          created_at?: string
+          day?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       muscu_workout_records: {
@@ -425,6 +713,8 @@ export type Database = {
     Enums: {
       equipment_type: 'barre' | 'halteres' | 'machine' | 'poulie' | 'poids_du_corps' | 'autre'
       exercise_tracking: 'poids_reps' | 'reps' | 'duree'
+      food_source: 'off' | 'perso'
+      meal_slot: 'petit_dej' | 'dejeuner' | 'diner' | 'collation'
       muscle_group:
         | 'pecs'
         | 'dos'
@@ -559,6 +849,8 @@ export const Constants = {
     Enums: {
       equipment_type: ['barre', 'halteres', 'machine', 'poulie', 'poids_du_corps', 'autre'],
       exercise_tracking: ['poids_reps', 'reps', 'duree'],
+      food_source: ['off', 'perso'],
+      meal_slot: ['petit_dej', 'dejeuner', 'diner', 'collation'],
       muscle_group: [
         'pecs',
         'dos',
