@@ -16,3 +16,8 @@ export const DEFAULT_GOALS = {
   water_ml: 2500,
   min_slots_tracked: 2,
 }
+
+/** Fiche aliment : quantité par défaut et pas des boutons − / + (grammes, portions). */
+export const DEFAULT_QUANTITY_G = 100
+export const QUANTITY_STEP_G = 10
+export const PORTION_STEP = 0.5

@@ -1,0 +1,431 @@
+.page,
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.title {
+  flex: 1;
+  margin: 0;
+  font-size: 22px;
+}
+
+.state,
+.help {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+.help a {
+  color: var(--accent-text);
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--text-2);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-button);
+  background: var(--card);
+}
+
+.seg,
+.segOn {
+  flex: 1;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.segOn {
+  background: var(--accent-solid);
+  color: #fff;
+  font-weight: 700;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 16px;
+  border-radius: 20px;
+  background: var(--card);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  color: var(--text-2);
+  text-decoration: none;
+}
+
+.item + .item {
+  border-top: 1px solid var(--card-2);
+}
+
+.itemText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.itemName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.cardTitle {
+  margin: 0 0 var(--space-2);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.createLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  margin-top: var(--space-3);
+  border-radius: 14px;
+  background: var(--card-2);
+  color: var(--accent-text);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.star,
+.starOn {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--card);
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.starOn {
+  color: var(--accent-2);
+}
+
+.starOn svg {
+  fill: currentColor;
+}
+
+.label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepButton {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card-2);
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stepValue {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--card-2);
+}
+
+.stepInput {
+  width: 80px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.unit {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.pill,
+.pillOn {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--card-2);
+  color: var(--text-2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pillOn {
+  background: var(--accent-solid);
+  color: #fff;
+  font-weight: 700;
+}
+
+.kcalLine {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: var(--space-4);
+}
+
+.kcalBig {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.macro {
+  margin-bottom: var(--space-3);
+}
+
+.macroHead {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.macroName {
+  font-weight: 600;
+}
+
+.track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--card-2);
+}
+
+.track > div {
+  height: 8px;
+  min-width: 2px;
+  border-radius: 4px;
+}
+
+.tableHead,
+.row,
+.rowSub {
+  display: flex;
+  align-items: center;
+  padding: 11px 0;
+}
+
+.tableHead {
+  padding-top: 0;
+}
+
+.tableHead .cardTitle {
+  flex: 1;
+  margin: 0;
+}
+
+.row,
+.rowSub {
+  border-top: 1px solid var(--card-2);
+  font-size: 14px;
+}
+
+.rowSub {
+  padding-left: 14px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.rowLabel {
+  flex: 1;
+}
+
+.colNow,
+.colRef {
+  width: 72px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.colNow {
+  font-weight: 700;
+}
+
+.tableHead .colNow {
+  font-size: 12px;
+  color: var(--accent-text);
+}
+
+.colRef {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.notice {
+  margin: 0;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--card);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-input);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+.number {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.twoCols,
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.section {
+  margin: 4px 0 0;
+  font-size: 18px;
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--card);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.error {
+  margin: 0;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+.sheetActions {
+  display: flex;
+  gap: var(--space-3);
+}
