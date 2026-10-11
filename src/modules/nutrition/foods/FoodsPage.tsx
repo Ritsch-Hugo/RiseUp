@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Card, Icon } from '../../../core/ui'
 import { MEAL_SLOTS, RECENT_FOODS_SHOWN } from '../config'
+import { OnlineSearch } from '../off/OnlineSearch'
 import { MealsTab } from '../meals/MealsTab'
 import { recentFoodIds } from '../rules/meals'
 import { foodSummary, searchFoods } from '../rules/food'
@@ -52,18 +53,27 @@ export function FoodsPage() {
       )}
 
       {!isMeals && (
-        <div className={styles.search}>
-          <Icon name="search" size={20} />
-          <label htmlFor="food-search" className={styles.srOnly}>
-            Rechercher un aliment
-          </label>
-          <input
-            id="food-search"
-            type="search"
-            placeholder="Rechercher un aliment"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
+        <div className={styles.searchRow}>
+          <div className={styles.search}>
+            <Icon name="search" size={20} />
+            <label htmlFor="food-search" className={styles.srOnly}>
+              Rechercher un aliment
+            </label>
+            <input
+              id="food-search"
+              type="search"
+              placeholder="Rechercher un aliment"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+          <Link
+            to={{ pathname: '/nutrition/scan', search }}
+            className={styles.scanButton}
+            aria-label="Scanner un code-barres"
+          >
+            <Icon name="scan" size={24} />
+          </Link>
         </div>
       )}
 
@@ -120,6 +130,8 @@ export function FoodsPage() {
           )}
         </>
       )}
+
+      {!isMeals && <OnlineSearch key={query.trim()} query={query} />}
 
       <Card>
         <h2 className={styles.cardTitle}>Tu ne trouves pas ton aliment ?</h2>

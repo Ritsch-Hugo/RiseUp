@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Button, IconLink, Sheet } from '../../../core/ui'
+import { offToForm, type OffFood } from '../rules/off'
 import { EMPTY_FOOD_FORM, foodToForm, validateFoodForm, type FoodForm } from '../rules/food'
 import { useArchiveFood, useFoods, useSaveFood, type Food } from './foodQueries'
 import styles from './foods.module.css'
@@ -28,20 +29,36 @@ const NUTRIENTS = [
 function FoodEditor({ existing }: { existing: Food | undefined }) {
   const navigate = useNavigate()
   const save = useSaveFood()
+  const { state, search } = useLocation()
+  const off = (state as { off?: OffFood; barcode?: string } | null)?.off
+  const scannedCode = (state as { barcode?: string } | null)?.barcode ?? off?.barcode
   const archive = useArchiveFood()
-  const [form, setForm] = useState<FoodForm>(existing ? foodToForm(existing) : EMPTY_FOOD_FORM)
+  const [form, setForm] = useState<FoodForm>(
+    existing ? foodToForm(existing) : off ? offToForm(off) : EMPTY_FOOD_FORM
+  )
   const [confirmArchive, setConfirmArchive] = useState(false)
   const patch = (p: Partial<FoodForm>) => setForm((f) => ({ ...f, ...p }))
   const result = validateFoodForm(form)
 
-  const back = existing ? `/nutrition/aliments/${existing.id}` : '/nutrition/aliments'
+  const back = existing
+    ? `/nutrition/aliments/${existing.id}${search}`
+    : `/nutrition/aliments${search}`
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!('values' in result)) return
     save.mutate(
-      { existingId: existing?.id, values: result.values },
-      { onSuccess: (id) => navigate(`/nutrition/aliments/${id}`, { replace: true }) }
+      {
+        existingId: existing?.id,
+        values: existing
+          ? result.values
+          : {
+              ...result.values,
+              ...(off ? { source: 'off' as const } : {}),
+              barcode: scannedCode ?? null,
+            },
+      },
+      { onSuccess: (id) => navigate(`/nutrition/aliments/${id}${search}`, { replace: true }) }
     )
   }
 
@@ -52,6 +69,16 @@ function FoodEditor({ existing }: { existing: Food | undefined }) {
         <h2 className={styles.title}>{existing ? 'Modifier l’aliment' : 'Nouvel aliment'}</h2>
       </div>
 
+      {!existing && off && (
+        <p className={styles.notice}>
+          Valeurs pré-remplies depuis Open Food Facts. Corrige-les si l’étiquette dit autre chose.
+        </p>
+      )}
+      {!existing && !off && scannedCode && (
+        <p className={styles.notice}>
+          Code-barres {scannedCode} : il sera retrouvé au prochain scan.
+        </p>
+      )}
       {existing?.source === 'off' && (
         <p className={styles.notice}>
           Valeurs issues d’Open Food Facts. Corrige-les si l’étiquette dit autre chose.

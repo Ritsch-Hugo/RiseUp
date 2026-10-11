@@ -2,6 +2,7 @@ import type { RouteObject } from 'react-router-dom'
 import { FoodFormPage } from './foods/FoodFormPage'
 import { FoodPage } from './foods/FoodPage'
 import { FoodsPage } from './foods/FoodsPage'
+import { ScanPage } from './off/ScanPage'
 import { JournalPage } from './journal/JournalPage'
 import { MealFormPage } from './meals/MealFormPage'
 import { WaterPage } from './water/WaterPage'
@@ -16,6 +17,7 @@ export const nutritionRoute: RouteObject = {
     { index: true, element: <JournalPage /> },
     { path: 'repas/nouveau', element: <MealFormPage /> },
     { path: 'repas/:id', element: <MealFormPage /> },
+    { path: 'scan', element: <ScanPage /> },
     { path: 'eau', element: <WaterPage /> },
     { path: 'aliments', element: <FoodsPage /> },
     { path: 'aliments/nouveau', element: <FoodFormPage /> },

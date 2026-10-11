@@ -24,7 +24,10 @@ export function useFoods() {
   })
 }
 
-type FoodValuesToSave = Extract<FoodFormResult, { values: unknown }>['values']
+type FoodValuesToSave = Extract<FoodFormResult, { values: unknown }>['values'] & {
+  source?: 'off' | 'perso'
+  barcode?: string | null
+}
 
 /** Crée l'aliment (`existingId` absent) ou le modifie ; renvoie son id. */
 export function useSaveFood() {
