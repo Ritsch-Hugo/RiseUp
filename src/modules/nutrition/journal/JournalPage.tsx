@@ -6,6 +6,7 @@ import { MEAL_SLOTS } from '../config'
 import { useGoalsForDay } from '../goals/goalsQueries'
 import { formatAmount, type Nutrition } from '../rules/food'
 import { dayLabel, isDay, sumNutrition } from '../rules/journal'
+import { WaterCard } from '../water/WaterCard'
 import { EntrySheet } from './EntrySheet'
 import { useEntries, type JournalEntry } from './journalQueries'
 import { Rings } from './Rings'
@@ -66,6 +67,8 @@ export function JournalPage() {
           <Card large>
             <Rings total={total} goals={goals} />
           </Card>
+
+          <WaterCard day={day} goalMl={goals.water_ml} />
 
           {MEAL_SLOTS.map((slot) => {
             const items = entries.filter((e) => e.slot === slot.key)

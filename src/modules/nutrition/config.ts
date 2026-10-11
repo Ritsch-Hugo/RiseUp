@@ -33,3 +33,13 @@ export type MealSlot = (typeof MEAL_SLOTS)[number]['key']
 
 /** Créneau proposé selon l'heure (Paris) : avant ces heures → petit-déj, déjeuner, collation ; ensuite dîner. */
 export const SLOT_SUGGESTION_HOURS = { petit_dej: 11, dejeuner: 15, collation: 18 }
+
+/** Eau : ajouts rapides (mL) ; les deux premiers sont aussi sur la carte du journal. */
+export const WATER_QUICK_ADDS = [
+  { ml: 250, hint: 'un verre' },
+  { ml: 500, hint: 'une bouteille' },
+  { ml: 750, hint: 'une gourde' },
+  { ml: 1000, hint: 'une grande gourde' },
+] as const
+export const WATER_JOURNAL_QUICK_ADDS = 2
+export const WATER_CHART_DAYS = 7
