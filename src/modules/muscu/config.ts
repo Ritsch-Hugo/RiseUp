@@ -79,3 +79,13 @@ export const RECOVERY_ALMOST_READY_HOURS = 6
 export const RECOVERY_DANGER_PROGRESS = 0.5
 /** Fenêtre de séances chargée pour la récupération et les muscles sollicités (jours). */
 export const MUSCLE_HISTORY_DAYS = 9
+
+/** Profil › Exercices : périodes proposées (jours) et période par défaut. */
+export const PROGRESS_PERIODS = [
+  { key: '1m', label: '1 M', days: 30 },
+  { key: '3m', label: '3 M', days: 91 },
+  { key: '6m', label: '6 M', days: 182 },
+  { key: '1a', label: '1 A', days: 365 },
+] as const
+export type ProgressPeriod = (typeof PROGRESS_PERIODS)[number]['key']
+export const DEFAULT_PROGRESS_PERIOD: ProgressPeriod = '3m'
