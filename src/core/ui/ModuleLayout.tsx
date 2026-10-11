@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { IconLink } from './IconLink'
 import { TabBar, type Tab } from './TabBar'
 import styles from './ModuleLayout.module.css'
@@ -14,6 +14,7 @@ type ModuleLayoutProps = {
 
 /** Cadre commun des modules : bouton accueil + titre, contenu de l'onglet, barre d'onglets. */
 export function ModuleLayout({ title, tabs, headerRight, banner }: ModuleLayoutProps) {
+  const { pathname } = useLocation()
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
@@ -23,7 +24,10 @@ export function ModuleLayout({ title, tabs, headerRight, banner }: ModuleLayoutP
         </div>
         {headerRight}
       </header>
-      <main className={banner ? `${styles.content} ${styles.withBanner}` : styles.content}>
+      <main
+        key={pathname}
+        className={banner ? `${styles.content} ${styles.withBanner}` : styles.content}
+      >
         <Outlet />
       </main>
       {banner && <div className={styles.banner}>{banner}</div>}

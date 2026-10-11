@@ -541,3 +541,8 @@
   font-weight: 700;
   color: var(--text);
 }
+
+.bar > span {
+  transition: width 0.55s var(--ease-out);
+  animation: fill-in 0.7s var(--ease-out) both;
+}

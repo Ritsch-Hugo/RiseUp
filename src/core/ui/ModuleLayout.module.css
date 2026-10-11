@@ -19,6 +19,7 @@
 }
 
 .content {
+  animation: page-in 0.3s var(--ease-out) both;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);

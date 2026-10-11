@@ -555,3 +555,12 @@
   font-size: 13px;
   color: var(--danger);
 }
+
+.bar > div,
+.barThick > div,
+.trackAfter,
+.trackBefore,
+.rewardTrack div {
+  transition: width 0.55s var(--ease-out);
+  animation: fill-in 0.7s var(--ease-out) both;
+}

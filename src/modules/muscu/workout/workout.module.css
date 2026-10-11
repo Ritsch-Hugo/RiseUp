@@ -662,3 +662,7 @@
   font-size: 22px;
   font-weight: 700;
 }
+
+.checkOn {
+  animation: pop 0.3s var(--ease-out);
+}

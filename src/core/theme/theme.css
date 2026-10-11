@@ -25,6 +25,9 @@
   --space-3: 12px;
   --space-4: 16px;
   --space-5: 24px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.12s;
+  --dur: 0.25s;
   --app-width: 430px;
   --tabbar-height: 96px;
   --page-padding: 56px 20px 24px;
@@ -45,8 +48,15 @@ body,
   min-height: 100%;
 }
 
+html {
+  overscroll-behavior-y: none;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
+  -webkit-font-smoothing: antialiased;
+  touch-action: manipulation;
   background: var(--bg);
   color: var(--text);
   font-size: 16px;
@@ -78,4 +88,99 @@ h2 {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Retour tactile : tout ce qui se touche s'enfonce légèrement. */
+button,
+a,
+[role='checkbox'] {
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    opacity 0.15s,
+    background-color var(--dur),
+    box-shadow var(--dur);
+  -webkit-touch-callout: none;
+}
+
+button,
+[role='checkbox'] {
+  user-select: none;
+}
+
+button:not(:disabled):active,
+[role='checkbox']:active {
+  transform: scale(0.95);
+}
+
+a:active {
+  transform: scale(0.985);
+}
+
+/* Animations partagées (les modules CSS y font référence par leur nom). */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+  }
+  60% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fill-in {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

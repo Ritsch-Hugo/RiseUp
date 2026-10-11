@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../core'
 import { Card, Icon, IconButton } from '../core/ui'
@@ -26,8 +27,8 @@ export function HomePage() {
         </div>
         <IconButton icon="logout" label="Se déconnecter" onClick={() => supabase.auth.signOut()} />
       </header>
-      {modules.map((m) => (
-        <ModuleCard key={m.path} module={m} />
+      {modules.map((m, i) => (
+        <ModuleCard key={m.path} module={m} index={i} />
       ))}
       <ExportCard />
     </main>
@@ -35,10 +36,10 @@ export function HomePage() {
 }
 
 /** Carte d'un module : son résumé du jour vient de son `useSummary` public. */
-function ModuleCard({ module: m }: { module: AppModule }) {
+function ModuleCard({ module: m, index }: { module: AppModule; index: number }) {
   const summary = m.useSummary()
   return (
-    <Link to={m.path}>
+    <Link to={m.path} className={styles.link} style={{ '--i': index } as CSSProperties}>
       <Card className={styles.module}>
         <span className={summary?.active ? styles.tileActive : styles.tile}>
           <Icon name={m.icon} size={26} />

@@ -41,6 +41,7 @@ export function Rings({ total, goals }: { total: Nutrition; goals: GoalValues })
               strokeWidth="12"
               strokeLinecap="round"
               strokeDasharray={`${bigDash} ${BIG_C}`}
+              style={{ transition: 'stroke-dasharray 0.6s var(--ease-out)' }}
               transform="rotate(-90 65 65)"
             />
           </svg>
@@ -80,6 +81,7 @@ export function Rings({ total, goals }: { total: Nutrition; goals: GoalValues })
                     strokeWidth="6"
                     strokeLinecap="round"
                     strokeDasharray={`${dash} ${SMALL_C}`}
+                    style={{ transition: 'stroke-dasharray 0.6s var(--ease-out)' }}
                     transform="rotate(-90 22 22)"
                   />
                 </svg>

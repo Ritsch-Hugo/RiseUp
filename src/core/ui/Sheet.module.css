@@ -6,6 +6,7 @@
   justify-content: center;
   background: rgb(0 0 0 / 0.6);
   z-index: 100;
+  animation: fade-in 0.2s ease-out both;
 }
 
 .sheet {
@@ -16,6 +17,7 @@
   padding: var(--space-3) var(--space-4) var(--space-5);
   background: var(--card);
   border-radius: var(--radius-card) var(--radius-card) 0 0;
+  animation: sheet-up 0.34s var(--ease-out) both;
 }
 
 .handle {
