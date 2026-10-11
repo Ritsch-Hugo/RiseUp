@@ -2,7 +2,12 @@ import type { RouteObject } from 'react-router-dom'
 import type { IconName } from './ui'
 
 /** Résumé d'un module sur l'accueil : une ligne, et `active` quand quelque chose attend aujourd'hui. */
-export type ModuleSummary = { text: string; active: boolean }
+export type ModuleSummary = {
+  text: string
+  active: boolean
+  /** Avancement du jour ou de la semaine, de 0 à 1 (anneau autour de l'icône). */
+  progress?: number
+}
 
 /** Ce que chaque module expose à l'app (via son index.ts) : carte d'accueil + routes. */
 export type AppModule = {

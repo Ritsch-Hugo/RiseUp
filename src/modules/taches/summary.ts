@@ -21,5 +21,9 @@ export function useSummary(): ModuleSummary | null {
     todo === 0 ? 'rien à faire' : `${todo} tâche${todo > 1 ? 's' : ''} à faire`,
   ]
   if (streak && streak.current > 0) parts.push(`série ${streak.current} j`)
-  return { text: parts.join(' · '), active: todo > 0 }
+  return {
+    text: parts.join(' · '),
+    active: todo > 0,
+    progress: levelFromXp(total).progress,
+  }
 }

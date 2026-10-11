@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { parisDay } from '../dates'
-import { Button, Card } from '../ui'
+import { Button } from '../ui'
 import { exportAll } from './exportData'
 import { downloadJson, exportFileName } from './exportFile'
 import { ImportSection } from './ImportSection'
-import styles from './ExportCard.module.css'
+import styles from './DataTools.module.css'
 
-/** Sauvegarde : télécharge toutes les données (Muscu, Nutrition, Tâches) dans un fichier JSON. */
-export function ExportCard() {
+/** Sauvegarde : télécharge toutes les données (Muscu, Nutrition, Tâches) dans un fichier JSON, ou les importe. */
+export function DataTools() {
   const [state, setState] = useState<'idle' | 'busy' | 'done' | 'error'>('idle')
 
   const run = async () => {
@@ -21,8 +21,7 @@ export function ExportCard() {
   }
 
   return (
-    <Card className={styles.card}>
-      <h2 className={styles.title}>Mes données</h2>
+    <div className={styles.card}>
       <p className={styles.text}>
         Télécharge une copie de tout ce que tu as enregistré (séances, repas, tâches…) dans un
         fichier JSON, ou ajoute à tes données le contenu d’un export précédent.
@@ -33,6 +32,6 @@ export function ExportCard() {
       {state === 'done' && <p className={styles.text}>Fichier téléchargé.</p>}
       {state === 'error' && <p className={styles.error}>Impossible d’exporter pour l’instant.</p>}
       <ImportSection />
-    </Card>
+    </div>
   )
 }

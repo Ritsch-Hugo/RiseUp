@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { Button } from '../ui'
 import { previewImport, runImport } from './importData'
 import { parseImport, totalOf, type ImportPlan } from './importFile'
-import styles from './ExportCard.module.css'
+import styles from './DataTools.module.css'
 
 type State =
   | { step: 'idle' }

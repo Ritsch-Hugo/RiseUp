@@ -26,5 +26,6 @@ export function useSummary(): ModuleSummary | null {
   return {
     text: `${kcalText} · eau ${liters(waterMl)} / ${liters(goals.water_ml)} L`,
     active: entries.length === 0,
+    progress: goals.kcal > 0 ? Math.min(1, Math.max(0, kcal / goals.kcal)) : 0,
   }
 }

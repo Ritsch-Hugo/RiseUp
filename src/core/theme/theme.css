@@ -164,6 +164,12 @@ a:active {
   }
 }
 
+@keyframes ring-in {
+  from {
+    stroke-dasharray: 0 100;
+  }
+}
+
 @keyframes rise {
   from {
     opacity: 0;
