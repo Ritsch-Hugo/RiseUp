@@ -1,5 +1,7 @@
 import type { RouteObject } from 'react-router-dom'
 import { ComingSoon, ModuleLayout, type Tab } from '../../core/ui'
+import { TaskDetailPage } from './tasks/TaskDetailPage'
+import { UpcomingPage } from './tasks/UpcomingPage'
 import { TaskFormPage } from './tasks/TaskFormPage'
 import { TodayPage } from './tasks/TodayPage'
 
@@ -16,8 +18,9 @@ export const tachesRoute: RouteObject = {
   children: [
     { index: true, element: <TodayPage /> },
     { path: 'nouvelle', element: <TaskFormPage /> },
+    { path: ':id', element: <TaskDetailPage /> },
     { path: ':id/modifier', element: <TaskFormPage /> },
-    { path: 'a-venir', element: <ComingSoon name="À venir" /> },
+    { path: 'a-venir', element: <UpcomingPage /> },
     { path: 'quetes', element: <ComingSoon name="Quêtes" /> },
     { path: 'progres', element: <ComingSoon name="Progrès" /> },
   ],

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '../../../core/ui'
 import { PRIORITIES } from '../config'
-import { taskSubtitle, taskXp } from '../rules/tasks'
+import { subtaskProgress, taskSubtitle, taskXp, upcomingSubtitle } from '../rules/tasks'
 import { useToggleTask, type Task } from './taskQueries'
 import styles from './tasks.module.css'
 
@@ -10,14 +10,28 @@ export function TaskRow({
   task,
   categoryName,
   today,
+  upcoming,
+  later,
 }: {
   task: Task
   categoryName: string | null
   today: string
+  /** Vue « À venir » : le jour est dans l'en-tête de section, pas dans la ligne. */
+  upcoming?: boolean
+  later?: boolean
 }) {
   const toggle = useToggleTask()
   const done = task.completed_at !== null
   const color = PRIORITIES.find((p) => p.key === task.priority)!.color
+  const progress = subtaskProgress(task.subtasks)
+  const subtitle = [
+    upcoming
+      ? upcomingSubtitle(task, categoryName, !!later)
+      : taskSubtitle(task, categoryName, today),
+    progress ? `${progress.done}/${progress.total} sous-tâches` : null,
+  ]
+    .filter(Boolean)
+    .join(' · ')
 
   return (
     <div className={done ? styles.rowDone : styles.row}>
@@ -28,13 +42,13 @@ export function TaskRow({
         role="checkbox"
         aria-checked={done}
         aria-label={`${done ? 'Décocher' : 'Terminer'} ${task.title}`}
-        onClick={() => toggle.mutate({ id: task.id, done: !done })}
+        onClick={() => toggle.mutate({ task, done: !done })}
       >
         {done && <Icon name="check" size={16} strokeWidth={3.5} />}
       </button>
-      <Link to={`/taches/${task.id}/modifier`} className={styles.rowText}>
+      <Link to={`/taches/${task.id}`} className={styles.rowText}>
         <span className={done ? styles.titleDone : styles.title}>{task.title}</span>
-        {!done && <span className={styles.sub}>{taskSubtitle(task, categoryName, today)}</span>}
+        {!done && <span className={styles.sub}>{subtitle}</span>}
       </Link>
       {!done && <span className={styles.xpChip}>+{taskXp(task.difficulty)} XP</span>}
     </div>

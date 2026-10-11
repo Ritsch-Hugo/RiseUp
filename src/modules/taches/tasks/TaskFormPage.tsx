@@ -5,9 +5,12 @@ import { Button, Card, IconLink, Sheet } from '../../../core/ui'
 import { DEFAULT_DIFFICULTY, DEFAULT_PRIORITY, PRIORITIES, TASK_DIFFICULTIES } from '../config'
 import {
   choiceForDue,
+  parseRecurrence,
+  repeatChoiceFor,
   taskXp,
   validateTaskForm,
   type DueChoice,
+  type RepeatChoice,
   type TaskForm,
 } from '../rules/tasks'
 import {
@@ -19,6 +22,12 @@ import {
   type Task,
 } from './taskQueries'
 import styles from './tasks.module.css'
+
+const REPEAT_CHOICES: { key: RepeatChoice; label: string }[] = [
+  { key: 'none', label: 'Jamais' },
+  { key: 'daily', label: 'Chaque jour' },
+  { key: 'weekly', label: 'Chaque semaine' },
+]
 
 const DUE_CHOICES: { key: DueChoice; label: string }[] = [
   { key: 'none', label: 'Sans échéance' },
@@ -48,6 +57,9 @@ function initialForm(existing: Task | undefined, today: string): TaskForm {
       due: 'today',
       customDate: '',
       time: '',
+      repeat: 'none',
+      notes: '',
+      subtasks: [],
     }
   }
   const due = choiceForDue(existing.due_date, today)
@@ -59,6 +71,9 @@ function initialForm(existing: Task | undefined, today: string): TaskForm {
     due,
     customDate: due === 'custom' ? (existing.due_date ?? '') : '',
     time: existing.due_time?.slice(0, 5) ?? '',
+    repeat: repeatChoiceFor(parseRecurrence(existing.recurrence)),
+    notes: existing.notes ?? '',
+    subtasks: existing.subtasks.map((s) => ({ id: s.id, title: s.title })),
   }
 }
 
@@ -72,6 +87,7 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
   const [form, setForm] = useState<TaskForm>(initialForm(existing, today))
   const [newCategory, setNewCategory] = useState<string | null>(null)
   const [confirmDelete, setConfirmDelete] = useState(false)
+  const [newSubtask, setNewSubtask] = useState('')
   const patch = (p: Partial<TaskForm>) => setForm((f) => ({ ...f, ...p }))
   const values = validateTaskForm(form, today)
 
@@ -84,11 +100,18 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
     setNewCategory(null)
   }
 
+  const addSubtask = () => {
+    const title = newSubtask.trim()
+    if (title === '') return
+    patch({ subtasks: [...form.subtasks, { id: crypto.randomUUID(), title }] })
+    setNewSubtask('')
+  }
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!values) return
     save.mutate(
-      { existingId: existing?.id, values },
+      { existingId: existing?.id, values, subtasks: form.subtasks },
       { onSuccess: () => navigate('/taches', { replace: true }) }
     )
   }
@@ -211,7 +234,9 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
               type="button"
               className={c.key === form.due ? styles.pillOn : styles.pill}
               aria-pressed={c.key === form.due}
-              onClick={() => patch({ due: c.key })}
+              onClick={() =>
+                patch({ due: c.key, ...(c.key === 'none' ? { repeat: 'none' as const } : {}) })
+              }
             >
               {c.label}
             </button>
@@ -237,6 +262,75 @@ function TaskEditor({ existing }: { existing: Task | undefined }) {
             />
           </label>
         )}
+      </div>
+
+      <div className={styles.field}>
+        <span className={styles.label}>Répéter</span>
+        <div className={styles.segmented} role="group" aria-label="Répéter">
+          {REPEAT_CHOICES.map((r) => (
+            <button
+              key={r.key}
+              type="button"
+              className={r.key === form.repeat ? styles.segOn : styles.seg}
+              aria-pressed={r.key === form.repeat}
+              onClick={() =>
+                patch({
+                  repeat: r.key,
+                  // Une tâche qui se répète a besoin d'une échéance.
+                  ...(r.key !== 'none' && form.due === 'none' ? { due: 'today' as const } : {}),
+                })
+              }
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <Card>
+        <h3 className={styles.cardTitle}>Sous-tâches</h3>
+        {form.subtasks.map((s) => (
+          <div key={s.id} className={styles.subRow}>
+            <span className={styles.subBullet} />
+            <span className={styles.subTitle}>{s.title}</span>
+            <button
+              type="button"
+              className={styles.removeButton}
+              aria-label={`Retirer ${s.title}`}
+              onClick={() => patch({ subtasks: form.subtasks.filter((x) => x.id !== s.id) })}
+            >
+              ×
+            </button>
+          </div>
+        ))}
+        <div className={styles.subAdd}>
+          <input
+            className={styles.input}
+            placeholder="Ajouter une sous-tâche"
+            aria-label="Nouvelle sous-tâche"
+            value={newSubtask}
+            onChange={(e) => setNewSubtask(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                addSubtask()
+              }
+            }}
+          />
+          <Button variant="secondary" onClick={addSubtask} disabled={newSubtask.trim() === ''}>
+            Ajouter
+          </Button>
+        </div>
+      </Card>
+
+      <div className={styles.field}>
+        <label htmlFor="task-notes">Notes (optionnel)</label>
+        <textarea
+          id="task-notes"
+          className={styles.textarea}
+          value={form.notes}
+          onChange={(e) => patch({ notes: e.target.value })}
+        />
       </div>
 
       <Card className={styles.xpCard}>

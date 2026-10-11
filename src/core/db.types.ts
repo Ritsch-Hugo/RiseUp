@@ -1007,6 +1007,7 @@ export type Database = {
           is_boss: boolean
           notes: string | null
           priority: Database['public']['Enums']['task_priority']
+          recurred_from: string | null
           recurrence: Json | null
           title: string
           updated_at: string
@@ -1025,6 +1026,7 @@ export type Database = {
           is_boss?: boolean
           notes?: string | null
           priority?: Database['public']['Enums']['task_priority']
+          recurred_from?: string | null
           recurrence?: Json | null
           title: string
           updated_at?: string
@@ -1043,6 +1045,7 @@ export type Database = {
           is_boss?: boolean
           notes?: string | null
           priority?: Database['public']['Enums']['task_priority']
+          recurred_from?: string | null
           recurrence?: Json | null
           title?: string
           updated_at?: string
@@ -1054,6 +1057,13 @@ export type Database = {
             columns: ['category_id']
             isOneToOne: false
             referencedRelation: 'taches_categories'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'taches_tasks_recurred_from_fkey'
+            columns: ['recurred_from']
+            isOneToOne: false
+            referencedRelation: 'taches_tasks'
             referencedColumns: ['id']
           },
         ]

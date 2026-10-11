@@ -4,7 +4,14 @@ import {
   dueDateFor,
   dueLabel,
   endOfWeek,
+  groupUpcoming,
+  nextOccurrence,
+  parseRecurrence,
+  relativeDue,
   splitToday,
+  subtaskProgress,
+  upcomingSubtitle,
+  weekStrip,
   taskSubtitle,
   taskXp,
   validateTaskForm,
@@ -109,6 +116,9 @@ describe('validateTaskForm', () => {
     due: 'today',
     customDate: '',
     time: '18:00',
+    repeat: 'none',
+    notes: '  ',
+    subtasks: [],
   }
   it('valeurs nettoyées', () => {
     expect(validateTaskForm(form, today)).toEqual({
@@ -118,7 +128,17 @@ describe('validateTaskForm', () => {
       difficulty: 'difficile',
       due_date: today,
       due_time: '18:00',
+      recurrence: null,
+      notes: null,
     })
+  })
+  it('récurrence et notes', () => {
+    const v = validateTaskForm({ ...form, repeat: 'weekly', notes: ' à relire ' }, today)!
+    expect(v.recurrence).toEqual({ type: 'weekly' })
+    expect(v.notes).toBe('à relire')
+  })
+  it('refuse une récurrence sans échéance', () => {
+    expect(validateTaskForm({ ...form, due: 'none', repeat: 'daily' }, today)).toBeNull()
   })
   it('heure ignorée sans échéance', () => {
     expect(validateTaskForm({ ...form, due: 'none' }, today)!.due_time).toBeNull()
@@ -126,5 +146,132 @@ describe('validateTaskForm', () => {
   it('refuse titre vide et date « choisir » vide', () => {
     expect(validateTaskForm({ ...form, title: '  ' }, today)).toBeNull()
     expect(validateTaskForm({ ...form, due: 'custom' }, today)).toBeNull()
+  })
+})
+
+describe('récurrence', () => {
+  it('lit la récurrence enregistrée', () => {
+    expect(parseRecurrence({ type: 'daily' })).toEqual({ type: 'daily' })
+    expect(parseRecurrence({ type: 'weekly' })).toEqual({ type: 'weekly' })
+    expect(parseRecurrence({ type: 'monthly' })).toBeNull()
+    expect(parseRecurrence(null)).toBeNull()
+  })
+  it('chaque jour : lendemain de l’échéance', () => {
+    expect(nextOccurrence({ type: 'daily' }, '2026-10-11', '2026-10-11')).toBe('2026-10-12')
+  })
+  it('chaque semaine : même jour la semaine suivante', () => {
+    expect(nextOccurrence({ type: 'weekly' }, '2026-10-11', '2026-10-11')).toBe('2026-10-18')
+  })
+  it('terminée en avance : on suit l’échéance, pas aujourd’hui', () => {
+    expect(nextOccurrence({ type: 'daily' }, '2026-10-15', '2026-10-11')).toBe('2026-10-16')
+  })
+  it('terminée en retard : jamais d’occurrence dans le passé', () => {
+    expect(nextOccurrence({ type: 'daily' }, '2026-10-05', '2026-10-11')).toBe('2026-10-12')
+    expect(nextOccurrence({ type: 'weekly' }, '2026-10-01', '2026-10-11')).toBe('2026-10-15')
+  })
+})
+
+describe('subtaskProgress', () => {
+  it('terminées / total', () => {
+    expect(subtaskProgress([{ done_at: 'x' }, { done_at: null }, { done_at: null }])).toEqual({
+      done: 1,
+      total: 3,
+    })
+    expect(subtaskProgress([])).toBeNull()
+  })
+})
+
+describe('groupUpcoming', () => {
+  const t = (title: string, due: string | null, extra: Partial<TaskLike> = {}) =>
+    task({ title, due_date: due, ...extra })
+  const sections = groupUpcoming(
+    [
+      t('demain 10h', '2026-10-12', { due_time: '10:00:00' }),
+      t('demain journée', '2026-10-12'),
+      t('mardi', '2026-10-13'),
+      t('loin', '2026-10-30'),
+      t('plus loin', '2026-11-20'),
+      t('aujourd’hui', today),
+      t('sans date', null),
+      t('faite', '2026-10-12', { completed_at: '2026-10-11T08:00:00Z' }),
+    ],
+    today
+  )
+  it('demain, jours suivants, puis plus tard ; rien d’autre', () => {
+    expect(sections.map((s) => s.key)).toEqual(['2026-10-12', '2026-10-13', 'later'])
+    expect(sections[0]!.label).toBe('Demain · lundi 12 oct.')
+    expect(sections[1]!.label).toBe('Mardi 13 oct.')
+    expect(sections[2]!.label).toBe('Plus tard')
+  })
+  it('heure d’abord dans un jour ; plus tard trié par date', () => {
+    expect(sections[0]!.tasks.map((x) => x.title)).toEqual(['demain journée', 'demain 10h'])
+    expect(sections[2]!.tasks.map((x) => x.title)).toEqual(['loin', 'plus loin'])
+  })
+})
+
+describe('upcomingSubtitle', () => {
+  it('heure, journée entière, date dans « plus tard »', () => {
+    expect(
+      upcomingSubtitle(
+        { due_date: '2026-10-12', due_time: '10:00:00', priority: 'normale' },
+        'Études',
+        false
+      )
+    ).toBe('Études · 10:00')
+    expect(
+      upcomingSubtitle(
+        { due_date: '2026-10-12', due_time: null, priority: 'basse' },
+        'Maison',
+        false
+      )
+    ).toBe('Maison · toute la journée · priorité basse')
+    expect(
+      upcomingSubtitle(
+        { due_date: '2026-10-30', due_time: null, priority: 'normale' },
+        'Admin',
+        true
+      )
+    ).toBe('Admin · 30 oct.')
+  })
+})
+
+describe('weekStrip', () => {
+  const strip = weekStrip(
+    [
+      task({ title: 'a', due_date: '2026-10-08', priority: 'basse' }),
+      task({ title: 'b', due_date: '2026-10-08', priority: 'critique' }),
+      task({ title: 'c', due_date: '2026-10-09', completed_at: '2026-10-09T10:00:00Z' }),
+    ],
+    today
+  )
+  it('7 jours lundi → dimanche, aujourd’hui repéré', () => {
+    expect(strip.map((d) => d.number)).toEqual([5, 6, 7, 8, 9, 10, 11])
+    expect(strip.map((d) => d.letter).join('')).toBe('LMMJVSD')
+    expect(strip.find((d) => d.today)!.number).toBe(11)
+  })
+  it('pastille = priorité la plus haute des tâches ouvertes', () => {
+    expect(strip[3]!.priority).toBe('critique')
+    expect(strip[4]!.priority).toBeNull()
+  })
+})
+
+describe('relativeDue', () => {
+  it('même jour avec heure', () => {
+    expect(relativeDue({ due_date: today, due_time: '18:00:00' }, today, 15 * 60)).toBe('dans 3 h')
+    expect(relativeDue({ due_date: today, due_time: '18:00:00' }, today, 17 * 60 + 35)).toBe(
+      'dans 25 min'
+    )
+    expect(relativeDue({ due_date: today, due_time: '09:00:00' }, today, 11 * 60)).toBe(
+      'il y a 2 h'
+    )
+    expect(relativeDue({ due_date: today, due_time: null }, today, 600)).toBeNull()
+  })
+  it('autres jours', () => {
+    expect(relativeDue({ due_date: '2026-10-14', due_time: null }, today, 0)).toBe('dans 3 jours')
+    expect(relativeDue({ due_date: '2026-10-12', due_time: null }, today, 0)).toBe('dans 1 jour')
+    expect(relativeDue({ due_date: '2026-10-09', due_time: null }, today, 0)).toBe(
+      'en retard de 2 jours'
+    )
+    expect(relativeDue({ due_date: null, due_time: null }, today, 0)).toBeNull()
   })
 })
