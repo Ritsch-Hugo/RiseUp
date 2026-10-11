@@ -1,5 +1,5 @@
 # ADR-013 : Open Food Facts et scan
-**Statut** : accepté (vérifié en oct. 2026)
+**Statut** : accepté (vérifié en oct. 2026) — la recherche texte passe par un proxy, voir ADR-016
 
 - Licence ODbL (citation + partage à l'identique si on publie une base dérivée) → mention « Données : Open Food Facts » sur la fiche aliment.
 - Identification obligatoire : le navigateur ne permet pas de définir le User-Agent → paramètres `app_name` / `app_version`.

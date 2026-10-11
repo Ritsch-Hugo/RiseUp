@@ -21,6 +21,7 @@ Toutes les valeurs sont des constantes dans `src/modules/<module>/config.ts`. Ch
 - **Jour suivi** : ≥ N créneaux sur 4 avec une entrée (N = 1, 2 ou 3, défaut 2 ; la collation compte).
 - **Streak** : jours suivis consécutifs ; aujourd'hui ne casse pas avant minuit. L'eau n'en fait pas partie.
 - **Moyennes** (7 j, 30 j, 3 mois) : sur les jours suivis uniquement, avec « sur X jours suivis ».
+- **Dans l'objectif** (stats calories) : jour suivi dont les calories sont à ± 5 % de l’objectif de ce jour (choix de Hugo). Aujourd'hui est exclu des moyennes et des comptes (saisie en cours).
 - **Affichage** : dépassement > 100 % sans rouge, sauf le sel.
 
 ## Tâches
@@ -37,3 +38,9 @@ Toutes les valeurs sont des constantes dans `src/modules/<module>/config.ts`. Ch
 - **Boss** : +10 XP par étape, +150 XP à la victoire. Non battu en fin de semaine : s'échappe, sans pénalité.
 - **Streak d'habitude** : jours prévus consécutifs faits ; jours non prévus et en pause ignorés ; aujourd'hui ne casse pas avant minuit.
 - **Récompense perso** : une par niveau, réclamable une fois le niveau atteint.
+- **Quêtes (Hugo, 11 oct.)** : 5 types (N tâches avec filtre de difficulté optionnel, N tâches d'une catégorie, N habitudes d'un moment, N habitudes, manuelle) ; bonus fixes +20 (jour) / +75 (semaine) ; progression calculée depuis les données de la période ; une quête atteinte est validée une seule fois, et dé-validée (ligne d'XP négative) si l'objectif n'est plus atteint ; « reconduire » recrée la quête à chaque nouvelle période.
+- **Série du badge « Série N j »** : jours actifs consécutifs (au moins une tâche terminée ou une habitude validée, heure de Paris) ; aujourd'hui ne casse pas la série avant minuit.
+- **Taux de réussite (écran Progrès)** : tâches arrivées à échéance sur les 30 derniers jours qui ont été terminées (définition de Claude, à valider).
+- **Anti-triche** : les règles « créée et terminée en moins de 5 min » et « même titre » ne s'appliquent pas aux tâches récurrentes.
+- **XP des habitudes** : une seule fois par habitude et par jour, à la validation ; décocher (ou repasser sous l'objectif d'un compteur) annule l'XP du jour.
+

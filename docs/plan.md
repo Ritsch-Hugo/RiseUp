@@ -12,23 +12,25 @@ Estimations en sessions d'environ 2 h avec Claude Code, indicatives. Hugo valide
 ## Phase 1 : Muscu (~12 sessions)
 - [x] Schéma + seed ~100 exercices traduits + images
 - [x] Bibliothèque (10 groupes), fiche exercice, création d'exercice + upload photo
-- [ ] Programmes et séances types
-- [ ] Séance en cours : feuille, saisie, minuteur, chrono, brouillon local, fin de séance
-- [ ] Règles métier + tests (1RM, records, volume, récup, muscles, streak)
-- [ ] Accueil Muscu, profil (graphes, silhouette SVG, calendrier, stats avancées)
+- [x] Programmes et séances types
+- [x] Séance en cours : feuille, saisie, minuteur, chrono, brouillon local, fin de séance
+- [x] Règles métier + tests (1RM, records, volume, récup, muscles, streak)
+- [x] Accueil Muscu, profil (graphes, silhouette SVG, calendrier, stats avancées), historique, prochaine séance
+- [ ] Reste : glisser-déposer pour réordonner, derniers calculs côté client à passer en SQL (fiche exercice, résumé de séance, profil)
 - **Jalon : 1 à 2 semaines d'usage réel en salle avant la phase 2.**
 
 ## Phase 2 : Nutrition (~8 sessions)
-- [ ] Schéma, journal, navigation par jour, anneaux
-- [ ] Recherche + Open Food Facts, scan, fiche et création d'aliment, favoris, récents
-- [ ] Repas enregistrés, « Copier hier », eau
-- [ ] Objectifs datés, stats, streak + tests
+- [x] Schéma, journal, navigation par jour, anneaux
+- [x] Recherche + Open Food Facts, scan, fiche et création d'aliment, favoris, récents
+- [x] Repas enregistrés, « Copier hier », eau
+- [x] Objectifs datés, stats, streak + tests
 
 ## Phase 3 : Tâches (~12 sessions)
-- [ ] Schéma, tâches, catégories, récurrence, Aujourd'hui / À venir
-- [ ] Habitudes, pauses, logs, routine du jour
-- [ ] Journal d'XP, niveaux, rangs, anti-triche, écran de récompense + tests
-- [ ] Quêtes perso (types, reconduction), boss, badges, récompenses perso
+- [x] Schéma, tâches, catégories, récurrence, Aujourd'hui / À venir
+- [x] Habitudes, pauses, logs, routine du jour
+- [x] Journal d'XP, niveaux, rangs, anti-triche, écran de récompense + tests
+- [x] Quêtes perso (types, reconduction)
+- [ ] Boss, badges, récompenses perso
 - [ ] Notifications push (pg_cron + Edge Function + Web Push)
 
 ## Phase 4 : finitions (~3 sessions)
@@ -45,3 +47,8 @@ Fin de séance, choix d'exercices, historique + détail de séance, calendrier, 
 - **Sécurité** : voir ADR-008.
 - **Tests** : composants, E2E Playwright.
 - **Récupération** : affiner avec le RPE.
+
+## État au 11 octobre 2026
+- Phases 1, 2 et 3 (étapes 1 à 5) codées, poussées, CI verte. **Rien n'est encore validé sur téléphone par Hugo.**
+- À faire ensuite : validation sur tel des 3 modules, jalon d'usage réel en salle (phase 1), puis phase 3 étape 6 (boss, badges, récompenses perso) et étape 7 (notifications push), puis phase 4.
+- Écrans proposés par Claude (absents des maquettes, à valider sur capture) : historique Muscu, création de quête, fin de séance/récompense déjà validée côté Muscu.

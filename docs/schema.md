@@ -26,7 +26,7 @@ Enum `meal_slot` : `petit_dej, dejeuner, diner, collation`.
 | Table | Colonnes |
 |---|---|
 | `nutri_foods` | name, brand, barcode, source (off \| perso), kcal, protein, carbs, sugars, fat, saturated_fat, fiber, salt (pour 100 g), serving_g, serving_label, is_favorite, archived_at |
-| `nutri_meals` | name |
+| `nutri_meals` | name, default_slot meal_slot null (repas habituel) |
 | `nutri_meal_items` | meal_id, food_id, quantity_g |
 | `nutri_entries` | day date, slot meal_slot, food_id, quantity_g, kcal, protein, carbs, sugars, fat, saturated_fat, fiber, salt (valeurs copiées pour la quantité), from_meal_id null |
 | `nutri_water` | day date, amount_ml |
@@ -34,20 +34,27 @@ Enum `meal_slot` : `petit_dej, dejeuner, diner, collation`.
 
 ## Tâches
 
-Enums : `priority` (haute, moyenne, basse, aucune), `difficulty` (facile, moyen, difficile), `habit_moment` (matin, aprem, soir, libre), `habit_type` (fait, compteur), `quest_period` (jour, semaine), `xp_source` (tache, habitude, quete, boss_etape, boss).
+Enums : `task_priority` (basse, normale, haute, critique), `difficulty` (facile, moyen, difficile), `habit_moment` (matin, aprem, soir, libre), `habit_type` (fait, compteur), `quest_period` (jour, semaine), `xp_source` (tache, habitude, quete, boss_etape, boss).
 
 | Table | Colonnes |
 |---|---|
 | `taches_categories` | name, color, position |
-| `taches_tasks` | title, category_id, priority, difficulty, due_date, due_time null, recurrence jsonb null, notes, is_boss, boss_week date null, completed_at, archived_at |
+| `taches_tasks` | title, category_id, priority, difficulty, due_date, due_time null, recurrence jsonb null (`{"type":"daily"}` ou `weekly`), recurred_from (occurrence précédente), notes, is_boss, boss_week date null, completed_at, archived_at |
 | `taches_subtasks` | task_id, title, position, hp int null (boss), done_at |
 | `taches_habits` | name, category_id null, weekdays int[], moment, type, target int null, unit, reminder_time null, difficulty, archived_at |
 | `taches_habit_pauses` | habit_id, start_day, end_day null |
 | `taches_habit_logs` | habit_id, day date, value int — unique (habit_id, day) |
-| `taches_xp_events` | source xp_source, source_id, xp int (peut être négatif), factor numeric |
-| `taches_quests` | period, period_start date, kind (type de critère), params jsonb, target int, bonus_xp, recurring bool, completed_at |
+| `taches_xp_events` | source xp_source, source_id, day date, xp int (peut être négatif), factor numeric — append-only (RLS : lecture et insertion seulement) |
+| `taches_quests` | title, period, period_start date, kind (type de critère), params jsonb (difficulty, category_id, moment), target int, bonus_xp, recurring bool, manual_progress (quêtes manuelles), completed_at |
 | `taches_badges` | badge_key, unlocked_at |
 | `taches_rewards` | level int, title, claimed_at |
 | `push_subscriptions` | endpoint, p256dh, auth, device_label |
 
 Types de quête (`kind`) : `n_taches`, `n_taches_categorie`, `habitudes_moment`, `habitudes_jour`, `manuelle`.
+
+## Vues SQL (dérivés, `security_invoker`)
+- Muscu : `muscu_workout_stats` (durée, volume, séries, groupes par séance comptée), `muscu_workout_records` (records battus par séance).
+- Nutrition : `nutri_day_totals` (totaux et créneaux suivis par jour), `nutri_water_day`.
+- Tâches : `taches_xp_total`, `taches_active_days` (série du badge), `taches_completed_by_day`.
+- Edge Function : `off-search` (proxy de recherche Open Food Facts, ADR-016).
+
