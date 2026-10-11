@@ -11,6 +11,7 @@ import { EntrySheet } from './EntrySheet'
 import { useEntries, useInsertEntries, type EntryDraft, type JournalEntry } from './journalQueries'
 import { Rings } from './Rings'
 import styles from './journal.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 /** Journal d'un jour (`?jour=AAAA-MM-JJ`, aujourd'hui par défaut). */
 export function JournalPage() {
@@ -83,7 +84,7 @@ export function JournalPage() {
         </button>
       </div>
 
-      {isPending && <p className={styles.state}>Chargement…</p>}
+      {isPending && <ListSkeleton />}
       {isError && <p className={styles.state}>Impossible de charger le journal.</p>}
 
       {entries && goals && (

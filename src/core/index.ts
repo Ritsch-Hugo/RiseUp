@@ -1,6 +1,7 @@
 export { AuthProvider } from './auth/AuthProvider'
 export { LoginPage } from './auth/LoginPage'
 export { RequireAuth } from './auth/RequireAuth'
+export { haptic } from './haptics'
 export { addDays, parisDay, parisMinutes } from './dates'
 export { supabase } from './supabase'
 export type { AppModule } from './module'

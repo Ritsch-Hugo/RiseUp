@@ -5,11 +5,12 @@ import { offToForm, type OffFood } from '../rules/off'
 import { EMPTY_FOOD_FORM, foodToForm, validateFoodForm, type FoodForm } from '../rules/food'
 import { useArchiveFood, useFoods, useSaveFood, type Food } from './foodQueries'
 import styles from './foods.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 export function FoodFormPage() {
   const { id } = useParams()
   const { data: foods, isPending } = useFoods()
-  if (id && isPending) return <p className={styles.state}>Chargement…</p>
+  if (id && isPending) return <ListSkeleton />
   const existing = id ? foods?.find((f) => f.id === id) : undefined
   if (id && !existing) return <Navigate to="/nutrition/aliments" replace />
   return <FoodEditor existing={existing} />

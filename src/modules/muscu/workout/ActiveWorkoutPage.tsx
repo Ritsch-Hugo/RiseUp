@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { haptic } from '../../../core'
 import { Button, Icon, IconButton, Sheet } from '../../../core/ui'
 import type { Tracking } from '../config'
 import { ExerciseImage } from '../library/ExerciseImage'
@@ -126,6 +127,7 @@ function Workout({ workout, exercises, previous }: WorkoutProps) {
     if (!we || !row) return
     const startsRest = !row.done && !row.warmup && canValidate(row, trackingOf(we.exercise_id))
     toggleDone(weId, rowId)
+    if (!row.done) haptic('tap')
     if (startsRest) timers.startRest(we.rest_seconds)
   }
 

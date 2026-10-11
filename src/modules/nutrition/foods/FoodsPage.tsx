@@ -9,6 +9,7 @@ import { foodSummary, searchFoods } from '../rules/food'
 import { useAddContext } from './addContext'
 import { useFoods, useRecentEntries } from './foodQueries'
 import styles from './foods.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 const FILTERS = [
   { key: 'recents', label: 'Récents' },
@@ -95,7 +96,7 @@ export function FoodsPage() {
         <MealsTab />
       ) : (
         <>
-          {isPending && <p className={styles.state}>Chargement…</p>}
+          {isPending && <ListSkeleton />}
           {isError && <p className={styles.state}>Impossible de charger les aliments.</p>}
           {data && foods.length === 0 && (
             <p className={styles.state}>

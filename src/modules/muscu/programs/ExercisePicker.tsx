@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 import { Sheet } from '../../../core/ui'
 import { MUSCLE_GROUPS } from '../config'
 import { ExerciseImage } from '../library/ExerciseImage'
@@ -23,7 +24,7 @@ export function ExercisePicker({ open, onClose, onPick }: ExercisePickerProps) {
     <Sheet open={open} onClose={onClose} title="Ajouter un exercice">
       <SearchField value={query} onChange={setQuery} />
       <div className={styles.pickerList}>
-        {isPending && <p className={styles.meta}>Chargement…</p>}
+        {isPending && <ListSkeleton rows={3} />}
         {results.map((e) => (
           <button
             key={e.id}

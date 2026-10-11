@@ -20,6 +20,7 @@ import {
   type Habit,
 } from './habitQueries'
 import styles from './habits.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 const TABS: { key: HabitStatus; label: string }[] = [
   { key: 'active', label: 'Actives' },
@@ -73,7 +74,7 @@ export function HabitsPage() {
         ))}
       </div>
 
-      {isPending && <p className={styles.empty}>Chargement…</p>}
+      {isPending && <ListSkeleton />}
       {isError && <p className={styles.empty}>Impossible de charger les habitudes.</p>}
       {habits && list.length === 0 && (
         <p className={styles.empty}>

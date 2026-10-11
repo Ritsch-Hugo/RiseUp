@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
-import { supabase, type Tables } from '../../../core'
+import { haptic, supabase, type Tables } from '../../../core'
 import { COMPLETED_FETCH_HOURS } from '../config'
 import { parisDay } from '../../../core'
 import { nextOccurrence, parseRecurrence } from '../rules/tasks'
@@ -208,6 +208,7 @@ export function useToggleTask() {
       return null
     },
     onMutate: async ({ task, done }) => {
+      haptic(done ? 'success' : 'tap')
       await queryClient.cancelQueries({ queryKey: TASKS_KEY })
       const previous = queryClient.getQueryData<Task[]>(TASKS_KEY)
       queryClient.setQueryData<Task[]>(TASKS_KEY, (tasks) =>
@@ -240,6 +241,7 @@ export function useToggleSubtask() {
       if (error) throw error
     },
     onMutate: async ({ id, done }) => {
+      haptic('tap')
       await queryClient.cancelQueries({ queryKey: TASKS_KEY })
       const previous = queryClient.getQueryData<Task[]>(TASKS_KEY)
       queryClient.setQueryData<Task[]>(TASKS_KEY, (tasks) =>

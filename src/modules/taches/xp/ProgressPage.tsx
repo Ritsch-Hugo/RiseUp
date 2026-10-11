@@ -4,6 +4,7 @@ import { RewardsSection } from '../rewards/RewardsSection'
 import { BADGES, PROGRESS_CHART_DAYS } from '../config'
 import { useActiveStreak, useBadges, useProgressStats, useXpTotal } from './xpQueries'
 import styles from './xp.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 const W = 318
 const H = 90
@@ -14,7 +15,7 @@ export function ProgressPage() {
   const { data: stats } = useProgressStats()
   const { data: streak } = useActiveStreak()
   const { data: unlocked } = useBadges()
-  if (total === undefined || !stats) return <p className={styles.state}>Chargement…</p>
+  if (total === undefined || !stats) return <ListSkeleton />
 
   const l = levelFromXp(total)
   const max = Math.max(1, ...stats.chart.map((d) => d.completed))

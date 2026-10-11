@@ -10,6 +10,7 @@ import { isDay } from '../rules/journal'
 import { defaultQuantity, mealSummary, mealTotals, parseQuantity } from '../rules/meals'
 import { useDeleteMeal, useMeals, useSaveMeal, type Meal } from './mealQueries'
 import styles from './meals.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 type Line = { key: string; food: Food; qty: string }
 
@@ -31,7 +32,7 @@ export function MealFormPage() {
   const entries = useEntries(fromDay)
 
   if (foodsPending || (id && mealsPending) || (!id && fromSlot && entries.isPending)) {
-    return <p className={styles.state}>Chargement…</p>
+    return <ListSkeleton />
   }
   const existing = id ? meals?.find((m) => m.id === id) : undefined
   if (id && !existing) return <Navigate to="/nutrition/aliments" replace />

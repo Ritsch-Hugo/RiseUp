@@ -7,6 +7,7 @@ import { groupUpcoming, weekStrip } from '../rules/tasks'
 import { TaskRow } from './TaskRow'
 import { useCategories, useTasks } from './taskQueries'
 import styles from './tasks.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 /** Écran À venir : semaine en cours, filtre par catégorie, tâches à échéance future par jour. */
 export function UpcomingPage() {
@@ -15,7 +16,7 @@ export function UpcomingPage() {
   const [categoryId, setCategoryId] = useState<string | null>(null)
   const today = parisDay()
 
-  if (isPending) return <p className={styles.state}>Chargement…</p>
+  if (isPending) return <ListSkeleton />
   if (isError) return <p className={styles.state}>Impossible de charger les tâches.</p>
 
   const regular = tasks.filter((t) => !t.is_boss)

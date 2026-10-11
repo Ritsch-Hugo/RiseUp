@@ -31,6 +31,7 @@ import {
   type Task,
 } from './taskQueries'
 import styles from './tasks.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 const REPEAT_CHOICES: { key: RepeatChoice; label: string }[] = [
   { key: 'none', label: 'Jamais' },
@@ -50,7 +51,7 @@ const DUE_CHOICES: { key: DueChoice; label: string }[] = [
 export function TaskFormPage() {
   const { id } = useParams()
   const { data: tasks, isPending } = useTasks()
-  if (id && isPending) return <p className={styles.state}>Chargement…</p>
+  if (id && isPending) return <ListSkeleton />
   const existing = id ? tasks?.find((t) => t.id === id) : undefined
   if (id && !existing) return <Navigate to="/taches" replace />
   return <TaskEditor existing={existing} />

@@ -7,6 +7,7 @@ import { nutritionFor } from '../rules/food'
 import { mealSummary, mealTotals, slotForMeal } from '../rules/meals'
 import { useMeals, type Meal } from './mealQueries'
 import styles from './meals.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 /** Onglet « Mes repas » de l'écran Aliments : créer, modifier, ajouter au journal en un tap. */
 export function MealsTab() {
@@ -41,7 +42,7 @@ export function MealsTab() {
       <p className={styles.sub}>
         Un repas est un ensemble d’aliments enregistré, que tu ajoutes au journal en un tap.
       </p>
-      {isPending && <p className={styles.state}>Chargement…</p>}
+      {isPending && <ListSkeleton />}
       {isError && <p className={styles.state}>Impossible de charger les repas.</p>}
       {meals?.length === 0 && (
         <p className={styles.state}>Aucun repas enregistré pour l’instant.</p>

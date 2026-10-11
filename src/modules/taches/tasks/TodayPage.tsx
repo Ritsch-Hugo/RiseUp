@@ -9,6 +9,7 @@ import { splitToday, taskXp } from '../rules/tasks'
 import { TaskRow } from './TaskRow'
 import { useCategories, useTasks } from './taskQueries'
 import styles from './tasks.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 /** Écran Aujourd'hui : tâches à faire (échues, du jour, sans échéance) et terminées du jour. */
 export function TodayPage() {
@@ -17,7 +18,7 @@ export function TodayPage() {
   const today = parisDay()
   const { data: xpToday } = useXpOnDay(today)
 
-  if (isPending) return <p className={styles.state}>Chargement…</p>
+  if (isPending) return <ListSkeleton />
   if (isError) return <p className={styles.state}>Impossible de charger les tâches.</p>
 
   const { todo, done } = splitToday(

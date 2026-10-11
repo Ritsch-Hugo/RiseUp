@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { haptic } from '../../../core'
 import { Button, Icon } from '../../../core/ui'
 import { summarizeAward, rankFor, type Award } from '../rules/xp'
 import styles from './xp.module.css'
@@ -9,6 +11,10 @@ const factorLabel = (f: number) => `×${String(f).replace('.', ',')}`
 export function RewardPage() {
   const navigate = useNavigate()
   const award = (useLocation().state as { award?: Award } | null)?.award
+  const celebrate = award ? summarizeAward(award).levelUp || award.kind === 'boss' : false
+  useEffect(() => {
+    if (award) haptic(celebrate ? 'level' : 'success')
+  }, [award, celebrate])
   if (!award) return <Navigate to="/taches" replace />
 
   const s = summarizeAward(award)

@@ -12,10 +12,11 @@ import {
 } from '../rules/goals'
 import { useCurrentGoals, useSaveGoals } from './goalsQueries'
 import styles from './goals.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 export function GoalsPage() {
   const { data, isPending, isError } = useCurrentGoals()
-  if (isPending) return <p className={styles.state}>Chargement…</p>
+  if (isPending) return <ListSkeleton />
   if (isError) return <p className={styles.state}>Impossible de charger les objectifs.</p>
   return <GoalsForm initial={data} />
 }

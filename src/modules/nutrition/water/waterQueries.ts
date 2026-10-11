@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { addDays, supabase, type Tables } from '../../../core'
+import { addDays, haptic, supabase, type Tables } from '../../../core'
 import { WATER_CHART_DAYS } from '../config'
 
 export type WaterRow = Tables<'nutri_water'>
@@ -48,6 +48,7 @@ export function useAddWater() {
       if (error) throw error
     },
     onMutate: async ({ day, ml, id }) => {
+      haptic('tap')
       await queryClient.cancelQueries({ queryKey: dayKey(day) })
       const previous = queryClient.getQueryData<WaterRow[]>(dayKey(day))
       const now = new Date().toISOString()

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { supabase, type Tables } from '../../../core'
+import { haptic, supabase, type Tables } from '../../../core'
 
 export type Reward = Tables<'taches_rewards'>
 
@@ -42,6 +42,7 @@ export function useClaimReward() {
       if (error) throw error
     },
     onMutate: async (id) => {
+      haptic('success')
       await queryClient.cancelQueries({ queryKey: REWARDS_KEY })
       const previous = queryClient.getQueryData<Reward[]>(REWARDS_KEY)
       queryClient.setQueryData<Reward[]>(REWARDS_KEY, (rs) =>

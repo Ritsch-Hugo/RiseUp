@@ -9,12 +9,13 @@ import { useAddEntry } from '../journal/journalQueries'
 import { useAddContext } from './addContext'
 import { useFoods, useToggleFavorite, type Food } from './foodQueries'
 import styles from './foods.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 export function FoodPage() {
   const { id } = useParams()
   const { data: foods, isPending, isError } = useFoods()
   const food = foods?.find((f) => f.id === id)
-  if (isPending) return <p className={styles.state}>Chargement…</p>
+  if (isPending) return <ListSkeleton />
   if (isError) return <p className={styles.state}>Impossible de charger l’aliment.</p>
   if (!food) return <Navigate to="/nutrition/aliments" replace />
   return <FoodSheet food={food} />

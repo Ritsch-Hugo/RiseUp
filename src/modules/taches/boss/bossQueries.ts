@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
-import { parisDay } from '../../../core'
+import { haptic, parisDay } from '../../../core'
 import { isCurrentBoss } from '../rules/boss'
 import { summarizeAward } from '../rules/xp'
 import { TASKS_KEY, useTasks, type Task } from '../tasks/taskQueries'
@@ -23,6 +23,7 @@ export function useToggleBossStep() {
     mutationFn: ({ task, stepId, done }: { task: Task; stepId: string; done: boolean }) =>
       toggleBossStep(task, stepId, done),
     onMutate: async ({ stepId, done }) => {
+      haptic(done ? 'success' : 'tap')
       await queryClient.cancelQueries({ queryKey: TASKS_KEY })
       const previous = queryClient.getQueryData<Task[]>(TASKS_KEY)
       queryClient.setQueryData<Task[]>(TASKS_KEY, (tasks) =>

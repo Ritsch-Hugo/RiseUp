@@ -16,6 +16,7 @@ import {
   type Quest,
 } from './questQueries'
 import styles from './quests.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 const LETTERS = 'DLMMJVS'
 
@@ -30,7 +31,7 @@ export function QuestsPage() {
   const [selected, setSelected] = useState<Quest | null>(null)
   const today = parisDay()
 
-  if (isPending || !ctx) return <p className={styles.state}>Chargement…</p>
+  if (isPending || !ctx) return <ListSkeleton />
   if (isError) return <p className={styles.state}>Impossible de charger les quêtes.</p>
 
   const progressOf = (q: Quest) => Math.min(q.target, questProgress(q, ctx))

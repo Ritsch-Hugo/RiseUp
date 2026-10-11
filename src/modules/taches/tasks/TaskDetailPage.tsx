@@ -13,13 +13,14 @@ import {
   type Task,
 } from './taskQueries'
 import styles from './tasks.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 const REPEAT_LABELS = { daily: 'Se répète chaque jour', weekly: 'Se répète chaque semaine' }
 
 export function TaskDetailPage() {
   const { id } = useParams()
   const { data: tasks, isPending } = useTasks()
-  if (isPending) return <p className={styles.state}>Chargement…</p>
+  if (isPending) return <ListSkeleton />
   const task = tasks?.find((t) => t.id === id)
   if (!task) return <Navigate to="/taches" replace />
   if (task.is_boss) return <Navigate to="/taches/quetes" replace />

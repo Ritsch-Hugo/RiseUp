@@ -10,6 +10,7 @@ import { averages, calorieShares, daysInTarget, monthDays, windowDays } from '..
 import { formatWater, weekdayLetter } from '../rules/water'
 import { useDayTotals, useStreak, useWaterDays } from './statsQueries'
 import styles from './stats.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 const CHART_W = 318
 const CHART_H = 110
@@ -29,7 +30,7 @@ export function StatsPage() {
   const [period, setPeriod] = useState<StatsPeriod>('7')
 
   if (streak.isPending || !goalRows.data || !totals.data) {
-    return <p className={styles.state}>Chargement…</p>
+    return <ListSkeleton />
   }
   return (
     <StatsView

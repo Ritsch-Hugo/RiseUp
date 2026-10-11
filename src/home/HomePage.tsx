@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../core'
-import { Card, Icon, IconButton } from '../core/ui'
+import { Card, Icon, IconButton, Skeleton } from '../core/ui'
 import { ExportCard } from '../core/export/ExportCard'
 import type { AppModule } from '../core/module'
 import { modules } from './modules'
@@ -46,7 +46,11 @@ function ModuleCard({ module: m, index }: { module: AppModule; index: number }) 
         </span>
         <span className={styles.text}>
           <h2 className={styles.name}>{m.label}</h2>
-          <span className={styles.summary}>{summary?.text ?? 'Chargement…'}</span>
+          {summary ? (
+            <span className={styles.summary}>{summary.text}</span>
+          ) : (
+            <Skeleton width="70%" height={12} />
+          )}
         </span>
         <Icon name="chevronRight" size={20} className={styles.chevron} />
       </Card>

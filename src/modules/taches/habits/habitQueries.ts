@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
-import { addDays, supabase, type Tables } from '../../../core'
+import { addDays, haptic, supabase, type Tables } from '../../../core'
 import { isDone, type LogMap } from '../rules/habits'
 import { summarizeAward } from '../rules/xp'
 import { awardHabit, revokeHabit } from '../xp/xpAwards'
@@ -166,7 +166,8 @@ export function useSetHabitValue() {
       if (wasDone && !nowDone) await revokeHabit(habit, day)
       return null
     },
-    onMutate: async ({ habit, day, value }) => {
+    onMutate: async ({ habit, day, value, previous: before }) => {
+      if (value > before) haptic(isDone(habit, value) && !isDone(habit, before) ? 'success' : 'tap')
       await queryClient.cancelQueries({ queryKey: LOGS_KEY })
       const previous = queryClient.getQueryData<HabitLog[]>(LOGS_KEY)
       queryClient.setQueryData<HabitLog[]>(LOGS_KEY, (logs = []) => {

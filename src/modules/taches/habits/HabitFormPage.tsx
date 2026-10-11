@@ -26,12 +26,13 @@ import {
   type Habit,
 } from './habitQueries'
 import styles from './habits.module.css'
+import { ListSkeleton } from '../../../core/ui/Skeleton'
 
 /** Création (`/taches/habitudes/nouvelle`) ou modification (`/taches/habitudes/:id`) d'une habitude. */
 export function HabitFormPage() {
   const { id } = useParams()
   const { data: habits, isPending } = useHabits()
-  if (id && isPending) return <p className={styles.empty}>Chargement…</p>
+  if (id && isPending) return <ListSkeleton />
   const existing = id ? habits?.find((h) => h.id === id) : undefined
   if (id && !existing) return <Navigate to="/taches/habitudes" replace />
   return <HabitEditor existing={existing} />
