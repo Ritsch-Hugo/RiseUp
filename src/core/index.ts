@@ -1,7 +1,7 @@
 export { AuthProvider } from './auth/AuthProvider'
 export { LoginPage } from './auth/LoginPage'
 export { RequireAuth } from './auth/RequireAuth'
-export { parisDay } from './dates'
+export { addDays, parisDay } from './dates'
 export { supabase } from './supabase'
 export type { AppModule } from './module'
 export type { Database, Enums, Tables, TablesUpdate } from './db.types'

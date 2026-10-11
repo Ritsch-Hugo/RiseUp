@@ -1,9 +1,12 @@
 import { useState } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
-import { Card, Icon, IconLink } from '../../../core/ui'
-import { DEFAULT_QUANTITY_G, PORTION_STEP, QUANTITY_STEP_G } from '../config'
+import { parisDay } from '../../../core'
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Button, Card, Icon, IconLink } from '../../../core/ui'
+import { MEAL_SLOTS, DEFAULT_QUANTITY_G, PORTION_STEP, QUANTITY_STEP_G } from '../config'
 import { useCurrentGoals } from '../goals/goalsQueries'
 import { formatAmount, nutritionFor } from '../rules/food'
+import { useAddEntry } from '../journal/journalQueries'
+import { useAddContext } from './addContext'
 import { useFoods, useToggleFavorite, type Food } from './foodQueries'
 import styles from './foods.module.css'
 
@@ -25,6 +28,10 @@ const MACROS = [
 
 function FoodSheet({ food }: { food: Food }) {
   const { data: goals } = useCurrentGoals()
+  const { day, slot, setSlot } = useAddContext()
+  const navigate = useNavigate()
+  const { search } = useLocation()
+  const addEntry = useAddEntry()
   const favorite = useToggleFavorite()
   const hasPortion = food.serving_g !== null
   const [unit, setUnit] = useState<'g' | 'portion'>('g')
@@ -73,7 +80,7 @@ function FoodSheet({ food }: { food: Food }) {
   return (
     <div className={styles.page}>
       <div className={styles.titleRow}>
-        <IconLink to="/nutrition/aliments" icon="chevronLeft" label="Retour" />
+        <IconLink to={`/nutrition/aliments${search}`} icon="chevronLeft" label="Retour" />
         <h2 className={styles.title}>{food.name}</h2>
         <button
           type="button"
@@ -84,9 +91,27 @@ function FoodSheet({ food }: { food: Food }) {
         >
           <Icon name="star" size={22} />
         </button>
-        <IconLink to={`/nutrition/aliments/${food.id}/modifier`} icon="edit" label="Modifier" />
+        <IconLink
+          to={`/nutrition/aliments/${food.id}/modifier${search}`}
+          icon="edit"
+          label="Modifier"
+        />
       </div>
       {food.brand && <p className={styles.help}>{food.brand}</p>}
+
+      <div className={styles.pills} role="group" aria-label="Repas">
+        {MEAL_SLOTS.map((s) => (
+          <button
+            key={s.key}
+            type="button"
+            className={s.key === slot ? styles.pillOn : styles.pill}
+            aria-pressed={s.key === slot}
+            onClick={() => setSlot(s.key)}
+          >
+            {s.short}
+          </button>
+        ))}
+      </div>
 
       <Card>
         <label htmlFor="quantity" className={styles.label}>
@@ -187,10 +212,18 @@ function FoodSheet({ food }: { food: Food }) {
         {food.source === 'off' && <p className={styles.help}>Données : Open Food Facts</p>}
       </Card>
 
-      <p className={styles.help}>
-        L’ajout au journal arrive à l’étape suivante.{' '}
-        <Link to="/nutrition/aliments/nouveau">Créer un autre aliment</Link>
-      </p>
+      <div className={styles.addBar}>
+        <Button
+          fullWidth
+          disabled={grams <= 0}
+          onClick={() => {
+            addEntry.mutate({ id: crypto.randomUUID(), day, slot, food, grams })
+            navigate(`/nutrition${day === parisDay() ? '' : `?jour=${day}`}`)
+          }}
+        >
+          Ajouter au {MEAL_SLOTS.find((s) => s.key === slot)!.short.toLowerCase()}
+        </Button>
+      </div>
     </div>
   )
 }

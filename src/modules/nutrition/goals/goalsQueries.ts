@@ -1,33 +1,39 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { parisDay, supabase } from '../../../core'
+import { parisDay, supabase, type Tables } from '../../../core'
 import { DEFAULT_GOALS } from '../config'
 import { goalForDay, type GoalValues } from '../rules/goals'
 
 const KEY = ['nutri', 'goals']
 
-/** Objectif en vigueur aujourd'hui ; les valeurs par défaut tant que rien n'est enregistré. */
-export function useCurrentGoals() {
+const toValues = (g: Tables<'nutri_goals'> | null): GoalValues =>
+  g
+    ? {
+        kcal: g.kcal,
+        protein_g: g.protein_g,
+        carbs_g: g.carbs_g,
+        fat_g: g.fat_g,
+        fiber_g: g.fiber_g,
+        salt_g: Number(g.salt_g),
+        water_ml: g.water_ml,
+        min_slots_tracked: g.min_slots_tracked,
+      }
+    : DEFAULT_GOALS
+
+/** Objectif en vigueur un jour donné ; les valeurs par défaut tant que rien n'est enregistré. */
+export function useGoalsForDay(day: string) {
   return useQuery({
     queryKey: KEY,
-    queryFn: async (): Promise<GoalValues> => {
+    queryFn: async () => {
       const { data, error } = await supabase.from('nutri_goals').select('*')
       if (error) throw error
-      const g = goalForDay(data, parisDay())
-      return g
-        ? {
-            kcal: g.kcal,
-            protein_g: g.protein_g,
-            carbs_g: g.carbs_g,
-            fat_g: g.fat_g,
-            fiber_g: g.fiber_g,
-            salt_g: Number(g.salt_g),
-            water_ml: g.water_ml,
-            min_slots_tracked: g.min_slots_tracked,
-          }
-        : DEFAULT_GOALS
+      return data
     },
+    select: (rows) => toValues(goalForDay(rows, day)),
   })
 }
+
+/** Objectif en vigueur aujourd'hui. */
+export const useCurrentGoals = () => useGoalsForDay(parisDay())
 
 /**
  * Enregistre les objectifs à partir d'aujourd'hui : les jours passés gardent ceux de leur époque.

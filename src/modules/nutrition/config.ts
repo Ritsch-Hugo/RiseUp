@@ -21,3 +21,15 @@ export const DEFAULT_GOALS = {
 export const DEFAULT_QUANTITY_G = 100
 export const QUANTITY_STEP_G = 10
 export const PORTION_STEP = 0.5
+
+/** Créneaux du journal, dans l'ordre d'affichage (libellé court pour les pastilles). */
+export const MEAL_SLOTS = [
+  { key: 'petit_dej', label: 'Petit-déjeuner', short: 'Petit-déj' },
+  { key: 'dejeuner', label: 'Déjeuner', short: 'Déjeuner' },
+  { key: 'diner', label: 'Dîner', short: 'Dîner' },
+  { key: 'collation', label: 'Collations', short: 'Collation' },
+] as const
+export type MealSlot = (typeof MEAL_SLOTS)[number]['key']
+
+/** Créneau proposé selon l'heure (Paris) : avant ces heures → petit-déj, déjeuner, collation ; ensuite dîner. */
+export const SLOT_SUGGESTION_HOURS = { petit_dej: 11, dejeuner: 15, collation: 18 }

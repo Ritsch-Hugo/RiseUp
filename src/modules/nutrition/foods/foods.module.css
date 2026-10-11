@@ -429,3 +429,10 @@
   display: flex;
   gap: var(--space-3);
 }
+
+.addBar {
+  position: sticky;
+  bottom: 96px;
+  padding: var(--space-3) 0;
+  background: linear-gradient(to top, var(--bg) 70%, transparent);
+}

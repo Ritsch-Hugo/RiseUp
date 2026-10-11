@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Card, Icon } from '../../../core/ui'
+import { MEAL_SLOTS } from '../config'
 import { foodSummary, searchFoods } from '../rules/food'
+import { useAddContext } from './addContext'
 import { useFoods } from './foodQueries'
 import styles from './foods.module.css'
 
@@ -13,6 +15,8 @@ const FILTERS = [
 /** Onglet Aliments : mes aliments et favoris, recherche locale. (Récents, repas et Open Food Facts viennent ensuite.) */
 export function FoodsPage() {
   const { data, isPending, isError } = useFoods()
+  const { slot, setSlot, fromJournal } = useAddContext()
+  const { search } = useLocation()
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState<(typeof FILTERS)[number]['key']>('mine')
 
@@ -23,6 +27,22 @@ export function FoodsPage() {
 
   return (
     <>
+      {fromJournal && (
+        <div className={styles.pills} role="group" aria-label="Repas">
+          {MEAL_SLOTS.map((s) => (
+            <button
+              key={s.key}
+              type="button"
+              className={s.key === slot ? styles.pillOn : styles.pill}
+              aria-pressed={s.key === slot}
+              onClick={() => setSlot(s.key)}
+            >
+              {s.short}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className={styles.search}>
         <Icon name="search" size={20} />
         <label htmlFor="food-search" className={styles.srOnly}>
@@ -65,7 +85,11 @@ export function FoodsPage() {
       {foods.length > 0 && (
         <div className={styles.list}>
           {foods.map((f) => (
-            <Link key={f.id} to={`/nutrition/aliments/${f.id}`} className={styles.item}>
+            <Link
+              key={f.id}
+              to={{ pathname: `/nutrition/aliments/${f.id}`, search }}
+              className={styles.item}
+            >
               <span className={styles.itemText}>
                 <span className={styles.itemName}>
                   {f.name}

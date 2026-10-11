@@ -1,0 +1,219 @@
+.dayNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.navButton:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.dayTitle {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.state {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.rings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ringsTop {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.bigRing {
+  position: relative;
+  flex: none;
+  width: 130px;
+  height: 130px;
+}
+
+.ringCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ringValue {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.ringLabel {
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--text-2);
+}
+
+.macros {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.macro {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.macroText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.macroName {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.extras {
+  display: flex;
+  padding-top: 14px;
+  border-top: 1px solid var(--card-2);
+}
+
+.extras > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.extraValue,
+.extraOver {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.extraOver {
+  color: var(--danger);
+}
+
+.slotHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slotTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  background: var(--accent-solid);
+  color: #fff;
+  text-decoration: none;
+}
+
+.empty {
+  margin: var(--space-3) 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--card-2);
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 0;
+  border: 0;
+  border-top: 1px solid var(--card-2);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.entryText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.entryName {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.entryKcal {
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheetBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sheetInput {
+  box-sizing: border-box;
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-input);
+  background: var(--card-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sheetActions {
+  display: flex;
+  gap: var(--space-3);
+}
