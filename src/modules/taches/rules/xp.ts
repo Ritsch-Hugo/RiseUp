@@ -132,14 +132,19 @@ export function taskFactor(
 export const applyFactor = (base: number, factor: number): number => Math.round(base * factor)
 
 /** Résultat d'un gain, pour l'écran de récompense. */
+/** Bonus de quête gagné en même temps (ou perdu). */
+export type Bonus = { title: string; xp: number }
+
 export type Award = {
-  kind: 'task' | 'habit'
+  kind: 'task' | 'habit' | 'quest'
   title: string
   /** Ligne de détail de l'écran de récompense : « Tâche difficile », « Habitude facile »… */
   label: string
   base: number
   xp: number
   reductions: Reduction[]
+  /** Quêtes validées par ce gain. */
+  bonuses: Bonus[]
   /** XP total avant / après le gain. */
   before: number
   after: number

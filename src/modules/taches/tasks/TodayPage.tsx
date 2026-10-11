@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { parisDay } from '../../../core'
 import { Icon } from '../../../core/ui'
+import { QuestsLink } from '../quests/QuestsLink'
 import { LevelCard } from '../xp/LevelCard'
 import { useXpOnDay } from '../xp/xpQueries'
 import { RoutineCard } from '../habits/RoutineCard'
@@ -30,6 +31,7 @@ export function TodayPage() {
   return (
     <div className={styles.page}>
       <LevelCard />
+      <QuestsLink />
       <RoutineCard today={today} />
 
       <div className={styles.sectionHead}>

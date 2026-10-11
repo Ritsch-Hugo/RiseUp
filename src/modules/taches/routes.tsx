@@ -1,7 +1,8 @@
 import type { RouteObject } from 'react-router-dom'
-import { ComingSoon } from '../../core/ui'
 import { HabitFormPage } from './habits/HabitFormPage'
 import { HabitsPage } from './habits/HabitsPage'
+import { QuestFormPage } from './quests/QuestFormPage'
+import { QuestsPage } from './quests/QuestsPage'
 import { TachesLayout } from './TachesLayout'
 import { ProgressPage } from './xp/ProgressPage'
 import { RewardPage } from './xp/RewardPage'
@@ -23,7 +24,8 @@ export const tachesRoute: RouteObject = {
     { path: ':id', element: <TaskDetailPage /> },
     { path: ':id/modifier', element: <TaskFormPage /> },
     { path: 'a-venir', element: <UpcomingPage /> },
-    { path: 'quetes', element: <ComingSoon name="Quêtes" /> },
+    { path: 'quetes', element: <QuestsPage /> },
+    { path: 'quetes/nouvelle', element: <QuestFormPage /> },
     { path: 'progres', element: <ProgressPage /> },
   ],
 }

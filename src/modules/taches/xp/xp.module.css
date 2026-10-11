@@ -393,3 +393,9 @@
   margin: 0 auto;
   padding: 12px 20px 34px;
 }
+
+.lineStack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

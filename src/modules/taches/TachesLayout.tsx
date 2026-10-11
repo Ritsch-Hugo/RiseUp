@@ -1,5 +1,9 @@
+import { useEffect } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
+import { parisDay } from '../../core'
 import { Icon, ModuleLayout, type Tab } from '../../core/ui'
+import { ensureRecurringQuests } from './quests/questAwards'
 import { useActiveStreak } from './xp/xpQueries'
 import styles from './tasks/tasks.module.css'
 
@@ -27,6 +31,15 @@ function StreakBadge() {
 
 export function TachesLayout() {
   const { pathname } = useLocation()
+  const queryClient = useQueryClient()
+  // Nouvelle période : les quêtes « reconduire » sont recréées une seule fois.
+  useEffect(() => {
+    ensureRecurringQuests(parisDay())
+      .then((changed) => {
+        if (changed) queryClient.invalidateQueries({ queryKey: ['taches', 'quests'] })
+      })
+      .catch(() => undefined)
+  }, [queryClient])
   return (
     <ModuleLayout
       title="Tâches"

@@ -16,7 +16,9 @@ export function RewardPage() {
     ? `Niveau ${s.after.level} atteint !`
     : award.kind === 'task'
       ? 'Tâche terminée'
-      : 'Habitude validée'
+      : award.kind === 'habit'
+        ? 'Habitude validée'
+        : 'Quête validée'
   const gained = award.after - award.before
 
   return (
@@ -37,14 +39,25 @@ export function RewardPage() {
         </span>
 
         <div className={styles.lines}>
-          <div className={styles.line}>
-            <span>{award.label}</span>
-            <span className={styles.lineXp}>+{award.base} XP</span>
-          </div>
+          {award.kind !== 'quest' && (
+            <div className={styles.line}>
+              <span>{award.label}</span>
+              <span className={styles.lineXp}>+{award.base} XP</span>
+            </div>
+          )}
           {award.reductions.map((r) => (
             <div key={r.reason} className={styles.line}>
               <span className={styles.lineMuted}>{r.label}</span>
               <span className={styles.lineMuted}>{factorLabel(r.factor)}</span>
+            </div>
+          ))}
+          {award.bonuses.map((b) => (
+            <div key={b.title} className={styles.line}>
+              <span className={styles.lineStack}>
+                <span>Quête validée</span>
+                <span className={styles.lineMuted}>{b.title}</span>
+              </span>
+              <span className={styles.lineXp}>+{b.xp} XP</span>
             </div>
           ))}
         </div>

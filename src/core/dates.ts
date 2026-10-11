@@ -14,3 +14,15 @@ export function addDays(day: string, n: number): string {
   d.setUTCDate(d.getUTCDate() + n)
   return d.toISOString().slice(0, 10)
 }
+
+/** Minutes écoulées depuis minuit, heure de Paris. */
+export function parisMinutes(date: Date = new Date()): number {
+  const parts = new Intl.DateTimeFormat('fr-FR', {
+    hour: 'numeric',
+    minute: 'numeric',
+    hourCycle: 'h23',
+    timeZone: 'Europe/Paris',
+  }).formatToParts(date)
+  const get = (type: string) => Number(parts.find((p) => p.type === type)?.value ?? 0)
+  return get('hour') * 60 + get('minute')
+}

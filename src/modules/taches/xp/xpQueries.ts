@@ -2,7 +2,7 @@ import { useQuery, type QueryClient } from '@tanstack/react-query'
 import { addDays, parisDay, supabase } from '../../../core'
 import { bestStreak, currentStreak } from '../../../core/streak'
 import { PROGRESS_CHART_DAYS, SUCCESS_RATE_DAYS } from '../config'
-import { fetchTotalXp } from './xpAwards'
+import { fetchTotalXp } from './xpLedger'
 
 const XP_KEY = ['taches', 'xp']
 const DAYS_KEY = ['taches', 'active-days']
@@ -13,6 +13,7 @@ export function invalidateProgress(queryClient: QueryClient) {
   queryClient.invalidateQueries({ queryKey: XP_KEY })
   queryClient.invalidateQueries({ queryKey: DAYS_KEY })
   queryClient.invalidateQueries({ queryKey: STATS_KEY })
+  queryClient.invalidateQueries({ queryKey: ['taches', 'quests'] })
 }
 
 export function useXpTotal() {

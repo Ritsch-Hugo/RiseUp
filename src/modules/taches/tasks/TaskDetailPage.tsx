@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
-import { parisDay } from '../../../core'
+import { parisDay, parisMinutes } from '../../../core'
 import { Button, Icon, IconLink, Sheet } from '../../../core/ui'
 import { PRIORITIES, TASK_DIFFICULTIES } from '../config'
 import { dueLabel, parseRecurrence, relativeDue, subtaskProgress, taskXp } from '../rules/tasks'
@@ -15,18 +15,6 @@ import {
 import styles from './tasks.module.css'
 
 const REPEAT_LABELS = { daily: 'Se répète chaque jour', weekly: 'Se répète chaque semaine' }
-
-/** Minutes écoulées depuis minuit, heure de Paris. */
-function parisMinutes(): number {
-  const parts = new Intl.DateTimeFormat('fr-FR', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hourCycle: 'h23',
-    timeZone: 'Europe/Paris',
-  }).formatToParts(new Date())
-  const get = (type: string) => Number(parts.find((p) => p.type === type)?.value ?? 0)
-  return get('hour') * 60 + get('minute')
-}
 
 export function TaskDetailPage() {
   const { id } = useParams()

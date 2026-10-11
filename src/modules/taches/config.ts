@@ -87,3 +87,42 @@ export const ANTI_CHEAT_FETCH_HOURS = 48
 /** Écran Progrès : jours du graphe et fenêtre du taux de réussite. */
 export const PROGRESS_CHART_DAYS = 14
 export const SUCCESS_RATE_DAYS = 30
+
+export type QuestKind = Enums<'quest_kind'>
+export type QuestPeriod = Enums<'quest_period'>
+
+/** Bonus fixe d'une quête validée, non réglable (docs/regles-metier.md, ADR-012). */
+export const QUEST_BONUS_XP: Record<QuestPeriod, number> = { jour: 20, semaine: 75 }
+
+export const QUEST_PERIODS: { key: QuestPeriod; label: string; reconduct: string }[] = [
+  { key: 'jour', label: 'Du jour', reconduct: 'chaque jour' },
+  { key: 'semaine', label: 'De la semaine', reconduct: 'chaque semaine' },
+]
+
+/** Types de quêtes (ADR-007 §6) : la progression se calcule seule, sauf « manuelle ». */
+export const QUEST_KINDS: { key: QuestKind; label: string; hint: string }[] = [
+  {
+    key: 'n_taches',
+    label: 'Tâches terminées',
+    hint: 'Termine N tâches, de n’importe quelle difficulté ou d’une seule.',
+  },
+  {
+    key: 'n_taches_categorie',
+    label: 'Tâches d’une catégorie',
+    hint: 'Termine N tâches d’une catégorie.',
+  },
+  {
+    key: 'habitudes_moment',
+    label: 'Habitudes d’un moment',
+    hint: 'Valide N habitudes du matin, de l’après-midi ou du soir.',
+  },
+  {
+    key: 'habitudes_jour',
+    label: 'Habitudes validées',
+    hint: 'Valide N habitudes, quel que soit leur moment.',
+  },
+  { key: 'manuelle', label: 'Manuelle', hint: 'Tu fais avancer la quête toi-même.' },
+]
+
+/** Objectif proposé par défaut à la création d'une quête. */
+export const DEFAULT_QUEST_TARGET = 3
