@@ -64,7 +64,12 @@ export function RoutineCard({ today }: { today: string }) {
                         onClick={() =>
                           counted
                             ? setCounter(h)
-                            : setValue.mutate({ habitId: h.id, day: today, value: done ? 0 : 1 })
+                            : setValue.mutate({
+                                habit: h,
+                                day: today,
+                                value: done ? 0 : 1,
+                                previous: value,
+                              })
                         }
                       >
                         {done && <Icon name="check" size={14} strokeWidth={3.5} />}

@@ -83,7 +83,7 @@ function CounterForm({
         fullWidth
         disabled={!valid}
         onClick={() => {
-          setValue.mutate({ habitId: habit.id, day, value: parsed })
+          setValue.mutate({ habit, day, value: parsed, previous: value })
           onClose()
         }}
       >

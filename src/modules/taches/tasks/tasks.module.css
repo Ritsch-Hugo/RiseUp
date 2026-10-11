@@ -630,3 +630,26 @@
   padding: var(--space-3) 0;
   background: linear-gradient(to top, var(--bg) 70%, transparent);
 }
+
+.streakBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--accent-2);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.streakBadge span {
+  color: var(--text);
+}
+
+.xpEarned {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--positive);
+}

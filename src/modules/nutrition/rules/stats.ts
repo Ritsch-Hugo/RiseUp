@@ -20,33 +20,7 @@ export function trackedSet(days: DayTotals[], minSlots: (day: string) => number)
   return new Set(days.filter((d) => d.slots_tracked >= minSlots(d.day)).map((d) => d.day))
 }
 
-/**
- * Série en cours : jours suivis consécutifs jusqu'à aujourd'hui.
- * Aujourd'hui ne casse pas la série tant qu'il n'est pas suivi (on part alors d'hier).
- */
-export function currentStreak(tracked: Set<string>, today: string): number {
-  let day = tracked.has(today) ? today : addDays(today, -1)
-  let n = 0
-  while (tracked.has(day)) {
-    n += 1
-    day = addDays(day, -1)
-  }
-  return n
-}
-
-/** Plus longue série de jours suivis consécutifs. */
-export function bestStreak(tracked: Set<string>): number {
-  const sorted = [...tracked].sort()
-  let best = 0
-  let run = 0
-  let previous: string | null = null
-  for (const day of sorted) {
-    run = previous !== null && addDays(previous, 1) === day ? run + 1 : 1
-    best = Math.max(best, run)
-    previous = day
-  }
-  return best
-}
+export { bestStreak, currentStreak } from '../../../core/streak'
 
 /** Les `n` jours qui finissent à `today` inclus, du plus ancien au plus récent. */
 export const windowDays = (today: string, n: number): string[] =>

@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 import { addDays, supabase, type Tables } from '../../../core'
-import type { LogMap } from '../rules/habits'
+import { isDone, type LogMap } from '../rules/habits'
+import { summarizeAward } from '../rules/xp'
+import { awardHabit, revokeHabit } from '../xp/xpAwards'
+import { invalidateProgress } from '../xp/xpQueries'
 
 export type HabitPause = Tables<'taches_habit_pauses'>
 export type Habit = Tables<'taches_habits'> & { pauses: HabitPause[] }
@@ -119,46 +123,66 @@ export function useResumeHabit() {
   })
 }
 
-/** Enregistre la valeur du jour (cochée = 1, compteur = quantité) ; 0 efface la ligne. Mise à jour immédiate. */
+/**
+ * Enregistre la valeur du jour (cochée = 1, compteur = quantité) ; 0 efface la ligne. Mise à jour immédiate.
+ * Valider l'habitude (objectif atteint) inscrit son XP ; la dé-valider l'annule. Un passage de niveau
+ * ouvre l'écran de récompense.
+ */
 export function useSetHabitValue() {
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
   return useMutation({
     mutationFn: async ({
-      habitId,
+      habit,
       day,
       value,
+      previous,
     }: {
-      habitId: string
+      habit: Habit
       day: string
       value: number
+      /** Valeur du jour avant ce changement. */
+      previous: number
     }) => {
       if (value <= 0) {
         const { error } = await supabase
           .from('taches_habit_logs')
           .delete()
-          .eq('habit_id', habitId)
+          .eq('habit_id', habit.id)
           .eq('day', day)
         if (error) throw error
-        return
+      } else {
+        const { error } = await supabase
+          .from('taches_habit_logs')
+          .upsert(
+            { id: crypto.randomUUID(), habit_id: habit.id, day, value },
+            { onConflict: 'habit_id,day' }
+          )
+        if (error) throw error
       }
-      const { error } = await supabase
-        .from('taches_habit_logs')
-        .upsert(
-          { id: crypto.randomUUID(), habit_id: habitId, day, value },
-          { onConflict: 'habit_id,day' }
-        )
-      if (error) throw error
+      const wasDone = isDone(habit, previous)
+      const nowDone = isDone(habit, value)
+      if (!wasDone && nowDone) return awardHabit(habit, day)
+      if (wasDone && !nowDone) await revokeHabit(habit, day)
+      return null
     },
-    onMutate: async ({ habitId, day, value }) => {
+    onMutate: async ({ habit, day, value }) => {
       await queryClient.cancelQueries({ queryKey: LOGS_KEY })
       const previous = queryClient.getQueryData<HabitLog[]>(LOGS_KEY)
       queryClient.setQueryData<HabitLog[]>(LOGS_KEY, (logs = []) => {
-        const rest = logs.filter((l) => !(l.habit_id === habitId && l.day === day))
-        return value > 0 ? [...rest, { habit_id: habitId, day, value }] : rest
+        const rest = logs.filter((l) => !(l.habit_id === habit.id && l.day === day))
+        return value > 0 ? [...rest, { habit_id: habit.id, day, value }] : rest
       })
       return { previous }
     },
+    onSuccess: (award) => {
+      if (award && summarizeAward(award).levelUp)
+        navigate('/taches/recompense', { state: { award } })
+    },
     onError: (_e, _v, context) => queryClient.setQueryData(LOGS_KEY, context?.previous),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: LOGS_KEY }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: LOGS_KEY })
+      invalidateProgress(queryClient)
+    },
   })
 }

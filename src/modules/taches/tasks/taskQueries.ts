@@ -1,8 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 import { supabase, type Tables } from '../../../core'
 import { COMPLETED_FETCH_HOURS } from '../config'
 import { parisDay } from '../../../core'
 import { nextOccurrence, parseRecurrence } from '../rules/tasks'
+import { awardTask, revokeTask } from '../xp/xpAwards'
+import { invalidateProgress } from '../xp/xpQueries'
 
 export type Subtask = Tables<'taches_subtasks'>
 export type Task = Tables<'taches_tasks'> & { subtasks: Subtask[] }
@@ -162,28 +165,33 @@ async function createNextOccurrence(task: Task) {
 }
 
 /**
- * Coche / décoche une tâche (mise à jour immédiate de la liste). Terminer une tâche récurrente crée
- * l'occurrence suivante ; la décocher retire cette occurrence si elle n'a pas été touchée.
+ * Coche / décoche une tâche (mise à jour immédiate de la liste). Terminer une tâche inscrit son XP
+ * (anti-triche appliqué) et ouvre l'écran de récompense ; la décocher annule l'XP. Terminer une tâche
+ * récurrente crée l'occurrence suivante ; la décocher retire cette occurrence si elle n'a pas été touchée.
  */
 export function useToggleTask() {
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
   return useMutation({
     mutationFn: async ({ task, done }: { task: Task; done: boolean }) => {
+      const completedAt = new Date().toISOString()
       const { error } = await supabase
         .from('taches_tasks')
-        .update({ completed_at: done ? new Date().toISOString() : null })
+        .update({ completed_at: done ? completedAt : null })
         .eq('id', task.id)
       if (error) throw error
       if (done) {
         await createNextOccurrence(task)
-      } else {
-        const { error: delError } = await supabase
-          .from('taches_tasks')
-          .delete()
-          .eq('recurred_from', task.id)
-          .is('completed_at', null)
-        if (delError) throw delError
+        return awardTask(task, completedAt)
       }
+      const { error: delError } = await supabase
+        .from('taches_tasks')
+        .delete()
+        .eq('recurred_from', task.id)
+        .is('completed_at', null)
+      if (delError) throw delError
+      await revokeTask(task)
+      return null
     },
     onMutate: async ({ task, done }) => {
       await queryClient.cancelQueries({ queryKey: TASKS_KEY })
@@ -195,8 +203,14 @@ export function useToggleTask() {
       )
       return { previous }
     },
+    onSuccess: (award) => {
+      if (award) navigate('/taches/recompense', { state: { award } })
+    },
     onError: (_e, _v, context) => queryClient.setQueryData(TASKS_KEY, context?.previous),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: TASKS_KEY }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: TASKS_KEY })
+      invalidateProgress(queryClient)
+    },
   })
 }
 

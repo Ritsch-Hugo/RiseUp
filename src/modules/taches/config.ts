@@ -54,3 +54,36 @@ export const DEFAULT_REMINDER_TIME = '21:00'
 
 /** Garde-fou du calcul de série : nombre maximal de jours remontés. */
 export const MAX_STREAK_LOOKBACK_DAYS = 3660
+
+/** Niveaux : XP pour passer du niveau n à n+1 = max(LEVEL_MIN_XP, LEVEL_STEP_XP × (n − 1)). */
+export const LEVEL_MIN_XP = 100
+export const LEVEL_STEP_XP = 100
+
+/** Rangs, par niveau minimum (docs/regles-metier.md). */
+export const RANKS: { minLevel: number; name: string }[] = [
+  { minLevel: 1, name: 'Débutant' },
+  { minLevel: 5, name: 'Régulier' },
+  { minLevel: 10, name: 'Discipliné' },
+  { minLevel: 15, name: 'Acharné' },
+  { minLevel: 20, name: 'Élite' },
+  { minLevel: 30, name: 'Légende' },
+]
+
+/** Anti-triche (facteurs cumulables, stockés dans taches_xp_events.factor). */
+export const ANTI_CHEAT = {
+  /** Tâches faciles du jour : jusqu'à la 5e plein tarif, de la 6e à la 10e demi-tarif, au-delà rien. */
+  easyFullLimit: 5,
+  easyHalfLimit: 10,
+  /** Tâche créée puis terminée en moins de ce nombre de minutes. */
+  minDurationMinutes: 5,
+  /** Même titre (normalisé) déjà validé dans cette fenêtre. */
+  duplicateWindowHours: 24,
+  halfFactor: 0.5,
+} as const
+
+/** Fenêtre (heures) des tâches terminées relues pour appliquer l'anti-triche. */
+export const ANTI_CHEAT_FETCH_HOURS = 48
+
+/** Écran Progrès : jours du graphe et fenêtre du taux de réussite. */
+export const PROGRESS_CHART_DAYS = 14
+export const SUCCESS_RATE_DAYS = 30

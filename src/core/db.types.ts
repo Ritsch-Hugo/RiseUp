@@ -1162,6 +1162,28 @@ export type Database = {
         }
         Relationships: []
       }
+      taches_active_days: {
+        Row: {
+          day: string | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
+      taches_completed_by_day: {
+        Row: {
+          completed: number | null
+          day: string | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
+      taches_xp_total: {
+        Row: {
+          total_xp: number | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

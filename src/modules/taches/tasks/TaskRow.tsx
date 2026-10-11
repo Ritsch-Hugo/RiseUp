@@ -12,6 +12,7 @@ export function TaskRow({
   today,
   upcoming,
   later,
+  earnedXp,
 }: {
   task: Task
   categoryName: string | null
@@ -19,6 +20,8 @@ export function TaskRow({
   /** Vue « À venir » : le jour est dans l'en-tête de section, pas dans la ligne. */
   upcoming?: boolean
   later?: boolean
+  /** XP réellement gagné (tâche terminée aujourd'hui). */
+  earnedXp?: number
 }) {
   const toggle = useToggleTask()
   const done = task.completed_at !== null
@@ -51,6 +54,7 @@ export function TaskRow({
         {!done && <span className={styles.sub}>{subtitle}</span>}
       </Link>
       {!done && <span className={styles.xpChip}>+{taskXp(task.difficulty)} XP</span>}
+      {done && earnedXp !== undefined && <span className={styles.xpEarned}>+{earnedXp} XP</span>}
     </div>
   )
 }
