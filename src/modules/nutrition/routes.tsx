@@ -1,5 +1,7 @@
 import type { RouteObject } from 'react-router-dom'
 import { ComingSoon, ModuleLayout, type Tab } from '../../core/ui'
+import { GoalsPage } from './goals/GoalsPage'
+import { StatsPage } from './stats/StatsPage'
 
 const tabs: Tab[] = [
   { to: '/nutrition', label: 'Journal', icon: 'book', end: true },
@@ -13,6 +15,7 @@ export const nutritionRoute: RouteObject = {
   children: [
     { index: true, element: <ComingSoon name="Journal" /> },
     { path: 'aliments', element: <ComingSoon name="Aliments" /> },
-    { path: 'stats', element: <ComingSoon name="Stats" /> },
+    { path: 'stats', element: <StatsPage /> },
+    { path: 'stats/objectifs', element: <GoalsPage /> },
   ],
 }

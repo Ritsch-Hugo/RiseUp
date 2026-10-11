@@ -1,0 +1,20 @@
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.goalsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.goalsTitle {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.sub {
+  font-size: 13px;
+  color: var(--text-2);
+}

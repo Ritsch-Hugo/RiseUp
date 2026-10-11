@@ -1,0 +1,195 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+}
+
+.state {
+  color: var(--text-2);
+}
+
+.cardTitle {
+  margin: 0 0 var(--space-3);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepButton {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card-2);
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stepValue {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--card-2);
+}
+
+.stepInput {
+  width: 90px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.unit {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.macroRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+}
+
+.macroName {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 76px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--card-2);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.chipInput {
+  width: 44px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: right;
+}
+
+.shareBar {
+  display: flex;
+  gap: 3px;
+}
+
+.shareBar > div {
+  height: 12px;
+  border-radius: 6px;
+}
+
+.warning {
+  margin: var(--space-3) 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #ffd479;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+  border-top: 1px solid var(--card-2);
+  font-size: 15px;
+}
+
+.rowValue {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rowInput {
+  width: 64px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  text-align: right;
+}
+
+.help {
+  margin: 0 0 var(--space-3);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius-button);
+  background: var(--card-2);
+}
+
+.seg,
+.segOn {
+  flex: 1;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.segOn {
+  background: var(--accent-solid);
+  color: #fff;
+  font-weight: 700;
+}
