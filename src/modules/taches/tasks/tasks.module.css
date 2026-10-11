@@ -1,0 +1,333 @@
+.page,
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.state,
+.empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.sub {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+.error {
+  margin: 0;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row,
+.rowDone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.rowDone {
+  opacity: 0.7;
+}
+
+.check,
+.checkOn {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 2px solid var(--accent-text);
+  border-radius: 14px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.checkOn {
+  border-color: var(--accent-solid);
+  background: var(--accent-solid);
+}
+
+.rowText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.title,
+.titleDone {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.titleDone {
+  color: var(--text-2);
+  text-decoration: line-through;
+}
+
+.xpChip {
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: var(--card-2);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.fab {
+  position: sticky;
+  bottom: 104px;
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background: var(--accent-solid);
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(47, 123, 255, 0.6);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.formTitle {
+  margin: 0;
+  font-size: 26px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field label,
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.titleInput,
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.input {
+  flex: 1;
+  height: 48px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.inlineRow {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.inlineRow button {
+  height: 48px;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill,
+.pillOn,
+.pillNew {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--text-2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pillOn {
+  background: var(--accent-solid);
+  color: #fff;
+  font-weight: 700;
+}
+
+.pillNew {
+  border: 1.5px dashed #6f7c99;
+  background: transparent;
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-button);
+  background: var(--card);
+}
+
+.seg,
+.segOn {
+  flex: 1;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.segOn {
+  background: var(--accent-solid);
+  color: #fff;
+  font-weight: 700;
+}
+
+.difficulties {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.diff,
+.diffOn {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  box-sizing: border-box;
+  padding: 14px 0;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.diffOn {
+  border-color: var(--accent-text);
+  background: rgba(47, 123, 255, 0.16);
+}
+
+.diffName {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.diffOn .diffName {
+  font-weight: 700;
+}
+
+.diffXp {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.diffOn .diffXp {
+  color: var(--accent-2);
+}
+
+.timeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background: var(--card);
+  font-size: 15px;
+  color: var(--text);
+}
+
+.timeInput {
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.xpCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: inset 0 0 0 1px rgba(56, 208, 255, 0.35);
+}
+
+.xpLine {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.xpBig {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.sheetActions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
