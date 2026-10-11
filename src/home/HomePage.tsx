@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { supabase } from '../core'
 import { Card, Icon, IconButton } from '../core/ui'
+import type { AppModule } from '../core/module'
 import { modules } from './modules'
 import styles from './HomePage.module.css'
 
@@ -25,16 +26,27 @@ export function HomePage() {
         <IconButton icon="logout" label="Se déconnecter" onClick={() => supabase.auth.signOut()} />
       </header>
       {modules.map((m) => (
-        <Link key={m.path} to={m.path}>
-          <Card className={styles.module}>
-            <span className={styles.tile}>
-              <Icon name={m.icon} size={26} />
-            </span>
-            <h2 className={styles.name}>{m.label}</h2>
-            <Icon name="chevronRight" size={20} className={styles.chevron} />
-          </Card>
-        </Link>
+        <ModuleCard key={m.path} module={m} />
       ))}
     </main>
+  )
+}
+
+/** Carte d'un module : son résumé du jour vient de son `useSummary` public. */
+function ModuleCard({ module: m }: { module: AppModule }) {
+  const summary = m.useSummary()
+  return (
+    <Link to={m.path}>
+      <Card className={styles.module}>
+        <span className={summary?.active ? styles.tileActive : styles.tile}>
+          <Icon name={m.icon} size={26} />
+        </span>
+        <span className={styles.text}>
+          <h2 className={styles.name}>{m.label}</h2>
+          <span className={styles.summary}>{summary?.text ?? 'Chargement…'}</span>
+        </span>
+        <Icon name="chevronRight" size={20} className={styles.chevron} />
+      </Card>
+    </Link>
   )
 }
