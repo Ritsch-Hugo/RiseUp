@@ -8,6 +8,7 @@ Toutes les valeurs sont des constantes dans `src/modules/<module>/config.ts`. Ch
 - **Volume** : Σ poids × reps hors échauffement. Par muscle : 100 % groupe principal, 50 % secondaires.
 - **Muscles sollicités** (0 → 1) : séries effectives sur la semaine (1 principal, 0,5 secondaire) / 15, plafonné à 1. Seuil réglable.
 - **Récupération** : temps nécessaire = 12 h + 4 h × séries effectives de la dernière séance sur ce muscle, plafonné à 48 h. Prêt quand écoulé ; sinon heures restantes. Indicatif.
+- **Prochaine séance** : la séance type qui suit, dans l'ordre du programme, la dernière séance type effectuée (retour à la première après la dernière). Sans historique, ou si la séance a été supprimée : première séance du premier programme. Les séances libres sont ignorées.
 - **Séance comptée** : terminée avec ≥ 1 série hors échauffement.
 - **Streak** : semaines consécutives avec séances ≥ objectif (3 par défaut). La semaine en cours ne casse pas le streak.
 

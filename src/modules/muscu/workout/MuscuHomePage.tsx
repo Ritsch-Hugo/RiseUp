@@ -1,6 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Card } from '../../../core/ui'
 import { HOME_RECENT_WORKOUTS } from '../config'
+import { usePrograms } from '../programs/programQueries'
+import { nextSession } from '../rules/nextSession'
 import { addDays, parisDay, weekStart, weekStats } from '../rules/week'
 import { formatDuration } from './format'
 import { usePastWorkouts, type PastWorkout } from './historyQueries'
@@ -17,6 +19,8 @@ export function MuscuHomePage() {
 
   return (
     <>
+      {past && <NextSessionCard past={past} />}
+
       <Card large>
         <h2>Entraînement</h2>
         <p className={styles.homeText}>
@@ -88,5 +92,29 @@ function WeekCard({ workouts }: { workouts: PastWorkout[] }) {
         <WeekStat value={`${Math.round(stats.volume).toLocaleString('fr-FR')} kg`} label="Volume" />
       </div>
     </Card>
+  )
+}
+
+function NextSessionCard({ past }: { past: PastWorkout[] }) {
+  const { data: programs } = usePrograms()
+  if (!programs) return null
+  // `past` est trié du plus récent au plus ancien.
+  const lastSessionId = past.find((w) => w.sessionId)?.sessionId ?? null
+  const next = nextSession(programs, lastSessionId)
+  if (!next) return null
+  const program = programs.find((p) => p.id === next.programId)!
+  const session = program.sessions.find((s) => s.id === next.sessionId)!
+  const count = session.exercises.length
+  return (
+    <Link
+      to={`/muscu/bibliotheque/programmes/${program.id}/seance/${session.id}`}
+      className={styles.nextCard}
+    >
+      <span className={styles.sub}>Prochaine séance · {program.name}</span>
+      <span className={styles.nextName}>{session.name}</span>
+      <span className={styles.sub}>
+        {count} exercice{count > 1 ? 's' : ''}
+      </span>
+    </Link>
   )
 }

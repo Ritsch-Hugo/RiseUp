@@ -7,6 +7,8 @@ import { workoutVolume } from '../rules/volume'
 export type PastWorkout = {
   id: string
   name: string
+  /** Séance type d'origine (null pour une séance libre ou une séance type supprimée). */
+  sessionId: string | null
   startedAt: string
   durationSeconds: number
   volume: number
@@ -27,7 +29,7 @@ export function usePastWorkouts() {
       const { data, error } = await supabase
         .from('muscu_workouts')
         .select(
-          'id, name, started_at, ended_at, muscu_workout_exercises(exercise_id, position, exercise:muscu_exercises(primary_group), sets:muscu_sets(weight_kg, reps, is_warmup))'
+          'id, name, session_id, started_at, ended_at, muscu_workout_exercises(exercise_id, position, exercise:muscu_exercises(primary_group), sets:muscu_sets(weight_kg, reps, is_warmup))'
         )
         .not('ended_at', 'is', null)
         .order('started_at', { ascending: true })
@@ -51,6 +53,7 @@ export function usePastWorkouts() {
         .map((w) => ({
           id: w.id,
           name: w.name,
+          sessionId: w.session_id,
           startedAt: w.started_at,
           durationSeconds:
             (new Date(w.ended_at!).getTime() - new Date(w.started_at).getTime()) / 1000,
