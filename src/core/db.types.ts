@@ -322,6 +322,13 @@ export type Database = {
             foreignKeyName: 'muscu_workout_exercises_workout_id_fkey'
             columns: ['workout_id']
             isOneToOne: false
+            referencedRelation: 'muscu_workout_records'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'muscu_workout_exercises_workout_id_fkey'
+            columns: ['workout_id']
+            isOneToOne: false
             referencedRelation: 'muscu_workout_stats'
             referencedColumns: ['id']
           },
@@ -380,6 +387,14 @@ export type Database = {
       }
     }
     Views: {
+      muscu_workout_records: {
+        Row: {
+          id: string | null
+          records: number | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
       muscu_workout_stats: {
         Row: {
           duration_seconds: number | null
