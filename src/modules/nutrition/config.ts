@@ -43,3 +43,7 @@ export const WATER_QUICK_ADDS = [
 ] as const
 export const WATER_JOURNAL_QUICK_ADDS = 2
 export const WATER_CHART_DAYS = 7
+
+/** Onglet « Récents » : nombre d'entrées du journal relues et d'aliments affichés. */
+export const RECENT_ENTRIES_FETCHED = 200
+export const RECENT_FOODS_SHOWN = 20

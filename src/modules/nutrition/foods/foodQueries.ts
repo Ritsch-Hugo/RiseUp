@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { supabase, type Tables } from '../../../core'
+import { RECENT_ENTRIES_FETCHED } from '../config'
 import type { FoodFormResult } from '../rules/food'
 
 export type Food = Tables<'nutri_foods'>
@@ -88,5 +89,22 @@ export function useArchiveFood() {
       if (error) throw error
     },
     onSettled: () => queryClient.invalidateQueries({ queryKey: KEY }),
+  })
+}
+
+/** Entrées récentes du journal (id d'aliment + date), pour l'onglet « Récents ». */
+export function useRecentEntries() {
+  return useQuery({
+    queryKey: ['nutri', 'entries', 'recent'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('nutri_entries')
+        .select('food_id, created_at')
+        .order('created_at', { ascending: false })
+        .limit(RECENT_ENTRIES_FETCHED)
+      if (error) throw error
+      return data
+    },
+    staleTime: 60_000,
   })
 }

@@ -4,6 +4,7 @@ import { FoodFormPage } from './foods/FoodFormPage'
 import { FoodPage } from './foods/FoodPage'
 import { FoodsPage } from './foods/FoodsPage'
 import { JournalPage } from './journal/JournalPage'
+import { MealFormPage } from './meals/MealFormPage'
 import { WaterPage } from './water/WaterPage'
 import { GoalsPage } from './goals/GoalsPage'
 import { StatsPage } from './stats/StatsPage'
@@ -19,6 +20,8 @@ export const nutritionRoute: RouteObject = {
   element: <ModuleLayout title="Nutrition" tabs={tabs} />,
   children: [
     { index: true, element: <JournalPage /> },
+    { path: 'repas/nouveau', element: <MealFormPage /> },
+    { path: 'repas/:id', element: <MealFormPage /> },
     { path: 'eau', element: <WaterPage /> },
     { path: 'aliments', element: <FoodsPage /> },
     { path: 'aliments/nouveau', element: <FoodFormPage /> },

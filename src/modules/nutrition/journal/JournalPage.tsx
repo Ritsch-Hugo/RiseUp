@@ -8,7 +8,7 @@ import { formatAmount, type Nutrition } from '../rules/food'
 import { dayLabel, isDay, sumNutrition } from '../rules/journal'
 import { WaterCard } from '../water/WaterCard'
 import { EntrySheet } from './EntrySheet'
-import { useEntries, type JournalEntry } from './journalQueries'
+import { useEntries, useInsertEntries, type EntryDraft, type JournalEntry } from './journalQueries'
 import { Rings } from './Rings'
 import styles from './journal.module.css'
 
@@ -20,6 +20,8 @@ export function JournalPage() {
   const day = isDay(raw) && raw <= today ? raw : today
   const { data: entries, isPending, isError } = useEntries(day)
   const { data: goals } = useGoalsForDay(day)
+  const yesterday = useEntries(addDays(day, -1))
+  const insert = useInsertEntries()
   const [selected, setSelected] = useState<JournalEntry | null>(null)
 
   const go = (n: number) =>
@@ -34,6 +36,28 @@ export function JournalPage() {
     )
 
   const total = sumNutrition(entries ?? [])
+  const copyFromYesterday = (slot: string) => {
+    const drafts: EntryDraft[] = (yesterday.data ?? [])
+      .filter((e) => e.slot === slot)
+      .map((e) => ({
+        id: crypto.randomUUID(),
+        day,
+        slot: e.slot,
+        food_id: e.food_id,
+        food: e.food,
+        quantity_g: e.quantity_g,
+        from_meal_id: e.from_meal_id,
+        kcal: e.kcal,
+        protein: e.protein,
+        carbs: e.carbs,
+        sugars: e.sugars,
+        fat: e.fat,
+        saturated_fat: e.saturated_fat,
+        fiber: e.fiber,
+        salt: e.salt,
+      }))
+    if (drafts.length > 0) insert.mutate(drafts)
+  }
   const addLink = (slot: string) => `/nutrition/aliments?creneau=${slot}&jour=${day}`
 
   return (
@@ -89,11 +113,30 @@ export function JournalPage() {
                   </Link>
                 </div>
                 {items.length === 0 && (
-                  <p className={styles.empty}>Rien d’enregistré pour l’instant</p>
+                  <div className={styles.emptyRow}>
+                    <span className={styles.emptyText}>Rien d’enregistré pour l’instant</span>
+                    <button
+                      type="button"
+                      className={styles.copyButton}
+                      disabled={!(yesterday.data ?? []).some((e) => e.slot === slot.key)}
+                      onClick={() => copyFromYesterday(slot.key)}
+                    >
+                      Copier hier
+                    </button>
+                  </div>
                 )}
                 {items.map((e) => (
                   <EntryRow key={e.id} entry={e} onSelect={() => setSelected(e)} />
                 ))}
+                {items.length > 0 && (
+                  <Link
+                    to={`/nutrition/repas/nouveau?jour=${day}&creneau=${slot.key}`}
+                    className={styles.saveMeal}
+                  >
+                    <Icon name="save" size={18} />
+                    Enregistrer comme repas
+                  </Link>
+                )}
               </Card>
             )
           })}

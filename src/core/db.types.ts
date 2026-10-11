@@ -625,6 +625,7 @@ export type Database = {
       nutri_meals: {
         Row: {
           created_at: string
+          default_slot: Database['public']['Enums']['meal_slot'] | null
           id: string
           name: string
           updated_at: string
@@ -632,6 +633,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          default_slot?: Database['public']['Enums']['meal_slot'] | null
           id: string
           name: string
           updated_at?: string
@@ -639,6 +641,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          default_slot?: Database['public']['Enums']['meal_slot'] | null
           id?: string
           name?: string
           updated_at?: string

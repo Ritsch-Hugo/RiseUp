@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient, type QueryClient } from '@tansta
 import { supabase, type Tables } from '../../../core'
 import type { MealSlot } from '../config'
 import type { Food } from '../foods/foodQueries'
-import { nutritionFor } from '../rules/food'
+import { nutritionFor, type Nutrition } from '../rules/food'
 import { rescaleEntry } from '../rules/journal'
 
 export type JournalEntry = Tables<'nutri_entries'> & {
@@ -123,5 +123,49 @@ export function useDeleteEntry() {
     (e) => e.day,
     (e) => supabase.from('nutri_entries').delete().eq('id', e.id),
     (e) => (entries) => entries.filter((x) => x.id !== e.id)
+  )
+}
+
+/** Entrée prête à insérer : valeurs déjà calculées (nouvel ajout) ou recopiées (copie d'un autre jour). */
+export type EntryDraft = {
+  id: string
+  day: string
+  slot: MealSlot
+  food_id: string
+  food: { name: string; brand: string | null } | null
+  quantity_g: number
+  from_meal_id: string | null
+} & Nutrition
+
+/** Insère plusieurs entrées d'un même jour d'un coup (repas enregistré, « Copier hier »). */
+export function useInsertEntries() {
+  return useEntryMutation<EntryDraft[]>(
+    (drafts) => drafts[0]!.day,
+    (drafts) =>
+      supabase.from('nutri_entries').insert(
+        drafts.map((d) => ({
+          id: d.id,
+          day: d.day,
+          slot: d.slot,
+          food_id: d.food_id,
+          quantity_g: d.quantity_g,
+          from_meal_id: d.from_meal_id,
+          kcal: d.kcal,
+          protein: d.protein,
+          carbs: d.carbs,
+          sugars: d.sugars,
+          fat: d.fat,
+          saturated_fat: d.saturated_fat,
+          fiber: d.fiber,
+          salt: d.salt,
+        }))
+      ),
+    (drafts) => (entries) => {
+      const now = new Date().toISOString()
+      return [
+        ...entries,
+        ...drafts.map((d) => ({ ...d, user_id: '', created_at: now, updated_at: now })),
+      ]
+    }
   )
 }

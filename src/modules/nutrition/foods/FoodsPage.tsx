@@ -1,15 +1,19 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Card, Icon } from '../../../core/ui'
-import { MEAL_SLOTS } from '../config'
+import { MEAL_SLOTS, RECENT_FOODS_SHOWN } from '../config'
+import { MealsTab } from '../meals/MealsTab'
+import { recentFoodIds } from '../rules/meals'
 import { foodSummary, searchFoods } from '../rules/food'
 import { useAddContext } from './addContext'
-import { useFoods } from './foodQueries'
+import { useFoods, useRecentEntries } from './foodQueries'
 import styles from './foods.module.css'
 
 const FILTERS = [
-  { key: 'mine', label: 'Mes aliments' },
+  { key: 'recents', label: 'Récents' },
   { key: 'favorites', label: 'Favoris' },
+  { key: 'mine', label: 'Mes aliments' },
+  { key: 'meals', label: 'Mes repas' },
 ] as const
 
 /** Onglet Aliments : mes aliments et favoris, recherche locale. (Récents, repas et Open Food Facts viennent ensuite.) */
@@ -18,12 +22,16 @@ export function FoodsPage() {
   const { slot, setSlot, fromJournal } = useAddContext()
   const { search } = useLocation()
   const [query, setQuery] = useState('')
-  const [filter, setFilter] = useState<(typeof FILTERS)[number]['key']>('mine')
+  const [filter, setFilter] = useState<(typeof FILTERS)[number]['key']>('recents')
 
-  const foods = searchFoods(
-    (data ?? []).filter((f) => filter === 'mine' || f.is_favorite),
-    query
-  )
+  const recent = useRecentEntries()
+  const recentIds = recentFoodIds(recent.data ?? [], RECENT_FOODS_SHOWN)
+  const base =
+    filter === 'recents'
+      ? recentIds.flatMap((id) => data?.find((f) => f.id === id) ?? [])
+      : (data ?? []).filter((f) => filter === 'mine' || f.is_favorite)
+  const foods = searchFoods(base, query)
+  const isMeals = filter === 'meals'
 
   return (
     <>
@@ -43,19 +51,21 @@ export function FoodsPage() {
         </div>
       )}
 
-      <div className={styles.search}>
-        <Icon name="search" size={20} />
-        <label htmlFor="food-search" className={styles.srOnly}>
-          Rechercher un aliment
-        </label>
-        <input
-          id="food-search"
-          type="search"
-          placeholder="Rechercher un aliment"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-      </div>
+      {!isMeals && (
+        <div className={styles.search}>
+          <Icon name="search" size={20} />
+          <label htmlFor="food-search" className={styles.srOnly}>
+            Rechercher un aliment
+          </label>
+          <input
+            id="food-search"
+            type="search"
+            placeholder="Rechercher un aliment"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
+      )}
 
       <div className={styles.segmented} role="group" aria-label="Liste">
         {FILTERS.map((f) => (
@@ -71,36 +81,44 @@ export function FoodsPage() {
         ))}
       </div>
 
-      {isPending && <p className={styles.state}>Chargement…</p>}
-      {isError && <p className={styles.state}>Impossible de charger les aliments.</p>}
-      {data && foods.length === 0 && (
-        <p className={styles.state}>
-          {query
-            ? 'Aucun aliment ne correspond.'
-            : filter === 'favorites'
-              ? 'Aucun favori pour l’instant.'
-              : 'Aucun aliment pour l’instant.'}
-        </p>
-      )}
-      {foods.length > 0 && (
-        <div className={styles.list}>
-          {foods.map((f) => (
-            <Link
-              key={f.id}
-              to={{ pathname: `/nutrition/aliments/${f.id}`, search }}
-              className={styles.item}
-            >
-              <span className={styles.itemText}>
-                <span className={styles.itemName}>
-                  {f.name}
-                  {f.brand ? ` · ${f.brand}` : ''}
-                </span>
-                <span className={styles.sub}>{foodSummary(f)}</span>
-              </span>
-              <Icon name="chevronRight" size={18} />
-            </Link>
-          ))}
-        </div>
+      {isMeals ? (
+        <MealsTab />
+      ) : (
+        <>
+          {isPending && <p className={styles.state}>Chargement…</p>}
+          {isError && <p className={styles.state}>Impossible de charger les aliments.</p>}
+          {data && foods.length === 0 && (
+            <p className={styles.state}>
+              {query
+                ? 'Aucun aliment ne correspond.'
+                : filter === 'favorites'
+                  ? 'Aucun favori pour l’instant.'
+                  : filter === 'recents'
+                    ? 'Ce que tu ajoutes au journal apparaît ici.'
+                    : 'Aucun aliment pour l’instant.'}
+            </p>
+          )}
+          {foods.length > 0 && (
+            <div className={styles.list}>
+              {foods.map((f) => (
+                <Link
+                  key={f.id}
+                  to={{ pathname: `/nutrition/aliments/${f.id}`, search }}
+                  className={styles.item}
+                >
+                  <span className={styles.itemText}>
+                    <span className={styles.itemName}>
+                      {f.name}
+                      {f.brand ? ` · ${f.brand}` : ''}
+                    </span>
+                    <span className={styles.sub}>{foodSummary(f)}</span>
+                  </span>
+                  <Icon name="chevronRight" size={18} />
+                </Link>
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       <Card>
