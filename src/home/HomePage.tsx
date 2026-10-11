@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { supabase } from '../core'
 import { Card, Icon, IconButton } from '../core/ui'
+import { ExportCard } from '../core/export/ExportCard'
 import type { AppModule } from '../core/module'
 import { modules } from './modules'
 import styles from './HomePage.module.css'
@@ -28,6 +29,7 @@ export function HomePage() {
       {modules.map((m) => (
         <ModuleCard key={m.path} module={m} />
       ))}
+      <ExportCard />
     </main>
   )
 }
