@@ -676,6 +676,424 @@ export type Database = {
         }
         Relationships: []
       }
+      taches_badges: {
+        Row: {
+          badge_key: string
+          created_at: string
+          id: string
+          unlocked_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          badge_key: string
+          created_at?: string
+          id: string
+          unlocked_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          badge_key?: string
+          created_at?: string
+          id?: string
+          unlocked_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      taches_categories: {
+        Row: {
+          color: string | null
+          created_at: string
+          id: string
+          name: string
+          position: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          id: string
+          name: string
+          position?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          position?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      taches_habit_logs: {
+        Row: {
+          created_at: string
+          day: string
+          habit_id: string
+          id: string
+          updated_at: string
+          user_id: string
+          value: number
+        }
+        Insert: {
+          created_at?: string
+          day: string
+          habit_id: string
+          id: string
+          updated_at?: string
+          user_id?: string
+          value?: number
+        }
+        Update: {
+          created_at?: string
+          day?: string
+          habit_id?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'taches_habit_logs_habit_id_fkey'
+            columns: ['habit_id']
+            isOneToOne: false
+            referencedRelation: 'taches_habits'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      taches_habit_pauses: {
+        Row: {
+          created_at: string
+          end_day: string | null
+          habit_id: string
+          id: string
+          start_day: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          end_day?: string | null
+          habit_id: string
+          id: string
+          start_day: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          end_day?: string | null
+          habit_id?: string
+          id?: string
+          start_day?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'taches_habit_pauses_habit_id_fkey'
+            columns: ['habit_id']
+            isOneToOne: false
+            referencedRelation: 'taches_habits'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      taches_habits: {
+        Row: {
+          archived_at: string | null
+          category_id: string | null
+          created_at: string
+          difficulty: Database['public']['Enums']['task_difficulty']
+          id: string
+          moment: Database['public']['Enums']['habit_moment']
+          name: string
+          reminder_time: string | null
+          target: number | null
+          type: Database['public']['Enums']['habit_type']
+          unit: string | null
+          updated_at: string
+          user_id: string
+          weekdays: number[]
+        }
+        Insert: {
+          archived_at?: string | null
+          category_id?: string | null
+          created_at?: string
+          difficulty?: Database['public']['Enums']['task_difficulty']
+          id: string
+          moment?: Database['public']['Enums']['habit_moment']
+          name: string
+          reminder_time?: string | null
+          target?: number | null
+          type?: Database['public']['Enums']['habit_type']
+          unit?: string | null
+          updated_at?: string
+          user_id?: string
+          weekdays?: number[]
+        }
+        Update: {
+          archived_at?: string | null
+          category_id?: string | null
+          created_at?: string
+          difficulty?: Database['public']['Enums']['task_difficulty']
+          id?: string
+          moment?: Database['public']['Enums']['habit_moment']
+          name?: string
+          reminder_time?: string | null
+          target?: number | null
+          type?: Database['public']['Enums']['habit_type']
+          unit?: string | null
+          updated_at?: string
+          user_id?: string
+          weekdays?: number[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'taches_habits_category_id_fkey'
+            columns: ['category_id']
+            isOneToOne: false
+            referencedRelation: 'taches_categories'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      taches_quests: {
+        Row: {
+          bonus_xp: number
+          completed_at: string | null
+          created_at: string
+          id: string
+          kind: Database['public']['Enums']['quest_kind']
+          manual_progress: number
+          params: Json
+          period: Database['public']['Enums']['quest_period']
+          period_start: string
+          recurring: boolean
+          target: number
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bonus_xp?: number
+          completed_at?: string | null
+          created_at?: string
+          id: string
+          kind: Database['public']['Enums']['quest_kind']
+          manual_progress?: number
+          params?: Json
+          period: Database['public']['Enums']['quest_period']
+          period_start: string
+          recurring?: boolean
+          target: number
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          bonus_xp?: number
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          kind?: Database['public']['Enums']['quest_kind']
+          manual_progress?: number
+          params?: Json
+          period?: Database['public']['Enums']['quest_period']
+          period_start?: string
+          recurring?: boolean
+          target?: number
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      taches_rewards: {
+        Row: {
+          claimed_at: string | null
+          created_at: string
+          id: string
+          level: number
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          claimed_at?: string | null
+          created_at?: string
+          id: string
+          level: number
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          claimed_at?: string | null
+          created_at?: string
+          id?: string
+          level?: number
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      taches_subtasks: {
+        Row: {
+          created_at: string
+          done_at: string | null
+          hp: number | null
+          id: string
+          position: number
+          task_id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          done_at?: string | null
+          hp?: number | null
+          id: string
+          position?: number
+          task_id: string
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          done_at?: string | null
+          hp?: number | null
+          id?: string
+          position?: number
+          task_id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'taches_subtasks_task_id_fkey'
+            columns: ['task_id']
+            isOneToOne: false
+            referencedRelation: 'taches_tasks'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      taches_tasks: {
+        Row: {
+          archived_at: string | null
+          boss_week: string | null
+          category_id: string | null
+          completed_at: string | null
+          created_at: string
+          difficulty: Database['public']['Enums']['task_difficulty']
+          due_date: string | null
+          due_time: string | null
+          id: string
+          is_boss: boolean
+          notes: string | null
+          priority: Database['public']['Enums']['task_priority']
+          recurrence: Json | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          archived_at?: string | null
+          boss_week?: string | null
+          category_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          difficulty?: Database['public']['Enums']['task_difficulty']
+          due_date?: string | null
+          due_time?: string | null
+          id: string
+          is_boss?: boolean
+          notes?: string | null
+          priority?: Database['public']['Enums']['task_priority']
+          recurrence?: Json | null
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          archived_at?: string | null
+          boss_week?: string | null
+          category_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          difficulty?: Database['public']['Enums']['task_difficulty']
+          due_date?: string | null
+          due_time?: string | null
+          id?: string
+          is_boss?: boolean
+          notes?: string | null
+          priority?: Database['public']['Enums']['task_priority']
+          recurrence?: Json | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'taches_tasks_category_id_fkey'
+            columns: ['category_id']
+            isOneToOne: false
+            referencedRelation: 'taches_categories'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      taches_xp_events: {
+        Row: {
+          created_at: string
+          day: string
+          factor: number
+          id: string
+          source: Database['public']['Enums']['xp_source']
+          source_id: string | null
+          updated_at: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          created_at?: string
+          day: string
+          factor?: number
+          id: string
+          source: Database['public']['Enums']['xp_source']
+          source_id?: string | null
+          updated_at?: string
+          user_id?: string
+          xp: number
+        }
+        Update: {
+          created_at?: string
+          day?: string
+          factor?: number
+          id?: string
+          source?: Database['public']['Enums']['xp_source']
+          source_id?: string | null
+          updated_at?: string
+          user_id?: string
+          xp?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       muscu_workout_records: {
@@ -742,6 +1160,8 @@ export type Database = {
       equipment_type: 'barre' | 'halteres' | 'machine' | 'poulie' | 'poids_du_corps' | 'autre'
       exercise_tracking: 'poids_reps' | 'reps' | 'duree'
       food_source: 'off' | 'perso'
+      habit_moment: 'matin' | 'aprem' | 'soir' | 'libre'
+      habit_type: 'fait' | 'compteur'
       meal_slot: 'petit_dej' | 'dejeuner' | 'diner' | 'collation'
       muscle_group:
         | 'pecs'
@@ -754,6 +1174,12 @@ export type Database = {
         | 'fessiers'
         | 'mollets'
         | 'abdos'
+      quest_kind:
+        'n_taches' | 'n_taches_categorie' | 'habitudes_moment' | 'habitudes_jour' | 'manuelle'
+      quest_period: 'jour' | 'semaine'
+      task_difficulty: 'facile' | 'moyen' | 'difficile'
+      task_priority: 'basse' | 'normale' | 'haute' | 'critique'
+      xp_source: 'tache' | 'habitude' | 'quete' | 'boss_etape' | 'boss'
     }
     CompositeTypes: {
       [_ in never]: never
@@ -878,6 +1304,8 @@ export const Constants = {
       equipment_type: ['barre', 'halteres', 'machine', 'poulie', 'poids_du_corps', 'autre'],
       exercise_tracking: ['poids_reps', 'reps', 'duree'],
       food_source: ['off', 'perso'],
+      habit_moment: ['matin', 'aprem', 'soir', 'libre'],
+      habit_type: ['fait', 'compteur'],
       meal_slot: ['petit_dej', 'dejeuner', 'diner', 'collation'],
       muscle_group: [
         'pecs',
@@ -891,6 +1319,17 @@ export const Constants = {
         'mollets',
         'abdos',
       ],
+      quest_kind: [
+        'n_taches',
+        'n_taches_categorie',
+        'habitudes_moment',
+        'habitudes_jour',
+        'manuelle',
+      ],
+      quest_period: ['jour', 'semaine'],
+      task_difficulty: ['facile', 'moyen', 'difficile'],
+      task_priority: ['basse', 'normale', 'haute', 'critique'],
+      xp_source: ['tache', 'habitude', 'quete', 'boss_etape', 'boss'],
     },
   },
 } as const
