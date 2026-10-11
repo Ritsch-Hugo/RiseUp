@@ -148,7 +148,7 @@
 .xpDone {
   padding: 4px 8px;
   border-radius: 8px;
-  background: var(--card-2);
+  background: rgb(56 208 255 / 0.1);
   font-size: 12px;
   font-weight: 700;
   color: var(--accent-2);
@@ -243,7 +243,8 @@
   gap: 4px;
   padding: 14px 16px;
   border-radius: 20px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .moment {
@@ -295,8 +296,10 @@
 }
 
 .checkOn {
-  border-color: var(--accent-solid);
-  background: var(--accent-solid);
+  border-color: var(--positive);
+  background: var(--positive);
+  color: #05070d;
+  box-shadow: 0 0 14px rgb(61 220 151 / 0.4);
 }
 
 .habitText {

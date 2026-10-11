@@ -44,16 +44,57 @@
 
 .row,
 .rowDone {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px;
+  padding: 14px 14px 14px 18px;
   border-radius: 16px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* Bande de couleur = priorité de la tâche. */
+.row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--priority, transparent);
 }
 
 .rowDone {
-  opacity: 0.7;
+  opacity: 0.65;
+  box-shadow: none;
+  background: var(--card);
+}
+
+.list > * {
+  animation: rise 0.4s var(--ease-out) both;
+}
+
+.list > :nth-child(2) {
+  animation-delay: 45ms;
+}
+
+.list > :nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.list > :nth-child(4) {
+  animation-delay: 135ms;
+}
+
+.list > :nth-child(5) {
+  animation-delay: 180ms;
+}
+
+.list > :nth-child(n + 6) {
+  animation-delay: 220ms;
 }
 
 .check,
@@ -74,8 +115,10 @@
 }
 
 .checkOn {
-  border-color: var(--accent-solid);
-  background: var(--accent-solid);
+  border-color: var(--positive);
+  background: var(--positive);
+  color: #05070d;
+  box-shadow: 0 0 14px rgb(61 220 151 / 0.4);
 }
 
 .rowText {
@@ -102,7 +145,8 @@
 .xpChip {
   padding: 5px 10px;
   border-radius: 10px;
-  background: var(--card-2);
+  background: rgb(56 208 255 / 0.1);
+  box-shadow: inset 0 0 0 1px rgb(56 208 255 / 0.18);
   font-size: 12px;
   font-weight: 700;
   color: var(--accent-2);
@@ -118,9 +162,11 @@
   width: 60px;
   height: 60px;
   border-radius: 30px;
-  background: var(--accent-solid);
+  background: linear-gradient(145deg, #3a82ff, var(--accent-solid));
   color: #fff;
-  box-shadow: 0 8px 28px rgba(47, 123, 255, 0.6);
+  box-shadow:
+    0 8px 28px rgba(47, 123, 255, 0.6),
+    inset 0 1px 0 rgb(255 255 255 / 0.25);
 }
 
 .titleRow {
@@ -638,7 +684,10 @@
   height: 36px;
   padding: 0 12px;
   border-radius: 18px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow:
+    inset 0 0 0 1px rgb(56 208 255 / 0.25),
+    0 4px 16px rgb(56 208 255 / 0.12);
   color: var(--accent-2);
   font-size: 13px;
   font-weight: 700;

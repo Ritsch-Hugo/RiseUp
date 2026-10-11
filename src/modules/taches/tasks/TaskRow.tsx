@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from '../../../core/ui'
 import { PRIORITIES } from '../config'
@@ -37,7 +38,10 @@ export function TaskRow({
     .join(' · ')
 
   return (
-    <div className={done ? styles.rowDone : styles.row}>
+    <div
+      className={done ? styles.rowDone : styles.row}
+      style={{ '--priority': task.priority === 'normale' ? 'transparent' : color } as CSSProperties}
+    >
       <button
         type="button"
         className={done ? styles.checkOn : styles.check}

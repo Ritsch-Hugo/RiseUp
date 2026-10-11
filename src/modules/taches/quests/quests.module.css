@@ -524,7 +524,8 @@
   gap: 12px;
   padding: 14px 16px;
   border-radius: 16px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--accent-text);
   text-decoration: none;
 }
