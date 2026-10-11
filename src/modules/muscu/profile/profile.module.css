@@ -332,3 +332,83 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
+
+.recordRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px 0;
+}
+
+.recordText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.recordName {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.recordValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.volumeTrack {
+  flex: none;
+  width: 160px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--card-2);
+}
+
+.volumePct {
+  flex: 1;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.split {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.splitBar {
+  display: flex;
+  gap: 3px;
+}
+
+.splitBar > div {
+  height: 14px;
+  border-radius: 6px;
+}
+
+.splitLegend {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+}

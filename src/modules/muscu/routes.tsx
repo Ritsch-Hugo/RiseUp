@@ -1,11 +1,11 @@
 import type { RouteObject } from 'react-router-dom'
-import { ComingSoon } from '../../core/ui'
 import { BibliothequePage } from './library/BibliothequePage'
 import { ExerciceFormPage } from './library/ExerciceFormPage'
 import { ExercicePage } from './library/ExercicePage'
 import { GroupePage } from './library/GroupePage'
 import { ExercisesPage } from './profile/ExercisesPage'
 import { OverviewPage } from './profile/OverviewPage'
+import { StatsPage } from './profile/StatsPage'
 import { ProfilePage } from './profile/ProfilePage'
 import { MuscuLayout } from './MuscuLayout'
 import { LancerSeancePage } from './programs/LancerSeancePage'
@@ -40,7 +40,7 @@ export const muscuRoute: RouteObject = {
       children: [
         { index: true, element: <OverviewPage /> },
         { path: 'exercices', element: <ExercisesPage /> },
-        { path: 'stats', element: <ComingSoon name="Stats avancées" /> },
+        { path: 'stats', element: <StatsPage /> },
       ],
     },
   ],

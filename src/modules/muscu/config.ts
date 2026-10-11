@@ -89,3 +89,13 @@ export const PROGRESS_PERIODS = [
 ] as const
 export type ProgressPeriod = (typeof PROGRESS_PERIODS)[number]['key']
 export const DEFAULT_PROGRESS_PERIOD: ProgressPeriod = '3m'
+
+/** Profil › Stats avancées : nombre de records affichés, semaines de régularité. */
+export const STATS_TOP_RECORDS = 5
+export const STATS_REGULARITY_WEEKS = 8
+
+/** Équilibre du volume : haut / bas du corps (abdos avec le bas), et push / pull au sein du haut. */
+export const UPPER_GROUPS: MuscleGroup[] = ['pecs', 'dos', 'epaules', 'biceps', 'triceps']
+export const LOWER_GROUPS: MuscleGroup[] = ['quadriceps', 'ischios', 'fessiers', 'mollets', 'abdos']
+export const PUSH_GROUPS: MuscleGroup[] = ['pecs', 'epaules', 'triceps']
+export const PULL_GROUPS: MuscleGroup[] = ['dos', 'biceps']
