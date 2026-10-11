@@ -41,6 +41,11 @@ export function ProgrammePage() {
         {program && (
           <>
             <h2>Séances du programme</h2>
+            {program.sessions.length === 0 && (
+              <p className={styles.empty}>
+                Ce programme n’a pas encore de séance. Ajoutes-en avec le crayon.
+              </p>
+            )}
             <div className={styles.list}>
               {program.sessions.map((s, i) => {
                 const shown = s.exercises.slice(0, THUMBS)

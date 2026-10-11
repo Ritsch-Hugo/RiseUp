@@ -34,9 +34,9 @@ Estimations en sessions d'environ 2 h avec Claude Code, indicatives. Hugo valide
 - [x] Notifications push (pg_cron + Edge Function + Web Push)
 
 ## Phase 4 : finitions (~3 sessions)
-- [ ] Accueil global (résumés des 3 modules)
-- [ ] Export / import JSON
-- [ ] États vides, écrans de détail restants
+- [x] Accueil global (résumés des 3 modules)
+- [x] Export / import JSON
+- [x] États vides, écrans de détail restants
 
 **Total : ~40 sessions.**
 

@@ -60,6 +60,7 @@ export function HistoryPage() {
               return selected ? day === selected : day.slice(0, 7) === month.slice(0, 7)
             })}
             selected={selected}
+            neverTrained={past.length === 0}
           />
         </>
       )}
@@ -70,9 +71,11 @@ export function HistoryPage() {
 function MonthList({
   workouts,
   selected,
+  neverTrained,
 }: {
   workouts: NonNullable<ReturnType<typeof usePastWorkouts>['data']>
   selected: string | null
+  neverTrained: boolean
 }) {
   return (
     <>
@@ -80,6 +83,15 @@ function MonthList({
         {workouts.length} séance{workouts.length > 1 ? 's' : ''}
         {selected ? ' ce jour-là' : ' ce mois-ci'}
       </h2>
+      {workouts.length === 0 && (
+        <p className={profile.sub}>
+          {neverTrained
+            ? 'Ton historique est vide. Lance ta première séance depuis l’accueil Muscu.'
+            : selected
+              ? 'Pas de séance ce jour-là.'
+              : 'Pas de séance ce mois-ci.'}
+        </p>
+      )}
       <div className={profile.historyList}>
         {workouts.map((w) => (
           <PastWorkoutCard key={w.id} workout={w} />

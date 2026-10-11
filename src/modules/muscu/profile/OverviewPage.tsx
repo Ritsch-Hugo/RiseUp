@@ -85,6 +85,14 @@ function Overview({ past, page, setPage, scroller }: OverviewProps) {
 
   return (
     <>
+      {past.length === 0 && (
+        <Card>
+          <p className={styles.sub}>
+            Pas encore de séance : tes graphiques, ta régularité et ton calendrier se rempliront dès
+            ta première séance.
+          </p>
+        </Card>
+      )}
       <div
         ref={scroller}
         className={styles.carousel}
