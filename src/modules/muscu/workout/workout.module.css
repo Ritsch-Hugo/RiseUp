@@ -638,3 +638,10 @@
 .bubbleMore {
   color: var(--text-2);
 }
+
+.seeAll {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-text);
+  text-decoration: none;
+}

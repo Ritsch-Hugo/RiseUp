@@ -49,9 +49,16 @@ export function weeklyStreak(counts: number[], goal: number): number {
 
 export type CalendarCell = { day: string; label: string; trained: boolean; today: boolean } | null
 
-/** Grille du mois de `today` (semaine commençant le lundi), cases vides = null. */
-export function monthGrid(today: string, trainedDays: Set<string>): CalendarCell[] {
-  const [y, m] = today.split('-').map(Number) as [number, number]
+/** Premier jour du mois décalé de `n` mois (négatif = passé). */
+export function shiftMonth(day: string, n: number): string {
+  const [y, m] = day.split('-').map(Number) as [number, number]
+  const d = new Date(Date.UTC(y, m - 1 + n, 1))
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}-01`
+}
+
+/** Grille du mois de `month` (semaine commençant le lundi), cases vides = null ; `today` marque aujourd'hui. */
+export function monthGrid(month: string, trainedDays: Set<string>, today = month): CalendarCell[] {
+  const [y, m] = month.split('-').map(Number) as [number, number]
   const first = `${y}-${String(m).padStart(2, '0')}-01`
   const lead = (new Date(`${first}T00:00:00Z`).getUTCDay() + 6) % 7
   const daysInMonth = new Date(Date.UTC(y, m, 0)).getUTCDate()

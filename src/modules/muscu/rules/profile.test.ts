@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { monthGrid, trendPercent, weeklySeries, weeklyStreak } from './profile'
+import { monthGrid, shiftMonth, trendPercent, weeklySeries, weeklyStreak } from './profile'
 
 describe('weeklySeries', () => {
   it('13 semaines, la semaine courante en dernier', () => {
@@ -44,5 +44,20 @@ describe('monthGrid', () => {
     expect(g[3]).toMatchObject({ label: '1', trained: true })
     expect(g.length % 7).toBe(0)
     expect(g.find((c) => c?.today)?.label).toBe('10')
+  })
+})
+
+describe('shiftMonth', () => {
+  it('mois précédent et suivant, y compris à cheval sur l’année', () => {
+    expect(shiftMonth('2026-10-10', -1)).toBe('2026-09-01')
+    expect(shiftMonth('2026-01-15', -1)).toBe('2025-12-01')
+    expect(shiftMonth('2026-12-01', 1)).toBe('2027-01-01')
+  })
+})
+
+describe('monthGrid d’un autre mois', () => {
+  it('aujourd’hui n’est marqué que dans son mois', () => {
+    expect(monthGrid('2026-09-01', new Set(), '2026-10-10').some((c) => c?.today)).toBe(false)
+    expect(monthGrid('2026-10-01', new Set(), '2026-10-10').find((c) => c?.today)?.label).toBe('10')
   })
 })
