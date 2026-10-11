@@ -62,6 +62,15 @@ export function RewardPage() {
               <span className={styles.lineXp}>+{b.xp} XP</span>
             </div>
           ))}
+          {(award.badges ?? []).map((b) => (
+            <div key={b} className={styles.line}>
+              <span className={styles.lineStack}>
+                <span>Badge débloqué</span>
+                <span className={styles.lineMuted}>{b}</span>
+              </span>
+              <Icon name="trophy" size={20} />
+            </div>
+          ))}
         </div>
 
         <div className={styles.level}>

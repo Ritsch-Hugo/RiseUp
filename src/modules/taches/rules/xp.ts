@@ -150,6 +150,8 @@ export type Award = {
   after: number
   /** Série de jours actifs après le gain. */
   streak: number
+  /** Libellés des badges débloqués par ce gain. */
+  badges?: string[]
 }
 
 export type AwardSummary = {

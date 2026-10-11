@@ -2,17 +2,20 @@ import { useQuery, type QueryClient } from '@tanstack/react-query'
 import { addDays, parisDay, supabase } from '../../../core'
 import { bestStreak, currentStreak } from '../../../core/streak'
 import { PROGRESS_CHART_DAYS, SUCCESS_RATE_DAYS } from '../config'
+import { syncBadges } from './badgeSync'
 import { fetchTotalXp } from './xpLedger'
 
 const XP_KEY = ['taches', 'xp']
 const DAYS_KEY = ['taches', 'active-days']
 const STATS_KEY = ['taches', 'stats']
+const BADGES_KEY = ['taches', 'badges']
 
 /** À appeler après tout gain / annulation d'XP ou changement de tâche terminée. */
 export function invalidateProgress(queryClient: QueryClient) {
   queryClient.invalidateQueries({ queryKey: XP_KEY })
   queryClient.invalidateQueries({ queryKey: DAYS_KEY })
   queryClient.invalidateQueries({ queryKey: STATS_KEY })
+  queryClient.invalidateQueries({ queryKey: BADGES_KEY })
   queryClient.invalidateQueries({ queryKey: ['taches', 'quests'] })
 }
 
@@ -87,6 +90,19 @@ export function useProgressStats() {
           return { day, completed: counts.get(day) ?? 0 }
         }),
       }
+    },
+  })
+}
+
+/** Clés des badges débloqués ; rattrape d'abord ceux dont le seuil est déjà atteint. */
+export function useBadges() {
+  return useQuery({
+    queryKey: BADGES_KEY,
+    queryFn: async () => {
+      await syncBadges()
+      const { data, error } = await supabase.from('taches_badges').select('badge_key')
+      if (error) throw error
+      return new Set(data.map((b) => b.badge_key))
     },
   })
 }

@@ -6,6 +6,8 @@ import { habitXp } from '../rules/habits'
 import { taskXp } from '../rules/tasks'
 import { applyFactor, taskFactor, type Award, type RecentTask } from '../rules/xp'
 import type { Task } from '../tasks/taskQueries'
+import { badgeLabel } from '../rules/badges'
+import { syncBadges } from './badgeSync'
 import { fetchActiveStreak, fetchTotalXp, insertXp, netXp } from './xpLedger'
 
 /** Tâches terminées récemment (pour appliquer l'anti-triche), `exceptId` exclue. */
@@ -66,6 +68,7 @@ export async function awardTask(task: Task, completedAt: string): Promise<Award 
     before,
     after: before + xp + gained.reduce((t, b) => t + b.xp, 0),
     streak: await fetchActiveStreak(day),
+    badges: (await syncBadges()).map(badgeLabel),
   }
 }
 
@@ -96,6 +99,7 @@ export async function awardHabit(habit: Habit, day: string): Promise<Award | nul
     before,
     after: before + xp + gained.reduce((t, b) => t + b.xp, 0),
     streak: await fetchActiveStreak(day),
+    badges: (await syncBadges()).map(badgeLabel),
   }
 }
 

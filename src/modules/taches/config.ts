@@ -132,3 +132,43 @@ export const BOSS_STEP_XP = 10
 export const BOSS_VICTORY_XP = 150
 /** PV proposés par défaut à une nouvelle étape de boss. */
 export const BOSS_DEFAULT_STEP_HP = 20
+
+export type BadgeMetric = 'tasks' | 'streak' | 'quests' | 'level' | 'boss' | 'habits'
+
+/**
+ * Catalogue des badges (12). Un badge se débloque quand la mesure atteint le seuil, puis reste acquis.
+ * Mesures : tâches terminées, meilleure série de jours actifs, quêtes validées, niveau, boss vaincus,
+ * habitudes validées (au moins une fois).
+ */
+export const BADGES: {
+  key: string
+  label: string
+  icon: 'check' | 'bolt' | 'target' | 'star' | 'trophy'
+  metric: BadgeMetric
+  threshold: number
+}[] = [
+  { key: 'premiere_tache', label: 'Première tâche', icon: 'check', metric: 'tasks', threshold: 1 },
+  {
+    key: 'premiere_habitude',
+    label: 'Première habitude',
+    icon: 'check',
+    metric: 'habits',
+    threshold: 1,
+  },
+  { key: 'serie_5', label: 'Série de 5 jours', icon: 'bolt', metric: 'streak', threshold: 5 },
+  { key: 'serie_10', label: 'Série de 10 jours', icon: 'bolt', metric: 'streak', threshold: 10 },
+  { key: 'serie_30', label: 'Série de 30 jours', icon: 'bolt', metric: 'streak', threshold: 30 },
+  {
+    key: 'quetes_10',
+    label: '10 quêtes validées',
+    icon: 'target',
+    metric: 'quests',
+    threshold: 10,
+  },
+  { key: 'taches_50', label: '50 tâches', icon: 'star', metric: 'tasks', threshold: 50 },
+  { key: 'taches_100', label: '100 tâches', icon: 'star', metric: 'tasks', threshold: 100 },
+  { key: 'boss_1', label: 'Boss vaincu', icon: 'trophy', metric: 'boss', threshold: 1 },
+  { key: 'niveau_5', label: 'Niveau 5', icon: 'trophy', metric: 'level', threshold: 5 },
+  { key: 'niveau_10', label: 'Niveau 10', icon: 'trophy', metric: 'level', threshold: 10 },
+  { key: 'niveau_20', label: 'Niveau 20', icon: 'trophy', metric: 'level', threshold: 20 },
+]

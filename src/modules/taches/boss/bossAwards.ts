@@ -1,6 +1,8 @@
 import { parisDay, supabase } from '../../../core'
 import { BOSS_STEP_XP, BOSS_VICTORY_XP } from '../config'
 import { bossHealth } from '../rules/boss'
+import { badgeLabel } from '../rules/badges'
+import { syncBadges } from '../xp/badgeSync'
 import type { Award } from '../rules/xp'
 import type { Task } from '../tasks/taskQueries'
 import { fetchActiveStreak, fetchTotalXp, insertXp, netXp } from '../xp/xpLedger'
@@ -72,5 +74,6 @@ export async function toggleBossStep(
     before,
     after: before + base,
     streak: await fetchActiveStreak(day),
+    badges: (await syncBadges()).map(badgeLabel),
   }
 }

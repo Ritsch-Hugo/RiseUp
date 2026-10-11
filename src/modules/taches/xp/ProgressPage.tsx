@@ -1,16 +1,18 @@
 import { levelFromXp, rankFor } from '../rules/xp'
-import { PROGRESS_CHART_DAYS } from '../config'
-import { useActiveStreak, useProgressStats, useXpTotal } from './xpQueries'
+import { Icon } from '../../../core/ui'
+import { BADGES, PROGRESS_CHART_DAYS } from '../config'
+import { useActiveStreak, useBadges, useProgressStats, useXpTotal } from './xpQueries'
 import styles from './xp.module.css'
 
 const W = 318
 const H = 90
 
-/** Écran Progrès : niveau, chiffres clés, tâches terminées par jour. (Badges et récompenses : plus tard.) */
+/** Écran Progrès : niveau, chiffres clés, tâches terminées par jour, badges. (Récompenses : plus tard.) */
 export function ProgressPage() {
   const { data: total } = useXpTotal()
   const { data: stats } = useProgressStats()
   const { data: streak } = useActiveStreak()
+  const { data: unlocked } = useBadges()
   if (total === undefined || !stats) return <p className={styles.state}>Chargement…</p>
 
   const l = levelFromXp(total)
@@ -94,6 +96,26 @@ export function ProgressPage() {
         <span className={styles.cardSub}>
           Taux de réussite : tâches arrivées à échéance sur 30 jours qui ont été terminées.
         </span>
+      </div>
+
+      <div className={styles.badgesHead}>
+        <h3 className={styles.section}>Badges</h3>
+        <span className={styles.cardSub}>
+          {unlocked?.size ?? 0} sur {BADGES.length}
+        </span>
+      </div>
+      <div className={styles.badges}>
+        {BADGES.map((b) => {
+          const on = unlocked?.has(b.key) ?? false
+          return (
+            <div key={b.key} className={on ? styles.badge : styles.badgeLocked}>
+              <span className={on ? styles.badgeIcon : styles.badgeIconLocked}>
+                <Icon name={on ? b.icon : 'lock'} size={on ? 24 : 22} strokeWidth={2.2} />
+              </span>
+              <span className={styles.badgeLabel}>{b.label}</span>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

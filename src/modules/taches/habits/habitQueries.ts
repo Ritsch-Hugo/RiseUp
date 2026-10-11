@@ -176,7 +176,7 @@ export function useSetHabitValue() {
       return { previous }
     },
     onSuccess: (award) => {
-      if (award && summarizeAward(award).levelUp)
+      if (award && (summarizeAward(award).levelUp || (award.badges?.length ?? 0) > 0))
         navigate('/taches/recompense', { state: { award } })
     },
     onError: (_e, _v, context) => queryClient.setQueryData(LOGS_KEY, context?.previous),
