@@ -13,7 +13,8 @@
   height: 52px;
   padding: 0 14px;
   border-radius: var(--radius-input);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
 }
 
@@ -51,7 +52,8 @@
   gap: 14px;
   padding: var(--space-4);
   border-radius: var(--radius-card);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .groupBadge {
@@ -122,7 +124,8 @@
   width: 64px;
   height: 64px;
   border-radius: 32px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   font-size: 15px;
   font-weight: 700;
 }
@@ -153,7 +156,8 @@
   flex-direction: column;
   overflow: hidden;
   border-radius: var(--radius-card);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .thumb {
@@ -199,7 +203,8 @@
   gap: 4px;
   padding: 4px;
   border-radius: var(--radius-button);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .switchOn,

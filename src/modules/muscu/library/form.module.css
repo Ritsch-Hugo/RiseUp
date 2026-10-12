@@ -45,7 +45,8 @@
   padding: 0 16px;
   border: 0;
   border-radius: var(--radius-pill);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
   font-size: 14px;
   font-weight: 500;
@@ -62,7 +63,8 @@
   gap: 4px;
   padding: 4px;
   border-radius: var(--radius-button);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .seg,
@@ -89,7 +91,8 @@
   padding: 14px var(--space-4);
   border: 0;
   border-radius: var(--radius-input);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text);
   font-size: 15px;
   resize: none;
@@ -104,7 +107,8 @@
   padding: 28px 0;
   border: 1.5px dashed var(--border-dashed);
   border-radius: var(--radius-card);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
 }
 

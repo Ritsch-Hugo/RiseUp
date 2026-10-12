@@ -10,7 +10,8 @@
   gap: var(--space-3);
   padding: var(--space-4);
   border-radius: var(--radius-card);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
 }
 
@@ -134,7 +135,8 @@
   height: 48px;
   border: 0;
   border-radius: var(--radius-input);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
   font-size: 16px;
   font-weight: 700;
@@ -157,7 +159,8 @@
   gap: var(--space-3);
   padding: var(--space-4);
   border-radius: var(--radius-card);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .line {
@@ -225,7 +228,8 @@
   gap: var(--space-3);
   padding: var(--space-3);
   border-radius: 18px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .exerciseHead {
@@ -331,7 +335,8 @@
   height: 44px;
   overflow: hidden;
   border-radius: 10px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
 }
 
@@ -356,7 +361,8 @@
   height: 44px;
   padding: 0 20px;
   border-radius: 22px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
   font-size: 15px;
   font-weight: 500;
@@ -379,7 +385,8 @@
   gap: 14px;
   padding: 10px;
   border-radius: 18px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .launchThumb {

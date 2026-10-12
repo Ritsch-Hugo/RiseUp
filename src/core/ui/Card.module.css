@@ -1,13 +1,15 @@
-.card {
-  background: var(--card);
+:where(.card) {
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   border-radius: var(--radius-card);
   padding: var(--space-4);
 }
 
-.large {
+:where(.large) {
   padding: 20px;
 }
 
-.raised {
+:where(.raised) {
   background: var(--card-2);
+  box-shadow: none;
 }

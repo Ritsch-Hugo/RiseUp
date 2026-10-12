@@ -50,7 +50,8 @@
 .chipMain {
   padding: 6px 12px;
   border-radius: 14px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
   font-size: 13px;
   font-weight: 500;
