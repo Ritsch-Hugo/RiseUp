@@ -51,21 +51,21 @@ Fin de séance, choix d'exercices, historique + détail de séance, calendrier, 
 ## Polish visuel (hors plan initial, demandé par Hugo le 11 oct.)
 Retour de Hugo après test sur tel : « tout est à peu près ok mais ça fait encore projet perso ».
 - [x] Base commune : animations (changement d'écran, feuilles, barres, cases), retour tactile, squelettes de chargement, vibrations
-- [x] Accueil (salutation, halo, cartes en dégradé, anneaux de progression, données dans une feuille)
-- [x] Tâches : écran Aujourd'hui (carte de niveau héros, bande de priorité, surfaces)
-- [x] Muscu : séance en cours (en-tête live, stats, minuteur de repos héros, exercices en cartes)
-- [ ] Nutrition : journal (anneaux, créneaux, eau)
-- [ ] Harmoniser les autres écrans avec `--surface` / `--shadow-card` : Tâches (À venir, Quêtes, Progrès, détail, formulaires), Muscu (accueil, bibliothèque, programmes, profil, historique, résumé de séance), Nutrition (aliments, repas, stats, objectifs), connexion
-- [ ] Éventuel : écran de démarrage (splash), glisser pour supprimer, pull-to-refresh
+- [x] Accueil, Tâches (Aujourd'hui), Muscu (séance en cours)
+- [x] Nutrition : journal (carte héros, anneau dégradé, créneaux animés)
+- [x] Harmonisation : `Card` partagée et toutes les cartes des modules en `--surface` / `--shadow-card` ; quêtes animées ; résumé de séance animé
+- [x] Connexion (halo, titre dégradé), écran de démarrage, tirer pour actualiser
+- [x] Bandeau « Nouvelle version disponible » (PWA en mode `prompt`, revérification au retour sur l'app)
+- [x] Correctifs : texte centré dans les cases, boutons qui grandissent sur 2 lignes, graphiques et anneaux responsives (`svg[role='img']`)
+- [x] Muscu : suppression d'une séance terminée (écran résumé, avec confirmation)
+- [ ] Éventuel : glisser pour supprimer (à tester sur un seul écran d'abord)
 
-## État au 11 octobre 2026 (fin de session)
-- **Les 4 phases du plan sont codées, poussées, CI verte.**
-- Hugo a testé sur téléphone (PWA installée) : fonctionnel dans l'ensemble, d'où le polish ci-dessus. Les retours détaillés (bugs précis) restent à collecter au fil de l'usage.
+## État au 12 octobre 2026
+- **Version 1 codée, déployée, polish terminé.** Reste la validation par l'usage réel.
 - **À faire ensuite, dans l'ordre :**
-  1. Poursuivre le polish (journal Nutrition, puis harmonisation des écrans restants).
-  2. Valider sur tel les ajouts récents : boss, badges, récompenses, notifications push (essai + vrai rappel), export puis réimport du même fichier (l'aperçu doit afficher « 0 ligne à ajouter »).
-  3. Jalon d'usage réel en salle (phase 1).
-  4. Trancher deux définitions : « taux de réussite » (Progrès) et exclusion des tâches récurrentes de l'anti-triche.
-  5. Confirmer les cases validées en vert (ou revenir au bleu de la maquette).
+  1. Valider sur tel : boss, badges, récompenses, notifications push (essai + vrai rappel), export puis réimport du même fichier (l'aperçu doit afficher « 0 ligne à ajouter »).
+  2. Confirmer les cases validées en vert (ou revenir au bleu de la maquette).
+  3. Trancher deux définitions : « taux de réussite » (Progrès) et exclusion des tâches récurrentes de l'anti-triche.
+  4. Jalon d'usage réel en salle (phase 1), 1 à 2 semaines d'usage, puis corriger ce qui gêne.
 - Écrans proposés par Claude (absents des maquettes, à valider sur capture) : historique Muscu, création de quête, formulaire boss, création de récompense, états vides ajoutés (historique, aperçu du profil, programme sans séance).
-- Backlog technique : réordonner par glisser-déposer, calculs restants à passer en SQL, tests de composants et E2E.
+- Backlog technique : glisser pour supprimer, réordonner par glisser-déposer, calculs restants à passer en SQL, tests de composants et E2E.
