@@ -194,3 +194,9 @@ a:active {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Graphiques et anneaux : se réduisent avec leur carte au lieu de déborder sur les petits écrans. */
+svg[role='img'] {
+  max-width: 100%;
+  height: auto;
+}
