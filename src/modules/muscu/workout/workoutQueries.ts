@@ -151,6 +151,18 @@ export function useAbandonWorkout() {
   })
 }
 
+/** Supprime une séance déjà terminée (séries et exercices partent en cascade). */
+export function useDeleteWorkout() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from('muscu_workouts').delete().eq('id', id)
+      if (error) throw error
+    },
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['muscu'] }),
+  })
+}
+
 /** Écrit (ou met à jour) une série validée. */
 export async function saveSet(
   workoutExerciseId: string,

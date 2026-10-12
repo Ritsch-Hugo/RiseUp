@@ -31,13 +31,20 @@ export function Rings({ total, goals }: { total: Nutrition; goals: GoalValues })
             role="img"
             aria-label={`${formatAmount(Math.abs(remaining), 0)} kilocalories ${over ? 'au-dessus' : 'restantes'} sur ${formatAmount(goals.kcal, 0)}`}
           >
+            <defs>
+              <linearGradient id="kcalGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="var(--accent-2)" />
+                <stop offset="100%" stopColor="var(--accent)" />
+              </linearGradient>
+            </defs>
             <circle cx="65" cy="65" r={BIG_R} fill="none" stroke="var(--card-2)" strokeWidth="12" />
             <circle
               cx="65"
               cy="65"
               r={BIG_R}
               fill="none"
-              stroke="var(--accent)"
+              stroke={over ? 'var(--danger)' : 'url(#kcalGradient)'}
+              className={styles.ringGlow}
               strokeWidth="12"
               strokeLinecap="round"
               strokeDasharray={`${bigDash} ${BIG_C}`}
@@ -56,7 +63,7 @@ export function Rings({ total, goals }: { total: Nutrition; goals: GoalValues })
             const goal = goals[m.goal]
             const dash = ringFraction(total[m.key], goal) * SMALL_C
             return (
-              <div key={m.key} className={styles.macro}>
+              <div key={m.key} className={`${styles.macro} ${styles.macroPill}`}>
                 <svg
                   width="44"
                   height="44"

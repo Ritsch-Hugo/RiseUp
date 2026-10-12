@@ -89,7 +89,7 @@ export function JournalPage() {
 
       {entries && goals && (
         <>
-          <Card large>
+          <Card large className={styles.hero}>
             <Rings total={total} goals={goals} />
           </Card>
 
@@ -99,7 +99,7 @@ export function JournalPage() {
             const items = entries.filter((e) => e.slot === slot.key)
             const kcal = sumNutrition(items).kcal
             return (
-              <Card key={slot.key}>
+              <Card key={slot.key} className={styles.slotCard}>
                 <div className={styles.slotHead}>
                   <div>
                     <h2 className={styles.slotTitle}>{slot.label}</h2>

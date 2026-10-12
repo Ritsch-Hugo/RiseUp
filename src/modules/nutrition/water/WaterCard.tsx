@@ -4,6 +4,7 @@ import { WATER_JOURNAL_QUICK_ADDS, WATER_QUICK_ADDS } from '../config'
 import { ringFraction } from '../rules/journal'
 import { formatWater, totalMl } from '../rules/water'
 import { useAddWater, useWater } from './waterQueries'
+import journal from '../journal/journal.module.css'
 import styles from './water.module.css'
 
 /** Carte Eau du journal : total du jour, barre, ajouts rapides, lien vers le détail. */
@@ -14,7 +15,7 @@ export function WaterCard({ day, goalMl }: { day: string; goalMl: number }) {
   const detail = `/nutrition/eau?jour=${day}`
 
   return (
-    <Card>
+    <Card className={journal.slotCard}>
       <Link to={detail} className={styles.cardLink}>
         <div className={styles.cardHead}>
           <Icon name="droplet" size={22} />

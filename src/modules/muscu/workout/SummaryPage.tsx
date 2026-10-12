@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Button, Card } from '../../../core/ui'
+import { Button, Card, Sheet } from '../../../core/ui'
 import { LibraryState } from '../library/LibraryState'
 import type { BrokenRecord } from '../rules/records'
 import { formatDuration } from './format'
 import { formatNumber } from './rows'
+import { useDeleteWorkout } from './workoutQueries'
 import { useWorkoutSummary, type ExerciseSummary } from './summaryQueries'
 import styles from './workout.module.css'
 
@@ -33,6 +35,8 @@ export function SummaryPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { data, isPending, isError } = useWorkoutSummary(id)
+  const remove = useDeleteWorkout()
+  const [confirming, setConfirming] = useState(false)
 
   return (
     <LibraryState isPending={isPending} isError={isError}>
@@ -89,6 +93,32 @@ export function SummaryPage() {
           <Button fullWidth onClick={() => navigate('/muscu', { replace: true })}>
             Terminé
           </Button>
+          <Button variant="danger" fullWidth onClick={() => setConfirming(true)}>
+            Supprimer cette séance
+          </Button>
+
+          <Sheet open={confirming} onClose={() => setConfirming(false)} title="Supprimer la séance ?">
+            <p className={styles.homeText}>
+              Les séries, le volume et les records de cette séance disparaissent pour de bon.
+            </p>
+            <div className={styles.sheetActions}>
+              <Button
+                variant="danger"
+                fullWidth
+                disabled={remove.isPending}
+                onClick={() =>
+                  remove.mutate(data.workout.id, {
+                    onSuccess: () => navigate('/muscu', { replace: true }),
+                  })
+                }
+              >
+                Supprimer
+              </Button>
+              <Button variant="secondary" fullWidth onClick={() => setConfirming(false)}>
+                Annuler
+              </Button>
+            </div>
+          </Sheet>
         </>
       )}
     </LibraryState>
