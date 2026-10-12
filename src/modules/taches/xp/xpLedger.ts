@@ -1,4 +1,4 @@
-import { supabase } from '../../../core'
+import { fetchAll, supabase } from '../../../core'
 import { currentStreak } from '../../../core/streak'
 
 export type XpSource = 'tache' | 'habitude' | 'quete' | 'boss_etape' | 'boss'
@@ -43,7 +43,8 @@ export async function insertXp(e: {
 
 /** Série de jours actifs (tâche terminée ou habitude validée) qui finit aujourd'hui. */
 export async function fetchActiveStreak(today: string): Promise<number> {
-  const { data, error } = await supabase.from('taches_active_days').select('day')
-  if (error) throw error
+  const data = await fetchAll((from, to) =>
+    supabase.from('taches_active_days').select('day').order('day').range(from, to)
+  )
   return currentStreak(new Set(data.flatMap((d) => (d.day ? [d.day] : []))), today)
 }

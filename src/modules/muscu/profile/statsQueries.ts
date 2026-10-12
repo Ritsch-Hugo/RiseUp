@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { supabase } from '../../../core'
+import { fetchAll, supabase } from '../../../core'
 import type { ProgressRow } from '../rules/exerciseProgress'
 
 /**
@@ -11,13 +11,16 @@ export function useAllSetRows() {
     queryKey: ['muscu', 'all-set-rows'],
     staleTime: 60_000,
     queryFn: async (): Promise<ProgressRow[]> => {
-      const { data, error } = await supabase
-        .from('muscu_workout_exercises')
-        .select(
-          'exercise_id, workout:muscu_workouts!inner(started_at, ended_at), exercise:muscu_exercises!inner(name, primary_group, secondary_groups), sets:muscu_sets(weight_kg, reps, is_warmup)'
-        )
-        .not('workout.ended_at', 'is', null)
-      if (error) throw error
+      const data = await fetchAll((from, to) =>
+        supabase
+          .from('muscu_workout_exercises')
+          .select(
+            'id, exercise_id, workout:muscu_workouts!inner(started_at, ended_at), exercise:muscu_exercises!inner(name, primary_group, secondary_groups), sets:muscu_sets(weight_kg, reps, is_warmup)'
+          )
+          .not('workout.ended_at', 'is', null)
+          .order('id')
+          .range(from, to)
+      )
       return data.map((r) => ({
         exerciseId: r.exercise_id,
         name: r.exercise.name,

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { addDays, parisDay, supabase } from '../../../core'
+import { addDays, fetchAll, parisDay, supabase } from '../../../core'
 import { STATS_PERIODS } from '../config'
 import { goalsOnDay, useGoalRows } from '../goals/goalsQueries'
 import { bestStreak, currentStreak, trackedSet, type DayTotals } from '../rules/stats'
@@ -11,8 +11,9 @@ export function useDayTotals() {
   return useQuery({
     queryKey: ['nutri', 'day-totals'],
     queryFn: async (): Promise<DayTotals[]> => {
-      const { data, error } = await supabase.from('nutri_day_totals').select('*').order('day')
-      if (error) throw error
+      const data = await fetchAll((from, to) =>
+        supabase.from('nutri_day_totals').select('*').order('day').range(from, to)
+      )
       return data.map((d) => ({
         day: d.day!,
         slots_tracked: Number(d.slots_tracked),

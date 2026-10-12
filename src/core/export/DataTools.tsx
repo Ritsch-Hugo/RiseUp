@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { parisDay } from '../dates'
 import { Button } from '../ui'
+import { writeLastBackup } from './backup'
 import { exportAll } from './exportData'
 import { downloadJson, exportFileName } from './exportFile'
 import { ImportSection } from './ImportSection'
@@ -14,6 +15,7 @@ export function DataTools() {
     setState('busy')
     try {
       downloadJson(await exportAll(), exportFileName(parisDay()))
+      writeLastBackup(parisDay())
       setState('done')
     } catch {
       setState('error')

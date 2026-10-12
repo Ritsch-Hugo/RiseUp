@@ -97,7 +97,11 @@ export function SummaryPage() {
             Supprimer cette séance
           </Button>
 
-          <Sheet open={confirming} onClose={() => setConfirming(false)} title="Supprimer la séance ?">
+          <Sheet
+            open={confirming}
+            onClose={() => setConfirming(false)}
+            title="Supprimer la séance ?"
+          >
             <p className={styles.homeText}>
               Les séries, le volume et les records de cette séance disparaissent pour de bon.
             </p>

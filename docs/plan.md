@@ -69,3 +69,11 @@ Retour de Hugo après test sur tel : « tout est à peu près ok mais ça fait e
   4. Jalon d'usage réel en salle (phase 1), 1 à 2 semaines d'usage, puis corriger ce qui gêne.
 - Écrans proposés par Claude (absents des maquettes, à valider sur capture) : historique Muscu, création de quête, formulaire boss, création de récompense, états vides ajoutés (historique, aperçu du profil, programme sans séance).
 - Backlog technique : glisser pour supprimer, réordonner par glisser-déposer, calculs restants à passer en SQL, tests de composants et E2E.
+
+## Review du 12 octobre 2026 (corrigé le jour même)
+- [x] Rappel de sauvegarde sur l'accueil (« Dernier export il y a N j », en rouge après 14 j) : pas d'export automatique, un artefact GitHub d'un dépôt public serait lisible par tout compte GitHub
+- [x] Erreur d'écran : `ErrorScreen` (recharger), bandeau hors ligne, message quand une action échoue (`notify`)
+- [x] Modules chargés à la demande (bundle principal 773 → 552 kB)
+- [x] Pagination (`fetchAll`) des requêtes sans limite : la limite de l'API est de 1000 lignes (séries d'exercices ≈ 1 an d'usage)
+- [ ] À faire : tests de composants / E2E, montée de `react-router` (2 alertes modérées), doublon `parisDay`/`addDays` dans `muscu/rules/week.ts`, découpage de `ActiveWorkoutPage`
+

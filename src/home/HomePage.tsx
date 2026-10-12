@@ -1,7 +1,8 @@
 import type { CSSProperties } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { parisMinutes, supabase } from '../core'
+import { parisDay, parisMinutes, supabase } from '../core'
+import { backupDue, backupLabel, daysSinceBackup, readLastBackup } from '../core/export/backup'
 import { DataTools } from '../core/export/DataTools'
 import type { AppModule } from '../core/module'
 import { Icon, IconButton, Sheet, Skeleton } from '../core/ui'
@@ -28,6 +29,7 @@ const greeting = (minutes: number) =>
 
 export function HomePage() {
   const [dataOpen, setDataOpen] = useState(false)
+  const sinceBackup = daysSinceBackup(readLastBackup(), parisDay())
   return (
     <main className={styles.page}>
       <div className={styles.glow} aria-hidden />
@@ -46,7 +48,9 @@ export function HomePage() {
       <button type="button" className={styles.dataRow} onClick={() => setDataOpen(true)}>
         <Icon name="save" size={20} />
         <span className={styles.dataText}>Mes données</span>
-        <span className={styles.dataHint}>Export et import</span>
+        <span className={backupDue(sinceBackup) ? styles.dataHintDue : styles.dataHint}>
+          {backupLabel(sinceBackup)}
+        </span>
         <Icon name="chevronRight" size={18} />
       </button>
       <Sheet open={dataOpen} onClose={() => setDataOpen(false)} title="Mes données">

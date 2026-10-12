@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { supabase } from '../../../core'
+import { fetchAll, supabase } from '../../../core'
 import type { MuscleGroup } from '../config'
 
 export type PastWorkout = {
@@ -25,14 +25,21 @@ export function usePastWorkouts() {
     staleTime: 60_000,
     queryFn: async (): Promise<PastWorkout[]> => {
       const [stats, records] = await Promise.all([
-        supabase.from('muscu_workout_stats').select('*').order('started_at', { ascending: true }),
-        supabase.from('muscu_workout_records').select('id, records'),
+        fetchAll((from, to) =>
+          supabase
+            .from('muscu_workout_stats')
+            .select('*')
+            .order('started_at', { ascending: true })
+            .order('id')
+            .range(from, to)
+        ),
+        fetchAll((from, to) =>
+          supabase.from('muscu_workout_records').select('id, records').order('id').range(from, to)
+        ),
       ])
-      if (stats.error) throw stats.error
-      if (records.error) throw records.error
-      const broken = new Map(records.data.map((r) => [r.id, Number(r.records)]))
+      const broken = new Map(records.map((r) => [r.id, Number(r.records)]))
 
-      return stats.data
+      return stats
         .map((w) => ({
           id: w.id!,
           name: w.name!,

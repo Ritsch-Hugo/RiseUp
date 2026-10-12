@@ -178,3 +178,11 @@
   font-size: 12px;
   text-align: right;
 }
+
+.dataHintDue {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--danger);
+  text-align: right;
+}

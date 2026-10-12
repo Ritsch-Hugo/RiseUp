@@ -19,7 +19,11 @@ export function UpdateBanner() {
   return (
     <div className={styles.banner} role="status">
       <span className={styles.text}>Nouvelle version disponible</span>
-      <button type="button" className={styles.button} onClick={() => void updateServiceWorker(true)}>
+      <button
+        type="button"
+        className={styles.button}
+        onClick={() => void updateServiceWorker(true)}
+      >
         Actualiser
       </button>
     </div>

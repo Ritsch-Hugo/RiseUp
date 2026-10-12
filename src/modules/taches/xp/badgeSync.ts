@@ -1,4 +1,4 @@
-import { supabase } from '../../../core'
+import { fetchAll, supabase } from '../../../core'
 import { bestStreak } from '../../../core/streak'
 import { newBadges, type BadgeStats } from '../rules/badges'
 import { levelFromXp } from '../rules/xp'
@@ -14,8 +14,12 @@ const count = async (query: PromiseLike<{ count: number | null; error: unknown }
 export async function fetchBadgeStats(): Promise<BadgeStats> {
   const [total, byDay, days, quests, boss, habits] = await Promise.all([
     fetchTotalXp(),
-    supabase.from('taches_completed_by_day').select('completed'),
-    supabase.from('taches_active_days').select('day'),
+    fetchAll((from, to) =>
+      supabase.from('taches_completed_by_day').select('day, completed').order('day').range(from, to)
+    ),
+    fetchAll((from, to) =>
+      supabase.from('taches_active_days').select('day').order('day').range(from, to)
+    ),
     count(
       supabase
         .from('taches_quests')
@@ -37,11 +41,9 @@ export async function fetchBadgeStats(): Promise<BadgeStats> {
         .gt('xp', 0)
     ),
   ])
-  if (byDay.error) throw byDay.error
-  if (days.error) throw days.error
   return {
-    tasks: byDay.data.reduce((t, d) => t + Number(d.completed), 0),
-    streak: bestStreak(new Set(days.data.flatMap((d) => (d.day ? [d.day] : [])))),
+    tasks: byDay.reduce((t, d) => t + Number(d.completed), 0),
+    streak: bestStreak(new Set(days.flatMap((d) => (d.day ? [d.day] : [])))),
     quests,
     level: levelFromXp(total).level,
     boss,

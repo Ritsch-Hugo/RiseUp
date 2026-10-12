@@ -1,5 +1,5 @@
 import { useQuery, type QueryClient } from '@tanstack/react-query'
-import { addDays, parisDay, supabase } from '../../../core'
+import { addDays, fetchAll, parisDay, supabase } from '../../../core'
 import { bestStreak, currentStreak } from '../../../core/streak'
 import { PROGRESS_CHART_DAYS, SUCCESS_RATE_DAYS } from '../config'
 import { syncBadges } from './badgeSync'
@@ -43,8 +43,9 @@ export function useActiveStreak() {
   return useQuery({
     queryKey: DAYS_KEY,
     queryFn: async () => {
-      const { data, error } = await supabase.from('taches_active_days').select('day')
-      if (error) throw error
+      const data = await fetchAll((from, to) =>
+        supabase.from('taches_active_days').select('day').order('day').range(from, to)
+      )
       const days = new Set(data.flatMap((d) => (d.day ? [d.day] : [])))
       return { current: currentStreak(days, parisDay()), best: bestStreak(days) }
     },
@@ -60,7 +61,13 @@ export function useProgressStats() {
       const since = addDays(today, -(PROGRESS_CHART_DAYS - 1))
       const rateSince = addDays(today, -(SUCCESS_RATE_DAYS - 1))
       const [byDay, dueAll, dueDone] = await Promise.all([
-        supabase.from('taches_completed_by_day').select('day, completed'),
+        fetchAll((from, to) =>
+          supabase
+            .from('taches_completed_by_day')
+            .select('day, completed')
+            .order('day')
+            .range(from, to)
+        ),
         supabase
           .from('taches_tasks')
           .select('id', { count: 'exact', head: true })
@@ -75,10 +82,9 @@ export function useProgressStats() {
           .gte('due_date', rateSince)
           .lte('due_date', today),
       ])
-      if (byDay.error) throw byDay.error
       if (dueAll.error) throw dueAll.error
       if (dueDone.error) throw dueDone.error
-      const counts = new Map(byDay.data.map((d) => [d.day!, Number(d.completed)]))
+      const counts = new Map(byDay.map((d) => [d.day!, Number(d.completed)]))
       const total = [...counts.values()].reduce((t, n) => t + n, 0)
       const due = dueAll.count ?? 0
       return {
