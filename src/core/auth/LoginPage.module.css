@@ -1,4 +1,6 @@
 .page {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -29,4 +31,41 @@
   margin: 0;
   font-size: 14px;
   color: var(--danger);
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgb(47 123 255 / 0.28), transparent);
+  pointer-events: none;
+}
+
+.header,
+.form {
+  position: relative;
+  animation: loginIn 0.6s var(--ease-out) both;
+}
+
+.form {
+  animation-delay: 0.1s;
+}
+
+.header h1 {
+  background: linear-gradient(90deg, var(--text), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 40px;
+}
+
+@keyframes loginIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
 }

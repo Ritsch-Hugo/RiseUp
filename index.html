@@ -7,9 +7,54 @@
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>RiseUp</title>
+    <style>
+      html,
+      body {
+        background: #05070d;
+      }
+      .splash {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        background: radial-gradient(60% 40% at 50% 40%, rgb(47 123 255 / 0.22), transparent 70%), #05070d;
+        color: #eaf0ff;
+        font-family: system-ui, sans-serif;
+      }
+      .splash-logo {
+        display: grid;
+        width: 84px;
+        height: 84px;
+        place-items: center;
+        border-radius: 26px;
+        background: linear-gradient(145deg, #38d0ff, #2a6cf0);
+        box-shadow: 0 0 0 10px rgb(47 123 255 / 0.12), 0 14px 40px rgb(47 123 255 / 0.5);
+        font-size: 44px;
+        font-weight: 800;
+        animation: splash-pulse 1.6s ease-in-out infinite;
+      }
+      .splash-name {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      @keyframes splash-pulse {
+        50% {
+          transform: scale(1.06);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="splash" aria-hidden="true">
+        <div class="splash-logo">R</div>
+        <span class="splash-name">RiseUp</span>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

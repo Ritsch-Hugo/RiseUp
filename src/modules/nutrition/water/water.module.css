@@ -156,7 +156,8 @@
   height: 64px;
   border: 0;
   border-radius: 16px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text);
   font: inherit;
   font-size: 16px;
@@ -178,7 +179,8 @@
   height: 52px;
   padding: 0 16px;
   border-radius: 14px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .customField input {
@@ -277,7 +279,8 @@
   min-height: 56px;
   padding: 0 16px;
   border-radius: 14px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text);
   font-size: 15px;
   font-weight: 600;

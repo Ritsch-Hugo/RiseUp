@@ -1,0 +1,38 @@
+.indicator {
+  position: fixed;
+  top: -40px;
+  left: 50%;
+  z-index: 150;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--card-2);
+  box-shadow: var(--shadow-card);
+  pointer-events: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s var(--ease-out);
+}
+
+.spinner,
+.spinnerOn {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid var(--text-2);
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+
+.spinnerOn {
+  border-color: var(--accent-2);
+  border-top-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
