@@ -1,0 +1,45 @@
+.banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 528px;
+  margin: 0 auto;
+  padding: 10px 10px 10px 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow:
+    inset 0 0 0 1px rgb(47 123 255 / 0.5),
+    0 12px 32px rgb(0 0 0 / 0.5);
+  animation: banner-in 0.4s var(--ease-out) both;
+}
+
+.text {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.button {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--accent-solid);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@keyframes banner-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
