@@ -58,7 +58,7 @@
   flex: none;
   flex-direction: column;
   gap: var(--space-3);
-  width: 300px;
+  width: min(300px, 85%);
   box-sizing: border-box;
   scroll-snap-align: start;
 }

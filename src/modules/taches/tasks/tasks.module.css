@@ -70,7 +70,8 @@
 .rowDone {
   opacity: 0.65;
   box-shadow: none;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .list > * {
@@ -203,7 +204,8 @@
   padding: 0 16px;
   border: 0;
   border-radius: 14px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text);
   font: inherit;
   font-size: 17px;
@@ -239,7 +241,8 @@
   padding: 0 16px;
   border: 0;
   border-radius: var(--radius-pill);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
   font: inherit;
   font-size: 14px;
@@ -265,7 +268,8 @@
   gap: 4px;
   padding: 4px;
   border-radius: var(--radius-button);
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .seg,
@@ -304,7 +308,8 @@
   padding: 14px 0;
   border: 2px solid transparent;
   border-radius: 16px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text);
   font: inherit;
   cursor: pointer;
@@ -342,7 +347,8 @@
   min-height: 52px;
   padding: 0 16px;
   border-radius: 14px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   font-size: 15px;
   color: var(--text);
 }
@@ -437,7 +443,8 @@
   padding: 14px 16px;
   border: 0;
   border-radius: 14px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text);
   font: inherit;
   font-size: 15px;
@@ -467,7 +474,8 @@
   padding: 8px 0;
   border: 1.5px solid transparent;
   border-radius: 14px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   text-align: center;
 }
 
@@ -551,7 +559,8 @@
 .chip {
   padding: 6px 12px;
   border-radius: 14px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   font-size: 13px;
   font-weight: 700;
 }
@@ -562,7 +571,8 @@
   gap: 12px;
   padding: 14px 16px;
   border-radius: 16px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: var(--text-2);
 }
 
@@ -584,7 +594,8 @@
   gap: 12px;
   padding: 16px;
   border-radius: 20px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .detailCard .cardTitle {
@@ -667,7 +678,8 @@
   height: 48px;
   border: 0;
   border-radius: 14px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   color: #ff7a88;
   font: inherit;
   font-size: 14px;

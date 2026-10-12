@@ -43,7 +43,8 @@
   gap: 12px;
   padding: 16px;
   border-radius: 20px;
-  background: var(--card);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
   box-shadow: inset 0 0 0 1px rgb(255 92 108 / 0.4);
 }
 
