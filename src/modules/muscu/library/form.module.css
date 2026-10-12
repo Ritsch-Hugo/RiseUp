@@ -110,6 +110,7 @@
   background: var(--surface);
   box-shadow: var(--shadow-card);
   color: var(--text-2);
+  text-align: center;
 }
 
 .addPhotoTitle {

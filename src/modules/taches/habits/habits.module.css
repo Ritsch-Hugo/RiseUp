@@ -51,6 +51,7 @@
   background: var(--accent-solid);
   color: #fff;
   box-shadow: 0 6px 20px rgba(47, 123, 255, 0.45);
+  text-align: center;
 }
 
 .segmented {
@@ -289,6 +290,7 @@
   background: transparent;
   color: #fff;
   cursor: pointer;
+  text-align: center;
 }
 
 .checkCounter {
@@ -429,6 +431,7 @@
   color: var(--text);
   font: inherit;
   cursor: pointer;
+  text-align: center;
 }
 
 .diffOn {
@@ -582,6 +585,7 @@
   height: 52px;
   border-radius: 14px;
   background: var(--card-2);
+  text-align: center;
 }
 
 .stepInput {

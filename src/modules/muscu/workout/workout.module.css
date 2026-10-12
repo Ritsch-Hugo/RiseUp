@@ -126,6 +126,7 @@
   background: var(--positive);
   color: #05070d;
   box-shadow: 0 0 12px rgb(61 220 151 / 0.4);
+  text-align: center;
 }
 
 .stats {
@@ -214,6 +215,7 @@
   background: var(--surface);
   box-shadow: var(--shadow-card);
   color: var(--text-2);
+  text-align: center;
 }
 
 .thumbLarge {
@@ -340,6 +342,7 @@
   padding: 0;
   border-radius: 20px;
   color: #fff;
+  text-align: center;
 }
 
 .checkOff {
@@ -365,6 +368,7 @@
   color: var(--accent-text);
   font-size: 14px;
   font-weight: 700;
+  text-align: center;
 }
 
 .target {
@@ -385,6 +389,7 @@
   color: var(--accent-text);
   font-size: 15px;
   font-weight: 700;
+  text-align: center;
 }
 
 .sheetActions {
@@ -456,6 +461,7 @@
   color: #fff;
   font-size: 16px;
   font-weight: 700;
+  text-align: center;
 }
 
 .errorText {
@@ -557,6 +563,7 @@
   border-radius: 10px;
   background: var(--card-2);
   color: var(--accent-text);
+  text-align: center;
 }
 
 .chronoOn {
@@ -585,6 +592,7 @@
   font-size: 28px;
   font-weight: 700;
   animation: pop 0.5s var(--ease-out) both;
+  text-align: center;
 }
 
 .summaryGrid {
@@ -744,6 +752,7 @@
   background: var(--card-2);
   font-size: 11px;
   font-weight: 600;
+  text-align: center;
 }
 
 .bubbleMore {

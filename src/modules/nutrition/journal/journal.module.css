@@ -17,6 +17,7 @@
   color: var(--text);
   cursor: pointer;
   transition: transform 0.15s var(--ease-out);
+  text-align: center;
 }
 
 .navButton:active:not(:disabled) {
@@ -71,6 +72,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .ringValue {
@@ -157,6 +159,7 @@
   color: #fff;
   text-decoration: none;
   transition: transform 0.15s var(--ease-out);
+  text-align: center;
 }
 
 .addButton:active {

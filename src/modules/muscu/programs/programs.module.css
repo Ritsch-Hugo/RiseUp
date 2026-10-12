@@ -59,6 +59,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
+  text-align: center;
 }
 
 .titleRow {
@@ -99,6 +100,7 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--text-2);
+  text-align: center;
 }
 
 .thumb img {
@@ -181,6 +183,7 @@
   font-size: 12px;
   font-weight: 600;
   color: var(--text-2);
+  text-align: center;
 }
 
 .lineName {
@@ -214,6 +217,7 @@
   color: var(--accent-text);
   font-size: 15px;
   font-weight: 700;
+  text-align: center;
 }
 
 .sheetActions {
@@ -261,6 +265,7 @@
   border-radius: 14px;
   background: var(--card-2);
   color: var(--text-2);
+  text-align: center;
 }
 
 .rowThumb img {
@@ -338,6 +343,7 @@
   background: var(--surface);
   box-shadow: var(--shadow-card);
   color: var(--text-2);
+  text-align: center;
 }
 
 .pickerThumb img {
@@ -400,6 +406,7 @@
   border-radius: 14px;
   background: var(--card-2);
   color: var(--text-2);
+  text-align: center;
 }
 
 .launchThumb img {

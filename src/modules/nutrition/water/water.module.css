@@ -91,6 +91,7 @@
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
+  text-align: center;
 }
 
 .quickOther {
@@ -103,6 +104,7 @@
   flex-direction: column;
   align-items: center;
   gap: 14px;
+  text-align: center;
 }
 
 .ring {
@@ -119,6 +121,7 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
+  text-align: center;
 }
 
 .ringValue {
@@ -159,6 +162,7 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  text-align: center;
 }
 
 .customRow {

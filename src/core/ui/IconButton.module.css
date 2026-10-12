@@ -10,6 +10,7 @@
   background: var(--card);
   color: var(--text);
   cursor: pointer;
+  text-align: center;
 }
 
 .round:focus-visible {

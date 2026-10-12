@@ -1,6 +1,8 @@
 .button {
-  height: 54px;
-  padding: 0 var(--space-5);
+  min-height: 54px;
+  padding: 10px var(--space-5);
+  line-height: 1.25;
+  text-align: center;
   border: 0;
   border-radius: var(--radius-button);
   font-size: 16px;

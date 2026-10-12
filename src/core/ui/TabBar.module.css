@@ -18,6 +18,7 @@
   align-items: center;
   gap: 5px;
   color: var(--text-2);
+  text-align: center;
 }
 
 .label {

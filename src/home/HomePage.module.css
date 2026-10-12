@@ -85,6 +85,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .ring {
@@ -117,6 +118,7 @@
   border-radius: 15px;
   background: var(--card-2);
   color: var(--text-2);
+  text-align: center;
 }
 
 .tileActive {

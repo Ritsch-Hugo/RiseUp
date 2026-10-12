@@ -146,6 +146,7 @@
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
+  text-align: center;
 }
 
 .star,
@@ -161,6 +162,7 @@
   background: var(--card);
   color: var(--text-2);
   cursor: pointer;
+  text-align: center;
 }
 
 .starOn {
@@ -207,6 +209,7 @@
   height: 52px;
   border-radius: 14px;
   background: var(--card-2);
+  text-align: center;
 }
 
 .stepInput {
@@ -458,4 +461,5 @@
   background: var(--accent-solid);
   color: #fff;
   box-shadow: var(--glow-accent);
+  text-align: center;
 }

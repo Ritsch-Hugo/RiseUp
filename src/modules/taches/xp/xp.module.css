@@ -55,6 +55,7 @@
   box-shadow:
     0 6px 20px rgba(47, 123, 255, 0.45),
     inset 0 1px 0 rgb(255 255 255 / 0.3);
+  text-align: center;
 }
 
 .levelBadgeLabel {
@@ -139,6 +140,7 @@
   background: var(--accent-solid);
   color: #fff;
   box-shadow: 0 8px 28px rgba(47, 123, 255, 0.5);
+  text-align: center;
 }
 
 .bigBadgeLabel {
@@ -253,6 +255,7 @@
   box-sizing: border-box;
   margin: 0 auto;
   padding: 96px 20px 24px;
+  text-align: center;
 }
 
 .badge {
@@ -267,6 +270,7 @@
   box-shadow:
     0 0 0 10px rgba(47, 123, 255, 0.18),
     0 0 60px rgba(47, 123, 255, 0.7);
+  text-align: center;
 }
 
 .title {
@@ -437,6 +441,7 @@
   padding: 14px 6px;
   border-radius: 16px;
   background: var(--card);
+  text-align: center;
 }
 
 .badgeLocked {
@@ -453,6 +458,7 @@
   border-radius: 24px;
   background: #2a6cf0;
   color: #fff;
+  text-align: center;
 }
 
 .badgeIconLocked {
@@ -514,6 +520,7 @@
   border-radius: 14px;
   background: var(--card-2);
   color: var(--accent-2);
+  text-align: center;
 }
 
 .rewardText {

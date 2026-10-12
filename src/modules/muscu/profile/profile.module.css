@@ -25,6 +25,7 @@
   text-decoration: none;
   color: var(--text-2);
   font-weight: 500;
+  text-align: center;
 }
 
 .tabOn {
@@ -116,6 +117,7 @@
   display: flex;
   justify-content: center;
   gap: 6px;
+  text-align: center;
 }
 
 .dot,
@@ -169,6 +171,7 @@
   color: var(--text-2);
   font-size: 12px;
   font-weight: 600;
+  text-align: center;
 }
 
 .dayOn {
@@ -241,6 +244,7 @@
   justify-content: center;
   gap: 24px;
   margin-top: var(--space-3);
+  text-align: center;
 }
 
 .body {
@@ -249,6 +253,7 @@
   align-items: center;
   gap: var(--space-2);
   margin: 0;
+  text-align: center;
 }
 
 .scale {
@@ -444,6 +449,7 @@
   background: var(--card-2);
   color: var(--text);
   cursor: pointer;
+  text-align: center;
 }
 
 .monthButton:disabled {
