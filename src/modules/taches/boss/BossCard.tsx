@@ -17,7 +17,7 @@ export function BossCard() {
     <>
       <div className={styles.head}>
         <h3 className={styles.title}>Boss de la semaine</h3>
-        <span className={styles.chip}>BOSS</span>
+        <span className={styles.chip}>Boss</span>
       </div>
 
       {!boss && (

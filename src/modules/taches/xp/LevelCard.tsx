@@ -12,7 +12,7 @@ export function LevelCard() {
     <Link to="/taches/progres" className={styles.levelCard}>
       <div className={styles.cardTop}>
         <div className={styles.levelBadge}>
-          <span className={styles.levelBadgeLabel}>NIV.</span>
+          <span className={styles.levelBadgeLabel}>Niv.</span>
           <span className={styles.levelBadgeValue}>{l.level}</span>
         </div>
         <div className={styles.cardText}>

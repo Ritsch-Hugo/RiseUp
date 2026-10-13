@@ -67,16 +67,14 @@ function ModuleCard({ module: m, index }: { module: AppModule; index: number }) 
   const summary = m.useSummary()
   const active = summary?.active ?? false
   return (
-    <Link to={m.path} className={styles.link} style={{ '--i': index } as CSSProperties}>
+    <Link
+      to={m.path}
+      className={styles.link}
+      style={{ '--i': index, '--mod': m.colors.accent } as CSSProperties}
+    >
       <div className={active ? styles.moduleActive : styles.module}>
         <span className={styles.ringBox}>
           <svg className={styles.ring} viewBox="0 0 64 64" aria-hidden>
-            <defs>
-              <linearGradient id={`ring-${index}`} x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="var(--accent)" />
-                <stop offset="100%" stopColor="var(--accent-2)" />
-              </linearGradient>
-            </defs>
             <circle cx="32" cy="32" r={RING_R} className={styles.ringTrack} />
             {summary?.progress !== undefined && summary.progress > 0 && (
               <circle
@@ -85,7 +83,6 @@ function ModuleCard({ module: m, index }: { module: AppModule; index: number }) 
                 r={RING_R}
                 pathLength={100}
                 className={styles.ringFill}
-                stroke={`url(#ring-${index})`}
                 strokeDasharray={`${Math.max(2, summary.progress * 100)} 100`}
                 transform="rotate(-90 32 32)"
               />
@@ -103,7 +100,12 @@ function ModuleCard({ module: m, index }: { module: AppModule; index: number }) 
             <Skeleton width="70%" height={12} />
           )}
         </span>
-        <Icon name="chevronRight" size={20} className={styles.chevron} />
+        {summary?.stat && (
+          <span className={styles.stat}>
+            <span className={styles.statValue}>{summary.stat.value}</span>
+            <span className={styles.statUnit}>{summary.stat.unit}</span>
+          </span>
+        )}
       </div>
     </Link>
   )

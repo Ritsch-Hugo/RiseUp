@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { COLORS } from './config'
 import { useQueryClient } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
 import { parisDay } from '../../core'
@@ -43,6 +44,7 @@ export function TachesLayout() {
   return (
     <ModuleLayout
       title="Tâches"
+      colors={COLORS}
       tabs={tabs}
       headerRight={pathname === '/taches' ? <StreakBadge /> : undefined}
     />

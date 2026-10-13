@@ -29,7 +29,7 @@ export function ProgressPage() {
       <div className={styles.bigCard}>
         <div className={styles.cardTop}>
           <div className={styles.bigBadge}>
-            <span className={styles.bigBadgeLabel}>NIV.</span>
+            <span className={styles.bigBadgeLabel}>Niv.</span>
             <span className={styles.bigBadgeValue}>{l.level}</span>
           </div>
           <div className={styles.cardText}>
@@ -72,29 +72,33 @@ export function ProgressPage() {
           <h3 className={styles.chartTitle}>Tâches terminées</h3>
           <span className={styles.cardSub}>{PROGRESS_CHART_DAYS} derniers jours</span>
         </div>
-        <svg
-          width={W}
-          height={H}
-          viewBox={`0 0 ${W} ${H}`}
-          role="img"
-          aria-label={`Tâches terminées par jour sur ${PROGRESS_CHART_DAYS} jours`}
-        >
-          {stats.chart.map((d, i) => {
-            const h = Math.max(4, (d.completed / max) * H)
-            return (
-              <rect
-                key={d.day}
-                x={i * step}
-                y={H - h}
-                width={barW}
-                height={h}
-                rx={4}
-                fill="var(--accent)"
-                fillOpacity={i === stats.chart.length - 1 ? 1 : 0.45}
-              />
-            )
-          })}
-        </svg>
+        {stats.totalCompleted === 0 ? (
+          <p className={styles.cardSub}>Termine une tâche pour voir ta courbe apparaître ici.</p>
+        ) : (
+          <svg
+            width={W}
+            height={H}
+            viewBox={`0 0 ${W} ${H}`}
+            role="img"
+            aria-label={`Tâches terminées par jour sur ${PROGRESS_CHART_DAYS} jours`}
+          >
+            {stats.chart.map((d, i) => {
+              const h = Math.max(4, (d.completed / max) * H)
+              return (
+                <rect
+                  key={d.day}
+                  x={i * step}
+                  y={H - h}
+                  width={barW}
+                  height={h}
+                  rx={4}
+                  fill="var(--accent)"
+                  fillOpacity={i === stats.chart.length - 1 ? 1 : 0.45}
+                />
+              )
+            })}
+          </svg>
+        )}
         <span className={styles.cardSub}>
           Taux de réussite : tâches arrivées à échéance sur 30 jours qui ont été terminées.
         </span>

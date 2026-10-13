@@ -33,7 +33,7 @@ export function Rings({ total, goals }: { total: Nutrition; goals: GoalValues })
           >
             <defs>
               <linearGradient id="kcalGradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="var(--accent-2)" />
+                <stop offset="0%" stopColor="var(--accent-hi)" />
                 <stop offset="100%" stopColor="var(--accent)" />
               </linearGradient>
             </defs>

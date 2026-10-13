@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom'
+import { COLORS } from './config'
 import { Icon, ModuleLayout, type Tab } from '../../core/ui'
 import { useStreak } from './stats/statsQueries'
 import styles from './stats/stats.module.css'
@@ -31,6 +32,7 @@ export function NutritionLayout() {
   return (
     <ModuleLayout
       title="Nutrition"
+      colors={COLORS}
       tabs={tabs}
       headerRight={pathname === '/nutrition' ? <StreakBadge /> : undefined}
     />

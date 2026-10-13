@@ -21,11 +21,7 @@ export function MuscuHomePage() {
     <>
       {past && <NextSessionCard past={past} />}
 
-      <Card large>
-        <h2>Entraînement</h2>
-        <p className={styles.homeText}>
-          Choisis une séance dans un de tes programmes, ou lance une séance libre.
-        </p>
+      <div>
         <div className={styles.homeActions}>
           <Link to="/muscu/bibliotheque/programmes" className={styles.homeLink}>
             Mes programmes
@@ -44,7 +40,7 @@ export function MuscuHomePage() {
           </Button>
         </div>
         {start.isError && <p className={styles.errorText}>Impossible de lancer la séance.</p>}
-      </Card>
+      </div>
 
       {past && <WeekCard workouts={past} />}
 

@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom'
+import { COLORS } from './config'
 import { IconLink, ModuleLayout, type Tab } from '../../core/ui'
 import { useOpenWorkout } from './workout/workoutQueries'
 import { WorkoutBar } from './workout/WorkoutBar'
@@ -18,5 +19,13 @@ export function MuscuLayout() {
     pathname === '/muscu' ? (
       <IconLink to="/muscu/historique" icon="calendar" label="Calendrier et historique" />
     ) : undefined
-  return <ModuleLayout title="Muscu" tabs={tabs} banner={banner} headerRight={headerRight} />
+  return (
+    <ModuleLayout
+      title="Muscu"
+      colors={COLORS}
+      tabs={tabs}
+      banner={banner}
+      headerRight={headerRight}
+    />
+  )
 }

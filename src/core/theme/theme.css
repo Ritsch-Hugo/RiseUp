@@ -10,9 +10,10 @@
   --border-dashed: #6f7c99;
   --glow-accent: 0 6px 24px rgb(47 123 255 / 0.45);
   --accent-2: #38d0ff;
+  --accent-hi: color-mix(in srgb, var(--accent) 70%, white);
   --positive: #3ddc97;
   --danger: #ff5c6c;
-  --macro-protein: var(--accent-2);
+  --macro-protein: #38d0ff;
   --macro-carbs: #9d8cff;
   --macro-fat: var(--positive);
 
@@ -35,6 +36,8 @@
   --app-width: 430px;
   --tabbar-height: 96px;
   --page-padding: 56px 20px 24px;
+
+  --font-display: 'Big Shoulders Display Variable', 'DM Sans Variable', system-ui, sans-serif;
 
   font-family: 'DM Sans Variable', system-ui, sans-serif;
   color-scheme: dark;
@@ -79,8 +82,9 @@ textarea {
 
 h1 {
   margin: 0;
-  font-size: 30px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 800;
 }
 
 h2 {

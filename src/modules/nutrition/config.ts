@@ -56,3 +56,6 @@ export const STATS_PERIODS = [
 ] as const
 export type StatsPeriod = (typeof STATS_PERIODS)[number]['key']
 export const KCAL_TARGET_TOLERANCE = 0.05
+
+/** Couleurs du module (voir ModuleColors dans core/module.ts). */
+export const COLORS = { accent: '#3ddc97', solid: '#168a5c', text: '#5be8ac' }

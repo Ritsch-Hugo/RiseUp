@@ -16,13 +16,11 @@ export function useSummary(): ModuleSummary | null {
     tasks.filter((t) => !t.is_boss),
     parisDay()
   ).todo.length
-  const parts = [
-    `Niveau ${levelFromXp(total).level}`,
-    todo === 0 ? 'rien à faire' : `${todo} tâche${todo > 1 ? 's' : ''} à faire`,
-  ]
+  const parts = [todo === 0 ? 'rien à faire' : `${todo} tâche${todo > 1 ? 's' : ''} à faire`]
   if (streak && streak.current > 0) parts.push(`série ${streak.current} j`)
   return {
     text: parts.join(' · '),
+    stat: { value: String(levelFromXp(total).level), unit: 'niveau' },
     active: todo > 0,
     progress: levelFromXp(total).progress,
   }

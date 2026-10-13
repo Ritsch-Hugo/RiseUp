@@ -13,18 +13,20 @@ export function useSummary(): ModuleSummary | null {
   const { data: programs } = usePrograms()
   if (openPending || !past || !programs) return null
   const today = parisDay(new Date())
-  const progress = Math.min(1, weekStats(past, today).count / WEEKLY_GOAL)
+  const count = weekStats(past, today).count
+  const progress = Math.min(1, count / WEEKLY_GOAL)
+  const stat = { value: `${count}/${WEEKLY_GOAL}`, unit: 'cette semaine' }
 
-  if (open) return { text: `Séance en cours : ${open.name}`, active: true, progress }
+  if (open) return { text: `Séance en cours : ${open.name}`, active: true, progress, stat }
 
   const doneToday = past.find((w) => parisDay(new Date(w.startedAt)) === today)
   if (doneToday)
-    return { text: `Séance faite aujourd’hui : ${doneToday.name}`, active: false, progress }
+    return { text: `Séance faite aujourd’hui : ${doneToday.name}`, active: false, progress, stat }
 
   const lastSessionId = past.find((w) => w.sessionId)?.sessionId ?? null
   const next = nextSession(programs, lastSessionId)
-  if (!next) return { text: 'Aucun programme pour l’instant', active: false, progress }
+  if (!next) return { text: 'Aucun programme pour l’instant', active: false, progress, stat }
   const program = programs.find((p) => p.id === next.programId)!
   const session = program.sessions.find((s) => s.id === next.sessionId)!
-  return { text: `Prochaine séance : ${session.name}`, active: true, progress }
+  return { text: `Prochaine séance : ${session.name}`, active: true, progress, stat }
 }

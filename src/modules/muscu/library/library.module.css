@@ -29,7 +29,7 @@
 }
 
 .search:focus-within {
-  outline: 2px solid var(--accent-2);
+  outline: 2px solid var(--accent-hi);
   outline-offset: 2px;
 }
 

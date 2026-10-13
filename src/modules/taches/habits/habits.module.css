@@ -50,7 +50,7 @@
   border-radius: 22px;
   background: var(--accent-solid);
   color: #fff;
-  box-shadow: 0 6px 20px rgba(47, 123, 255, 0.45);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 45%, transparent);
   text-align: center;
 }
 
@@ -126,7 +126,7 @@
   gap: 4px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--accent-2);
+  color: var(--accent-hi);
 }
 
 .progress {
@@ -144,17 +144,17 @@
 }
 
 .progress > .progressCounter {
-  background: var(--accent-2);
+  background: var(--accent-hi);
 }
 
 .xpChip,
 .xpDone {
   padding: 4px 8px;
   border-radius: 8px;
-  background: rgb(56 208 255 / 0.1);
+  background: color-mix(in srgb, var(--accent-hi) 10%, transparent);
   font-size: 12px;
   font-weight: 700;
-  color: var(--accent-2);
+  color: var(--accent-hi);
   white-space: nowrap;
 }
 
@@ -298,7 +298,7 @@
 }
 
 .checkCounter {
-  border-color: var(--accent-2);
+  border-color: var(--accent-hi);
 }
 
 .checkOn {
@@ -343,7 +343,7 @@
   display: block;
   height: 5px;
   border-radius: 3px;
-  background: var(--accent-2);
+  background: var(--accent-hi);
 }
 
 /* Formulaire */
@@ -443,7 +443,7 @@
 
 .diffOn {
   border-color: var(--accent-text);
-  background: rgba(47, 123, 255, 0.16);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
 .diffName {
@@ -458,7 +458,7 @@
 }
 
 .diffOn .diffXp {
-  color: var(--accent-2);
+  color: var(--accent-hi);
 }
 
 .reminderCard {
@@ -538,7 +538,7 @@
   border-radius: 20px;
   background: var(--surface);
   box-shadow: var(--shadow-card);
-  box-shadow: inset 0 0 0 1px rgba(56, 208, 255, 0.35);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-hi) 35%, transparent);
 }
 
 .xpLine {
@@ -550,7 +550,7 @@
 .xpBig {
   font-size: 28px;
   font-weight: 700;
-  color: var(--accent-2);
+  color: var(--accent-hi);
 }
 
 .sheetActions {

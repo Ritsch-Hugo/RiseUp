@@ -12,6 +12,7 @@
 
 .pageTitle {
   margin: 0;
+  font-family: var(--font-display);
   font-size: 30px;
   font-weight: 700;
 }
@@ -25,11 +26,16 @@
   padding: 18px;
   border-radius: 20px;
   background:
-    radial-gradient(90% 120% at 100% 0%, rgb(47 123 255 / 0.22), transparent 60%), var(--surface);
+    radial-gradient(
+      90% 120% at 100% 0%,
+      color-mix(in srgb, var(--accent) 22%, transparent),
+      transparent 60%
+    ),
+    var(--surface);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.08),
-    inset 0 0 0 1px rgba(47, 123, 255, 0.4),
-    0 14px 36px rgb(47 123 255 / 0.16);
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent),
+    0 14px 36px color-mix(in srgb, var(--accent) 16%, transparent);
   overflow: hidden;
   color: inherit;
   text-decoration: none;
@@ -50,10 +56,10 @@
   width: 56px;
   height: 56px;
   border-radius: 18px;
-  background: linear-gradient(145deg, #3a82ff, var(--accent-solid));
+  background: linear-gradient(145deg, var(--accent-hi), var(--accent-solid));
   color: #fff;
   box-shadow:
-    0 6px 20px rgba(47, 123, 255, 0.45),
+    0 6px 20px color-mix(in srgb, var(--accent) 45%, transparent),
     inset 0 1px 0 rgb(255 255 255 / 0.3);
   text-align: center;
 }
@@ -67,7 +73,8 @@
 }
 
 .levelBadgeValue {
-  font-size: 24px;
+  font-family: var(--font-display);
+  font-size: 30px;
   font-weight: 700;
   line-height: 1.1;
 }
@@ -91,9 +98,10 @@
 }
 
 .cardXp {
-  font-size: 15px;
+  font-family: var(--font-display);
+  font-size: 19px;
   font-weight: 700;
-  color: var(--accent-2);
+  color: var(--accent-hi);
   font-variant-numeric: tabular-nums;
 }
 
@@ -113,8 +121,8 @@
 .barThick > div {
   height: 10px;
   border-radius: 5px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 12px rgb(56 208 255 / 0.55);
+  background: linear-gradient(90deg, var(--accent), var(--accent-hi));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent-hi) 55%, transparent);
 }
 
 /* Progrès */
@@ -126,7 +134,7 @@
   border-radius: 20px;
   background: var(--surface);
   box-shadow: var(--shadow-card);
-  box-shadow: inset 0 0 0 1px rgba(47, 123, 255, 0.35);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .bigBadge {
@@ -140,7 +148,7 @@
   border-radius: 22px;
   background: var(--accent-solid);
   color: #fff;
-  box-shadow: 0 8px 28px rgba(47, 123, 255, 0.5);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--accent) 50%, transparent);
   text-align: center;
 }
 
@@ -153,6 +161,7 @@
 }
 
 .bigBadgeValue {
+  font-family: var(--font-display);
   font-size: 32px;
   font-weight: 700;
   line-height: 1.1;
@@ -191,7 +200,8 @@
 }
 
 .tileValue {
-  font-size: 22px;
+  font-family: var(--font-display);
+  font-size: 28px;
   font-weight: 700;
 }
 
@@ -240,7 +250,7 @@
   height: 520px;
   background: radial-gradient(
     ellipse at 50% 40%,
-    rgba(47, 123, 255, 0.38) 0%,
+    color-mix(in srgb, var(--accent) 38%, transparent) 0%,
     rgba(5, 7, 13, 0) 70%
   );
   pointer-events: none;
@@ -271,8 +281,8 @@
   background: var(--accent-solid);
   color: #fff;
   box-shadow:
-    0 0 0 10px rgba(47, 123, 255, 0.18),
-    0 0 60px rgba(47, 123, 255, 0.7);
+    0 0 0 10px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 0 60px color-mix(in srgb, var(--accent) 70%, transparent);
   text-align: center;
 }
 
@@ -290,11 +300,12 @@
 }
 
 .big {
+  font-family: var(--font-display);
   font-size: 64px;
   font-weight: 700;
   line-height: 1;
-  color: var(--accent-2);
-  text-shadow: 0 0 30px rgba(56, 208, 255, 0.5);
+  color: var(--accent-hi);
+  text-shadow: 0 0 30px color-mix(in srgb, var(--accent-hi) 50%, transparent);
 }
 
 .lines {
@@ -323,7 +334,7 @@
 
 .lineXp {
   font-weight: 700;
-  color: var(--accent-2);
+  color: var(--accent-hi);
 }
 
 .lineMuted {
@@ -380,8 +391,8 @@
 }
 
 .trackAfter {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 16px rgba(56, 208, 255, 0.5);
+  background: linear-gradient(90deg, var(--accent), var(--accent-hi));
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent-hi) 50%, transparent);
 }
 
 .streak {
@@ -394,7 +405,7 @@
   border-radius: 16px;
   background: var(--surface);
   box-shadow: var(--shadow-card);
-  color: var(--accent-2);
+  color: var(--accent-hi);
   font-size: 14px;
   font-weight: 600;
 }
@@ -462,7 +473,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 24px;
-  background: #2a6cf0;
+  background: var(--accent-solid);
   color: #fff;
   text-align: center;
 }
@@ -526,7 +537,7 @@
   justify-content: center;
   border-radius: 14px;
   background: var(--card-2);
-  color: var(--accent-2);
+  color: var(--accent-hi);
   text-align: center;
 }
 
@@ -552,7 +563,7 @@
 .rewardXp {
   font-size: 12px;
   font-weight: 700;
-  color: var(--accent-2);
+  color: var(--accent-hi);
 }
 
 .rewardTrack {
@@ -564,7 +575,7 @@
 .rewardTrack div {
   height: 6px;
   border-radius: 3px;
-  background: var(--accent-2);
+  background: var(--accent-hi);
 }
 
 .rewardForm {

@@ -167,7 +167,7 @@
 
 .checkOn {
   border: 0;
-  background: #2a6cf0;
+  background: var(--accent-solid);
   color: #fff;
 }
 

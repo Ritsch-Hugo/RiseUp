@@ -99,3 +99,6 @@ export const UPPER_GROUPS: MuscleGroup[] = ['pecs', 'dos', 'epaules', 'biceps', 
 export const LOWER_GROUPS: MuscleGroup[] = ['quadriceps', 'ischios', 'fessiers', 'mollets', 'abdos']
 export const PUSH_GROUPS: MuscleGroup[] = ['pecs', 'epaules', 'triceps']
 export const PULL_GROUPS: MuscleGroup[] = ['dos', 'biceps']
+
+/** Couleurs du module (voir ModuleColors dans core/module.ts). */
+export const COLORS = { accent: '#ff7a45', solid: '#d9531f', text: '#ff9468' }

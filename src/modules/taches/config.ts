@@ -31,10 +31,10 @@ export const HABIT_XP: Record<TaskDifficulty, number> = { facile: 10, moyen: 15,
 
 /** Moments de la journée, dans l'ordre d'affichage de la routine. */
 export const HABIT_MOMENTS: { key: HabitMoment; label: string; short: string }[] = [
-  { key: 'matin', label: 'Matin', short: 'MATIN' },
-  { key: 'aprem', label: 'Après-midi', short: 'APRÈS-MIDI' },
-  { key: 'soir', label: 'Soir', short: 'SOIR' },
-  { key: 'libre', label: 'Libre', short: 'À TOUT MOMENT' },
+  { key: 'matin', label: 'Matin', short: 'Matin' },
+  { key: 'aprem', label: 'Après-midi', short: 'Après-midi' },
+  { key: 'soir', label: 'Soir', short: 'Soir' },
+  { key: 'libre', label: 'Libre', short: 'À tout moment' },
 ]
 export const DEFAULT_HABIT_MOMENT: HabitMoment = 'libre'
 
@@ -176,3 +176,6 @@ export const BADGES: {
 /** Récompenses perso : une par niveau, de ce niveau minimum à ce niveau maximum. */
 export const REWARD_MIN_LEVEL = 2
 export const REWARD_MAX_LEVEL = 99
+
+/** Couleurs du module (voir ModuleColors dans core/module.ts). */
+export const COLORS = { accent: '#9d8cff', solid: '#6a56e8', text: '#b3a6ff' }

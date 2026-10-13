@@ -19,12 +19,13 @@ export function useSummary(): ModuleSummary | null {
   const kcal = Math.round(sumNutrition(entries).kcal)
   const left = goals.kcal - kcal
   const waterMl = water.reduce((t, w) => t + w.amount_ml, 0)
-  const kcalText =
+  const stat =
     left >= 0
-      ? `${formatAmount(left, 0)} kcal restantes`
-      : `${formatAmount(-left, 0)} kcal au-dessus de l’objectif`
+      ? { value: formatAmount(left, 0), unit: 'kcal restantes' }
+      : { value: formatAmount(-left, 0), unit: 'kcal en trop' }
   return {
-    text: `${kcalText} · eau ${liters(waterMl)} / ${liters(goals.water_ml)} L`,
+    text: `Eau ${liters(waterMl)} / ${liters(goals.water_ml)} L`,
+    stat,
     active: entries.length === 0,
     progress: goals.kcal > 0 ? Math.min(1, Math.max(0, kcal / goals.kcal)) : 0,
   }

@@ -234,7 +234,7 @@ function StatsView({
             ))}
             {shares && (
               <div className={styles.shares}>
-                <span className={styles.sharesTitle}>RÉPARTITION DES CALORIES</span>
+                <span className={styles.sharesTitle}>Répartition des calories</span>
                 <div className={styles.shareBar}>
                   {MACROS.map((m) => (
                     <div key={m.key} style={{ width: `${shares[m.key]}%`, background: m.color }} />

@@ -189,6 +189,7 @@
 }
 
 .totalBig {
+  font-family: var(--font-display);
   font-size: 36px;
   font-weight: 700;
   line-height: 1;
